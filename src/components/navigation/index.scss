@@ -1,0 +1,94 @@
+.navigation{
+    position: absolute;
+    // width: 95px;
+    // height: 180px;
+    top: 54px;
+    right: 60px;
+    
+    .fenceng{
+        background-image: url('../../images/navigation/btn_fenceng.png');
+        width: 92px;
+        height: 28px;
+        .text{
+            width: 42px;
+            height: 30px;
+            font-size: 17px;
+            font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+            color: #4EF9FF;
+            letter-spacing: 2px;
+            margin: 0 auto;
+        }
+        .shouqi{
+            width: 20px;
+            height: 20px;
+            margin-top: -52px;
+            margin-left: 65px;
+        }
+        .expand{
+            width: 20px;
+            height: 20px;
+            margin-top: -92px;
+            margin-left: 64px;
+        }
+    }
+    .f1{
+        background-image: url('../../images/navigation/btn_lc.png');
+        width: 71px;
+        height: 27px;
+        margin: 0 auto;
+        margin-top: 5px;
+        .text-f1{
+            width: 21px;
+            height: 27px;
+            font-size: 18px;
+            font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+            color: #4EF9FF;
+            margin: 0 auto;
+        }
+    }
+    .f2{
+        background-image: url('../../images/navigation/btn_lc.png');
+        width: 71px;
+        height: 27px;
+        margin: 0 auto;
+        margin-top: 5px;
+        .text-f2{
+            width: 21px;
+            height: 27px;
+            font-size: 18px;
+            font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+            color: #4EF9FF;
+            margin: 0 auto;
+        }
+    }
+    .f3{
+        background-image: url('../../images/navigation/btn_lc.png');
+        width: 71px;
+        height: 27px;
+        margin: 0 auto;
+        margin-top: 5px;
+        .text-f3{
+            width: 21px;
+            height: 27px;
+            font-size: 18px;
+            font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+            color: #4EF9FF;
+            margin: 0 auto;
+        }
+    }
+    .f4{
+        background-image: url('../../images/navigation/btn_lc.png');
+        width: 71px;
+        height: 27px;
+        margin: 0 auto;
+        margin-top: 5px;
+        .text-f4{
+            width: 21px;
+            height: 27px;
+            font-size: 18px;
+            font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+            color: #4EF9FF;
+            margin: 0 auto;
+        }
+    }
+}
