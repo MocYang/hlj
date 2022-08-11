@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import App from './pages/home'
 import reportWebVitals from './reportWebVitals'
 import 'normalize.css'
-import './assets/styles/utils.scss'
+import './assets/styles/app.scss'
 
 const $container = document.getElementById('root')
 const app = createRoot($container)

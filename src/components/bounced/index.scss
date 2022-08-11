@@ -2,466 +2,511 @@
 //     position: relative;
 
 .bounced {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  pointer-events: none;
+
+  .bg-1 {
+    width: 100vw;
+    height: 100vh;
     pointer-events: none;
+  }
 
-    .bg-1 {
-        width: 100vw;
-        height: 100vh;
-        pointer-events: none;
-    }
+  .information {
+    background-image: url('../../images/bounced/留置室弹窗.png');
+    width: 917px;
+    height: 569px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
-    .btstr {
-        background-image: url(../../images/bounced/顶部标题.png);
-        background-repeat: no-repeat;
-        width: 100%;
-        height: 84px;
+    .title_liuzhi_1 {
+      background-image: url('../../images//bounced/title_liuzhi_1.png');
+      width: 217px;
+      height: 40px;
+      margin: 0 auto;
+      margin-top: 20px;
+
+      p {
+        font-size: 20px;
+        font-family: Source Han Sans CN-Bold, Source Han Sans CN;
+        font-weight: bold;
+        color: #8EFFFF;
+        line-height: 40px;
+      }
+
+      .fork {
+        background-image: url('../../images/bounced/icon_close.png');
+        width: 24px;
+        height: 24px;
         position: absolute;
-        top: 0;
-        left: 0;
-        text-align: center;
-        background-size: 100%;
-    }
-
-    .information {
-        background-image: url('../../images/bounced/留置室弹窗.png');
-        width: 917px;
-        height: 569px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        .title_liuzhi_1 {
-        background-image: url('../../images//bounced/title_liuzhi_1.png');
-        width: 217px;
-        height: 40px;
+        top: 27px;
+        left: 750px;
+        right: 0;
         margin: 0 auto;
-        margin-top: 20px;
-
-        p {
-            font-size: 20px;
-            font-family: Source Han Sans CN-Bold, Source Han Sans CN;
-            font-weight: bold;
-            color: #8EFFFF;
-            line-height: 40px;
-        }
-        .fork{
-            background-image: url('../../images/bounced/icon_close.png');
-            width: 24px;
-            height: 24px;
-            position: absolute;
-            top: 27px;
-            left: 750px;
-            right: 0;
-            margin: 0 auto;
-        }
+      }
     }
 
     .title_liuzhi_2 {
-        background-image: url('../../images/bounced/title_liuzhi_2.png');
-        width: 774px;
-        height: 29px;
-        margin-left: 32px;
-        display: flex;
-        align-items: center;
-        p {
-            margin-top: 7px;
-            margin-left: 11px;
-            font-size: 18px;
-            font-family: Source Han Sans CN-Medium, Source Han Sans CN;
-            font-weight: 500;
-            color: #FFFFFF;
-            line-height: 29px;
-        }
+      background-image: url('../../images/bounced/title_liuzhi_2.png');
+      width: 774px;
+      height: 29px;
+      margin-left: 32px;
+      display: flex;
+      align-items: center;
+
+      p {
+        margin-top: 7px;
+        margin-left: 11px;
+        font-size: 18px;
+        font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+        font-weight: 500;
+        color: #FFFFFF;
+        line-height: 29px;
+      }
     }
-    .icon_renyuan{
-        width: 100%;
+
+    .icon_renyuan {
+      width: 100%;
+      height: 33px;
+      margin-left: 28px;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+
+      .icon {
+        background-image: url('../../images/bounced/icon_renyuan.png');
+        width: 32px;
         height: 33px;
-        margin-left: 28px;
-        margin-top: 10px;
-        display: flex;
-        align-items: center;
-        .icon{
-            background-image: url('../../images/bounced/icon_renyuan.png');
-            width: 32px;
-            height: 33px;
-        }
-        .zhang{
-            width: 54px;
+      }
+
+      .zhang {
+        width: 54px;
+        height: 27px;
+        margin-left: 10px;
+        margin-top: 12px;
+        font-size: 18px;
+        font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+        font-weight: 500;
+        color: #4EF9FF;
+      }
+
+      p {
+        width: 33px;
+        height: 21px;
+        font-size: 14px;
+        font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+        font-weight: 400;
+        color: #4EF9FF;
+        margin-left: 8px;
+        margin-top: 12px;
+      }
+    }
+
+    .box {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      margin-top: 10px;
+
+      .box_lztime {
+        background-image: url('../../images/bounced/box_lztime.png');
+        width: 500px;
+        height: 112px;
+
+        .title_lztime {
+          background-image: url('../../images/bounced/title_lztime.png');
+          width: 466px;
+          height: 32px;
+          margin: 0 auto;
+          margin-top: 10px;
+
+          p {
+            display: inline-block;
+            margin: 0 auto;
+            width: 78px;
             height: 27px;
-            margin-left: 10px;
-            margin-top: 12px;
             font-size: 18px;
             font-family: Source Han Sans CN-Medium, Source Han Sans CN;
-            font-weight: 500;
-            color: #4EF9FF;
+            color: #FFFFFF;
+            letter-spacing: 1px;
+            text-shadow: 0px 0px 7px rgba(121, 255, 239, 0.37);;
+          }
         }
-        p{
-            width: 33px;
-            height: 21px;
-            font-size: 14px;
+
+        .time {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: space-around;
+
+          .tian {
+            width: 185px;
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+            margin-left: 15px;
+
+            .tian_1 {
+              background-image: url('../../images/bounced/box_shuzi.png');
+              width: 27px;
+              height: 40px;
+              margin-top: 10px;
+            }
+
+            .tian_2 {
+              background-image: url('../../images/bounced/box_shuzi.png');
+              width: 27px;
+              height: 40px;
+              margin-top: 10px;
+            }
+
+            .tian_3 {
+              background-image: url('../../images/bounced/box_shuzi.png');
+              width: 27px;
+              height: 40px;
+              margin-top: 10px;
+            }
+
+            .tian_4 {
+              background-image: url('../../images/bounced/box_shuzi.png');
+              width: 27px;
+              height: 40px;
+              margin-top: 10px;
+            }
+
+            .tian_5 {
+              background-image: url('../../images/bounced/box_shuzi.png');
+              width: 27px;
+              height: 40px;
+              margin-top: 10px;
+            }
+
+            .tian_6 {
+              background-image: url('../../images/bounced/box_shuzi.png');
+              width: 27px;
+              height: 40px;
+              margin-top: 10px;
+            }
+
+            p {
+              width: 16px;
+              height: 24px;
+              font-size: 16px;
+              font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+              color: #FFFFFF;
+              letter-spacing: 1px;
+              margin-top: 28px;
+              // margin-left: 3px;
+            }
+          }
+
+          .shi {
+            width: 71px;
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+
+            .shi_1 {
+              background-image: url('../../images/bounced/box_shuzi.png');
+              width: 27px;
+              height: 40px;
+              margin-top: 10px;
+            }
+
+            .shi_2 {
+              background-image: url('../../images/bounced/box_shuzi.png');
+              width: 27px;
+              height: 40px;
+              margin-top: 10px;
+            }
+
+            p {
+              width: 16px;
+              height: 24px;
+              font-size: 16px;
+              font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+              color: #FFFFFF;
+              letter-spacing: 1px;
+              margin-top: 28px;
+              margin-left: 3px;
+            }
+          }
+
+          .fen {
+            width: 71px;
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+
+            .fen_1 {
+              background-image: url('../../images/bounced/box_shuzi.png');
+              width: 27px;
+              height: 40px;
+              margin-top: 10px;
+            }
+
+            .fen_2 {
+              background-image: url('../../images/bounced/box_shuzi.png');
+              width: 27px;
+              height: 40px;
+              margin-top: 10px;
+            }
+
+            p {
+              width: 16px;
+              height: 24px;
+              font-size: 16px;
+              font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+              color: #FFFFFF;
+              letter-spacing: 1px;
+              margin-top: 28px;
+              margin-left: 3px;
+            }
+          }
+
+          .miao {
+            width: 71px;
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 10px;
+
+            .miao_1 {
+              background-image: url('../../images/bounced/box_shuzi.png');
+              width: 27px;
+              height: 40px;
+              margin-top: 10px;
+            }
+
+            .miao_2 {
+              background-image: url('../../images/bounced/box_shuzi.png');
+              width: 27px;
+              height: 40px;
+              margin-top: 10px;
+            }
+
+            p {
+              width: 16px;
+              height: 24px;
+              font-size: 16px;
+              font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+              color: #FFFFFF;
+              letter-spacing: 1px;
+              margin-top: 28px;
+              margin-left: 3px;
+            }
+          }
+        }
+
+        .countdown {
+          width: 15px;
+          height: 36px;
+          font-size: 24px;
+          font-family: Source Han Sans CN-Bold, Source Han Sans CN;
+          font-weight: bold;
+          color: #4AFCDC;
+          letter-spacing: 2px;
+          text-shadow: 0px 0px 7px rgba(0, 255, 194, 0.3);
+          margin: 0 auto;
+          margin-top: 3px !important;
+        }
+      }
+
+      .box_ai {
+        background-image: url('../../images/bounced/box_ai.png');
+        width: 345px;
+        height: 112px;
+
+        .title_ai {
+          background-image: url('../../images/bounced/title_ai.png');
+          width: 336px;
+          height: 32px;
+          margin: 0 auto;
+          margin-top: 10px;
+
+          p {
+            display: inline-block;
+            margin: 0 auto;
+            width: 98px;
+            height: 27px;
+            font-size: 18px;
+            font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+            color: #FFFFFF;
+            letter-spacing: 1px;
+            text-shadow: 0px 0px 7px rgba(121, 255, 239, 0.37);
+          }
+        }
+
+        .when {
+          background-image: url('../../images/bounced/box_ai.png');
+          background-size: 100% 100%;
+          width: 280px;
+          height: 39px;
+          margin-top: 20px;
+          margin-left: 18px;
+
+          p {
+            display: inline-block;
+            position: absolute;
+            width: 16px;
+            height: 24px;
+            font-size: 16px;
             font-family: Source Han Sans CN-Regular, Source Han Sans CN;
-            font-weight: 400;
-            color: #4EF9FF;
-            margin-left: 8px;
-            margin-top: 12px;
+            color: #FFFFFF;
+            letter-spacing: 1px;
+            top: 224px;
+            right: 50px;
+          }
+
+          .eight {
+            font-size: 24px;
+            font-family: Source Han Sans CN-Bold, Source Han Sans CN;
+            font-weight: bold;
+            color: #4AFCDC;
+            letter-spacing: 2px;
+            text-shadow: 0px 0px 7px rgba(0, 255, 194, 0.3);
+            margin: 0 auto !important;
+          }
         }
+      }
     }
-    .box{
-        width: 100%;
+
+    .xinxi {
+      width: 100%;
+      margin: 15px 27px 0;
+      color: #ffffff;
+
+      .xinxi_1 {
+        width: calc(100% - 54px);
         display: flex;
-        justify-content: space-evenly;
-        margin-top: 10px;
-        .box_lztime{
-            background-image: url('../../images/bounced/box_lztime.png');
-            width: 500px;
-            height: 112px;
-            .title_lztime{
-                background-image: url('../../images/bounced/title_lztime.png');
-                width: 466px;
-                height: 32px;
-                margin: 0 auto;
-                margin-top: 10px;
-                p{
-                    display: inline-block;
-                    margin: 0 auto;
-                    width: 78px;
-                    height: 27px;
-                    font-size: 18px;
-                    font-family: Source Han Sans CN-Medium, Source Han Sans CN;
-                    color: #FFFFFF;
-                    letter-spacing: 1px;
-                    text-shadow: 0px 0px 7px rgba(121, 255, 239, 0.37);;
-                }
-            }
-            .time{
-                width: 100%;
-                height: 100%;
-                display: flex;
-                justify-content: space-around;
-                .tian{
-                    width: 185px;
-                    display: flex;
-                    justify-content: space-around;
-                    margin-top: 10px;
-                    margin-left: 15px;
-                    .tian_1{
-                        background-image: url('../../images/bounced/box_shuzi.png');
-                        width: 27px;
-                        height: 40px;
-                        margin-top: 10px;
-                    }
-                    .tian_2{
-                        background-image: url('../../images/bounced/box_shuzi.png');
-                        width: 27px;
-                        height: 40px;
-                        margin-top: 10px;
-                    }
-                    .tian_3{
-                        background-image: url('../../images/bounced/box_shuzi.png');
-                        width: 27px;
-                        height: 40px;
-                        margin-top: 10px;
-                    }
-                    .tian_4{
-                        background-image: url('../../images/bounced/box_shuzi.png');
-                        width: 27px;
-                        height: 40px;
-                        margin-top: 10px;
-                    }
-                    .tian_5{
-                        background-image: url('../../images/bounced/box_shuzi.png');
-                        width: 27px;
-                        height: 40px;
-                        margin-top: 10px;
-                    }
-                    .tian_6{
-                        background-image: url('../../images/bounced/box_shuzi.png');
-                        width: 27px;
-                        height: 40px;
-                        margin-top: 10px;
-                    }
-                    p{
-                        width: 16px;
-                        height: 24px;
-                        font-size: 16px;
-                        font-family: Source Han Sans CN-Regular, Source Han Sans CN;
-                        color: #FFFFFF;
-                        letter-spacing: 1px;
-                        margin-top: 28px;
-                        // margin-left: 3px;
-                    }
-                }
-                .shi{
-                    width: 71px;
-                    display: flex;
-                    justify-content: space-around;
-                    margin-top: 10px;
-                    .shi_1{
-                        background-image: url('../../images/bounced/box_shuzi.png');
-                        width: 27px;
-                        height: 40px;
-                        margin-top: 10px;
-                    }
-                    .shi_2{
-                        background-image: url('../../images/bounced/box_shuzi.png');
-                        width: 27px;
-                        height: 40px;
-                        margin-top: 10px;
-                    }
-                    p{
-                        width: 16px;
-                        height: 24px;
-                        font-size: 16px;
-                        font-family: Source Han Sans CN-Regular, Source Han Sans CN;
-                        color: #FFFFFF;
-                        letter-spacing: 1px;
-                        margin-top: 28px;
-                        margin-left: 3px;
-                    }
-                }
-                .fen{
-                    width: 71px;
-                    display: flex;
-                    justify-content: space-around;
-                    margin-top: 10px;
-                    .fen_1{
-                        background-image: url('../../images/bounced/box_shuzi.png');
-                        width: 27px;
-                        height: 40px;
-                        margin-top: 10px;
-                    }
-                    .fen_2{
-                        background-image: url('../../images/bounced/box_shuzi.png');
-                        width: 27px;
-                        height: 40px;
-                        margin-top: 10px;
-                    }
-                    p{
-                        width: 16px;
-                        height: 24px;
-                        font-size: 16px;
-                        font-family: Source Han Sans CN-Regular, Source Han Sans CN;
-                        color: #FFFFFF;
-                        letter-spacing: 1px;
-                        margin-top: 28px;
-                        margin-left: 3px;
-                    }
-                }
-                .miao{
-                    width: 71px;
-                    display: flex;
-                    justify-content: space-evenly;
-                    margin-top: 10px;
-                    .miao_1{
-                        background-image: url('../../images/bounced/box_shuzi.png');
-                        width: 27px;
-                        height: 40px;
-                        margin-top: 10px;
-                    }
-                    .miao_2{
-                        background-image: url('../../images/bounced/box_shuzi.png');
-                        width: 27px;
-                        height: 40px;
-                        margin-top: 10px;
-                    }
-                    p{
-                        width: 16px;
-                        height: 24px;
-                        font-size: 16px;
-                        font-family: Source Han Sans CN-Regular, Source Han Sans CN;
-                        color: #FFFFFF;
-                        letter-spacing: 1px;
-                        margin-top: 28px;
-                        margin-left: 3px;
-                    }
-                }
-            }
-            .countdown{
-                width: 15px;
-                height: 36px;
-                font-size: 24px;
-                font-family: Source Han Sans CN-Bold, Source Han Sans CN;
-                font-weight: bold;
-                color: #4AFCDC;
-                letter-spacing: 2px;
-                text-shadow: 0px 0px 7px rgba(0, 255, 194, 0.3);
-                margin: 0 auto;
-                margin-top: 3px !important;
-            }
+        align-items: center;
+        justify-content: space-between;
+
+        .rudang,
+        .chusheng,
+        .xueli {
+          display: flex;
+          align-items: center;
+
+          .contont {
+            width: 209px;
+            height: 27px;
+            line-height: 27px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px 2px 2px 2px;
+            padding-left: 5px;;
+          }
+
+          .key {
+            margin-right: 8px;
+            text-align: right;
+          }
+
+          p {
+            height: 27px;
+            font-size: 18px;
+            font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+            color: #FFFFFF;
+            text-align: left;
+          }
         }
-        .box_ai{
-            background-image: url('../../images/bounced/box_ai.png');
-            width: 345px;
-            height: 112px;
-            .title_ai{
-                background-image: url('../../images/bounced/title_ai.png');
-                width: 336px;
-                height: 32px;
-                margin: 0 auto;
-                margin-top: 10px;
-                p{
-                    display: inline-block;
-                    margin: 0 auto;
-                    width: 98px;
-                    height: 27px;
-                    font-size: 18px;
-                    font-family: Source Han Sans CN-Medium, Source Han Sans CN;
-                    color: #FFFFFF;
-                    letter-spacing: 1px;
-                    text-shadow: 0px 0px 7px rgba(121, 255, 239, 0.37);
-                }
-            }
-            .when{
-                background-image: url('../../images/bounced/box_ai.png'); 
-                background-size: 100% 100%;
-                width: 280px;
-                height: 39px;
-                margin-top: 20px;
-                margin-left: 18px;
-                p{
-                    display: inline-block;
-                    position: absolute;
-                    width: 16px;
-                    height: 24px;
-                    font-size: 16px;
-                    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
-                    color: #FFFFFF;
-                    letter-spacing: 1px;
-                    top: 224px;
-                    right: 50px;
-                }
-                .eight{
-                    font-size: 24px;
-                    font-family: Source Han Sans CN-Bold, Source Han Sans CN;
-                    font-weight: bold;
-                    color: #4AFCDC;
-                    letter-spacing: 2px;
-                    text-shadow: 0px 0px 7px rgba(0, 255, 194, 0.3);
-                    margin: 0 auto !important;
-                }
-            }
+      }
+
+      .xinxi_2 {
+        width: calc(100% - 54px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .zhiwu,
+        .zhiji,
+        .zuzhang {
+          display: flex;
+          align-items: center;
+
+          .contont {
+            width: 209px;
+            height: 27px;
+            line-height: 27px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px 2px 2px 2px;
+            padding-left: 5px;;
+          }
+
+          .key {
+            margin-right: 8px;
+            text-align: right;
+          }
+
+          p {
+            height: 27px;
+            font-size: 18px;
+            font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+            color: #FFFFFF;
+            text-align: left;
+          }
         }
+      }
+
+      .xinxi-3 {
+        width: calc(100% - 54px);
+        display: flex;
+        align-items: center;
+
+        .anquanyuan,
+        .gongzuodanwei {
+          display: flex;
+          align-items: center;
+
+          .contont {
+            width: 209px;
+            height: 27px;
+            line-height: 27px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px 2px 2px 2px;
+            padding-left: 5px;;
+          }
+
+          .key {
+            margin-right: 8px;
+            text-align: right;
+          }
+
+          p {
+            height: 27px;
+            font-size: 18px;
+            font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+            color: #FFFFFF;
+            text-align: left;
+          }
+        }
+
+        .gongzuodanwei {
+          margin-left: 13px;
+
+          .contont {
+            width: 480px;
+          }
+        }
+      }
     }
-            .xinxi{
-                width: 100%;
-                margin: 15px 27px 0;
-                color: #ffffff;
-                .xinxi_1{
-                    width: calc(100% - 54px);
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                   
-                  .rudang,
-                  .chusheng,
-                  .xueli{
-                     display: flex;
-                     align-items: center;
-                     .contont{
-                        width: 209px;
-                        height: 27px;
-                        line-height: 27px;
-                        background: rgba(255, 255, 255, 0.1);
-                        border-radius: 2px 2px 2px 2px;
-                        padding-left: 5px;;
-                     }
-                     .key {
-                         margin-right: 8px;
-                         text-align: right;
-                     }
-                   p{
-                       height: 27px;
-                       font-size: 18px;
-                        font-family: Source Han Sans CN-Regular, Source Han Sans CN;
-                        color: #FFFFFF;
-                        text-align: left;
-                   }
-                  }
-                }
-                .xinxi_2{
-                    width: calc(100% - 54px);
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                   
-                  .zhiwu,
-                  .zhiji,
-                  .zuzhang{
-                     display: flex;
-                     align-items: center;
-                     .contont{
-                        width: 209px;
-                        height: 27px;
-                        line-height: 27px;
-                        background: rgba(255, 255, 255, 0.1);
-                        border-radius: 2px 2px 2px 2px;
-                        padding-left: 5px;;
-                     }
-                     .key {
-                         margin-right: 8px;
-                         text-align: right;
-                     }
-                   p{
-                       height: 27px;
-                       font-size: 18px;
-                        font-family: Source Han Sans CN-Regular, Source Han Sans CN;
-                        color: #FFFFFF;
-                        text-align: left;
-                   }
-                  }
-                }
-                .xinxi-3 {
-                    width: calc(100% - 54px);
-                    display: flex;
-                    align-items: center;
-                    .anquanyuan,
-                    .gongzuodanwei{
-                       display: flex;
-                       align-items: center;
-                       .contont{
-                          width: 209px;
-                          height: 27px;
-                          line-height: 27px;
-                          background: rgba(255, 255, 255, 0.1);
-                          border-radius: 2px 2px 2px 2px;
-                          padding-left: 5px;;
-                       }
-                       .key {
-                           margin-right: 8px;
-                           text-align: right;
-                       }
-                     p{
-                         height: 27px;
-                         font-size: 18px;
-                          font-family: Source Han Sans CN-Regular, Source Han Sans CN;
-                          color: #FFFFFF;
-                          text-align: left;
-                     }
-                    }
-                    .gongzuodanwei {
-                        margin-left: 13px;
-                        .contont {
-                            width: 480px;
-                        }
-                    }
-                }
-            }
-            .img-list-box {
-                display: flex;
-                align-items: center;
-                justify-content: space-around;
-                .img-item {
-                    width: 177px;
-                    height: 120px;
-                }
-            }
-        }
+
+    .img-list-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+
+      .img-item {
+        width: 177px;
+        height: 120px;
+      }
     }
+  }
+}
+
 // }
-    

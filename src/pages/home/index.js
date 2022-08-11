@@ -1,25 +1,29 @@
-import Scene, { getConfigJson, getMapInstanceByKey } from '@ty/Scene'
-import { initUrlConfig} from '../../api'
+import { useCallback } from 'react'
+import MapContainer, { getConfigJson } from '../../components/MapContainer'
+import { initUrlConfig } from '../../api'
+
 import makeServer from '../../api/mock/server'
-// import Bac from '../../components/bac'
-import Bounced from '../../components/bounced'
+
+import Header from '../../components/Header'
+import Background from '../../components/Background'
+import Admin from '../../components/Admin'
 import Navigation from '../../components/navigation'
-const sceneCtl = Scene()
-const SceneComp = sceneCtl.Dom
+
+import useHomePosition from '../../hooks/useHomePosition'
+
+let mapViewer = null
 
 // 获取 mapViewer 实例
 export const getMapViewer = () => {
-  return getMapInstanceByKey('light')
+  return mapViewer
 }
 
-
 function Index() {
-  
-  // 地图初始化成功后的回调
-  const handleSuccess = () => {
-    console.log('地图初始化成功！')
-    console.log(getMapViewer())
 
+  const { resetHome } = useHomePosition()
+
+  // 地图初始化成功后的回调
+  const handleSuccess = useCallback((viewer) => {
     const config = getConfigJson()
 
     let api = config.api
@@ -30,22 +34,33 @@ function Index() {
     if (config && config.environments === 'MOCK') {
       makeServer()
     }
-  }
+
+    mapViewer = viewer
+
+    mapViewer.build.resetAllBuildings()
+
+    // 默认定位到指定视角
+    resetHome()
+  }, [])
 
   return (
-   <>
-   <SceneComp
-      onMapSuccess={handleSuccess}
-      retryCount={5}
-      retryInterval={100}
-    />
+    <>
+      <MapContainer
+        onSuccess={handleSuccess}
+      />
 
-    {/* <Bac/>  */}
+      {/*背景边框*/}
+      <Background />
 
-    <Bounced/>
+      {/*页头*/}
+      <Header />
 
-    <Navigation/>
-   </> 
+      {/*楼层分层按钮*/}
+      <Navigation/>
+
+      {/*开发环境下，会显示的测试面板*/}
+      <Admin />
+    </>
   )
 }
 

@@ -43,9 +43,6 @@
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
-    "@ty/Components": "^0.1.17",
-    "@ty/Scene": "^0.1.44",
-    "@ty/shared": "^0.1.10",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.16.0",
@@ -55,7 +52,6 @@
     "eslint-plugin-react": "^7.30.0",
     "husky": "^7.0.4",
     "lint-staged": "^11.2.6",
-    "mapv3d": "^0.1.16",
     "prettier": "^2.6.2"
   },
   "lint-staged": {
