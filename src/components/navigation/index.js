@@ -1,14 +1,35 @@
-import React, { useState } from 'react';
-import './index.scss'
-import icon from './images/icon-fold.png'
+import React, { useState, useEffect } from 'react';
+import floorConfig, { buildId } from './floorConfig'
+import { getMapViewer } from '../MapContainer'
+import Build from '../../utils/build'
 import expand from './images/icon-open.png'
+import icon from './images/icon-fold.png'
+import './index.scss'
 
 function Navigation() {
   // 是否点击了分层，
   const [open, setOpen] = useState(false)
+  const [activeFloorId, setActiveFloorId] = useState(-1)
+
+  useEffect(() => {
+    const mapViewer = getMapViewer()
+
+    if (mapViewer) {
+      if (open) {
+        Build.splitDynamicBuilding(buildId, 10, 1)
+
+      } else {
+        Build.resetAllBuildings()
+      }
+    }
+  }, [open])
 
   const handleToggleOpen = () => {
     setOpen(open => !open)
+  }
+
+  const handleFloorClick = (floor) => {
+    setActiveFloorId(floor.id)
   }
 
   return (
@@ -25,18 +46,17 @@ function Navigation() {
       {/* 定义一个空容器*/}
       <div className="floor-list-wrapper">
         <div className={`floor-list ${open ? 'active' : ''}`}>
-          <div className="f1 floor-item">
-            <p className="text-f1">F1</p>
-          </div>
-          <div className="f2 floor-item">
-            <p className="text-f2">F2</p>
-          </div>
-          <div className="f3 floor-item">
-            <p className="text-f3">F3</p>
-          </div>
-          <div className="f4 floor-item">
-            <p className="text-f4">F4</p>
-          </div>
+          {
+            floorConfig.map(floor => (
+              <div
+                key={floor.id}
+                className={`f1 floor-item ${floor.id === activeFloorId ? 'active' : ''}`}
+                onClick={() => handleFloorClick(floor)}
+              >
+                <p className="text-f1">{floor.displayName}</p>
+              </div>
+            ))
+          }
         </div>
       </div>
     </div>

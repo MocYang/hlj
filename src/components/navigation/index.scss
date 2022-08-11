@@ -43,97 +43,48 @@
   .floor-list-wrapper {
     position: absolute;
     left: 0;
-    top: 0;
+    top: 100%;
     width: 92px;
-    height: 28px;
+    height: 128px;
     background: transparent;
-    //overflow: hidden;
+    overflow: hidden;
   }
 
 
   .floor-list {
     position: absolute;
     left: 50%;
-    top: 100%;
+    top: -100%;
     transform: translateX(-50%);
-    transition: top 1s;
-    visibility: hidden;
+    transition: top .2s;
 
     &.active {
-      visibility: visible;
+      top: 0;
     }
   }
 
   .floor-item {
     cursor: pointer;
     user-select: none;
-  }
 
-  .f1 {
-    background-image: url('images/btn_lc.png');
+    background: url('images/btn_lc.png') no-repeat;
+    background-size: 100% 100%;
     width: 71px;
     height: 27px;
     margin: 0 auto;
     margin-top: 5px;
+    color: #4EF9FF;
 
     .text-f1 {
       width: 21px;
       height: 27px;
       font-size: 18px;
       font-family: Source Han Sans CN-Medium, Source Han Sans CN;
-      color: #4EF9FF;
       margin: 0 auto;
     }
-  }
 
-  .f2 {
-    background-image: url('images/btn_lc.png');
-    width: 71px;
-    height: 27px;
-    margin: 0 auto;
-    margin-top: 5px;
-
-    .text-f2 {
-      width: 21px;
-      height: 27px;
-      font-size: 18px;
-      font-family: Source Han Sans CN-Medium, Source Han Sans CN;
-      color: #4EF9FF;
-      margin: 0 auto;
-    }
-  }
-
-  .f3 {
-    background-image: url('images/btn_lc.png');
-    width: 71px;
-    height: 27px;
-    margin: 0 auto;
-    margin-top: 5px;
-
-    .text-f3 {
-      width: 21px;
-      height: 27px;
-      font-size: 18px;
-      font-family: Source Han Sans CN-Medium, Source Han Sans CN;
-      color: #4EF9FF;
-      margin: 0 auto;
-    }
-  }
-
-  .f4 {
-    background-image: url('images/btn_lc.png');
-    width: 71px;
-    height: 27px;
-    margin: 0 auto;
-    margin-top: 5px;
-
-    .text-f4 {
-      width: 21px;
-      height: 27px;
-      font-size: 18px;
-      font-family: Source Han Sans CN-Medium, Source Han Sans CN;
-      color: #4EF9FF;
-      margin: 0 auto;
+    &.active {
+      color: #4E9FFF;
     }
   }
 }

@@ -6,7 +6,7 @@
  * @Description: 首页定位 hooks
  */
 import { useCallback } from 'react'
-import { getMapViewer } from '../../pages/home'
+import { getMapViewer } from '../../components/MapContainer'
 
 const homePosition = {
   pitch: 58.651084899902344,

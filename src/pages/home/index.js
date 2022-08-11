@@ -11,19 +11,12 @@ import Navigation from '../../components/navigation'
 
 import useHomePosition from '../../hooks/useHomePosition'
 
-let mapViewer = null
-
-// 获取 mapViewer 实例
-export const getMapViewer = () => {
-  return mapViewer
-}
-
 function Index() {
 
   const { resetHome } = useHomePosition()
 
   // 地图初始化成功后的回调
-  const handleSuccess = useCallback((viewer) => {
+  const handleSuccess = useCallback(() => {
     const config = getConfigJson()
 
     let api = config.api
@@ -34,10 +27,6 @@ function Index() {
     if (config && config.environments === 'MOCK') {
       makeServer()
     }
-
-    mapViewer = viewer
-
-    mapViewer.build.resetAllBuildings()
 
     // 默认定位到指定视角
     resetHome()

@@ -7,7 +7,7 @@
  */
 import { useRef } from 'react'
 
-import { getMapViewer } from '../../pages/home'
+import { getMapViewer } from '../MapContainer'
 
 import "./index.scss"
 

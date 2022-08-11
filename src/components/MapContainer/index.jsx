@@ -12,7 +12,9 @@ import './index.scss'
 const { createUUID, fetchConfig } = window.mapv3d.utils
 
 let configFile = null
+let mapViewer = null
 
+export const getMapViewer = () => mapViewer
 
 const getMapContainerId = () => {
   return `mapvision3d_${createUUID()}`
@@ -36,7 +38,7 @@ function MapContainer({
     if (!ready) {
       fetchConfig().then(config => {
         configFile = config
-        const mapViewer = new window.mapv3d.MapViewer({
+        mapViewer = new window.mapv3d.MapViewer({
           // id: 'mapvision3d',
           id: mapContainerId,
           ...config,
