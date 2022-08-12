@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import floorConfig, { buildId } from './floorConfig'
 import { getMapViewer } from '../MapContainer'
 import Build from '../../utils/build'
+import EventBus from '../../utils/EventBus'
 import expand from './images/icon-open.png'
 import icon from './images/icon-fold.png'
 import './index.scss'
@@ -17,9 +18,8 @@ function Navigation() {
     if (mapViewer) {
       if (open) {
         Build.splitDynamicBuilding(buildId, 10, 1)
-
       } else {
-        Build.resetAllBuildings()
+        Build.splitBuildingReset(buildId)
       }
     }
   }, [open])
@@ -30,6 +30,19 @@ function Navigation() {
 
   const handleFloorClick = (floor) => {
     setActiveFloorId(floor.id)
+    const mapViewer = getMapViewer()
+    // mapViewer.core.view3d.FindObjectById('V001_JZ0001', res => {
+    //   const buildInfo = res
+      // Build.splitDynamicFloor(buildId, floor.floorId, 10, 2, () => {
+      //   console.log('floor split')
+      // })
+
+    // })
+
+    EventBus.dispatch('floorSplit', {
+      buildId,
+      floorId: floor.floodId
+    })
   }
 
   return (
