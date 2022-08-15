@@ -10,4 +10,7 @@
 export const urlConfig = {
   // '实例接口'
   sysConfigList: `/sys/config/list`,
+
+  // 监控列表
+  cameraList: `/device/camera/list`
 }

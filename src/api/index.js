@@ -40,26 +40,10 @@ export function initUrlConfig(url = '') {
   }
 }
 
-/**
- * 数据图层列表数据
- *
- */
-export function mapLayerList() {
+export function cameraListConfig (data = null) {
   return {
-    url: urls.mapLayerList,
-    method: 'GET',
-    data: null
-  }
-}
-
-/**
- * 数据图层列表树形数据
- *
- */
-export function mapLayerTree() {
-  return {
-    url: urls.mapLayerTree,
-    method: 'GET',
-    data: null
+    url: urls.cameraList,
+    method: 'POST',
+    data
   }
 }

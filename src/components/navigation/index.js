@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import floorConfig, { buildId } from './floorConfig'
-import { getMapViewer } from '../MapContainer'
+import { getMapViewer, getConfigJson } from '../MapContainer'
 import Build from '../../utils/build'
-import EventBus from '../../utils/EventBus'
 import expand from './images/icon-open.png'
 import icon from './images/icon-fold.png'
 import './index.scss'
 
-function Navigation() {
+function Navigation({onChange}) {
   // 是否点击了分层，
   const [open, setOpen] = useState(false)
   const [activeFloorId, setActiveFloorId] = useState(-1)
@@ -17,7 +16,9 @@ function Navigation() {
 
     if (mapViewer && Build.api) {
       if (open) {
-        Build.api.splitDynamicBuilding(buildId, 10, 1)
+        const configJson = getConfigJson()
+        const splitHeight = configJson.splitHeight
+        Build.api.splitDynamicBuilding(buildId, splitHeight, 1)
       } else {
         Build.api.splitBuildingReset(buildId)
       }
@@ -30,19 +31,13 @@ function Navigation() {
 
   const handleFloorClick = (floor) => {
     setActiveFloorId(floor.id)
-    const mapViewer = getMapViewer()
-    // mapViewer.core.view3d.FindObjectById('V001_JZ0001', res => {
-    //   const buildInfo = res
-      // Build.splitDynamicFloor(buildId, floor.floorId, 10, 2, () => {
-      //   console.log('floor split')
-      // })
 
-    // })
+    // 设置楼层分层显示
+    Build.setFloorVisible(buildId, floor.floorId)
 
-    EventBus.dispatch('floorSplit', {
-      buildId,
-      floorId: floor.floodId
-    })
+    if (onChange) {
+      onChange(floor)
+    }
   }
 
   return (

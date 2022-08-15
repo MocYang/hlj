@@ -1,6 +1,8 @@
 import { createServer } from 'miragejs'
 // eslint-disable-next-line
-import { urlConfig } from '../config'
+import { urls } from '../index'
+
+import cameraListHandler from './cameraListHandler'
 
 function makeServer(environment = 'development') {
   createServer({
@@ -31,6 +33,8 @@ function makeServer(environment = 'development') {
       //     req.onloadend()
       //   }
       // })
+
+      this.post(urls.cameraList, cameraListHandler)
     }
   })
 }

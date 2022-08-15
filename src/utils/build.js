@@ -52,6 +52,18 @@ class MapBuildingUtils {
     return reg.test(id)
   }
 
+  isFloorName(floorName) {
+    const reg = /^[B|F]\d+$/
+
+    return reg.test(floorName)
+  }
+
+  // V001_JZ0001#F001
+  isFloorId(floorId) {
+    const reg = /^V\d+_JZ\d+#[F|B]\d+$/
+    return reg.test(floorId)
+  }
+
   getBuildingIdFromGid(gid) {
     if (this.isBuildingId(gid)) {
       return gid
@@ -69,6 +81,36 @@ class MapBuildingUtils {
     return buildingIdArr.join('_')
   }
 
+  /**
+   * F001 => 1
+   * F002 => 2
+   * B001 => -1
+   * B002 => 02
+   * @param floorName
+   * @returns {number|undefined}
+   */
+  getFloorNumberFromFloorName(floorName) {
+    if (!this.isValidFloorName(floorName)) {
+      return
+    }
+
+    const floorSignString = floorName[0]
+    let floorSign = 1
+    if (floorSignString === 'B') {
+      floorSign = -1
+    }
+
+    return Number(floorName.slice(1)) * floorSign
+  }
+
+  getFloorNameFromFloorId(floorId) {
+    if (!this.isFloorId(floorId)) {
+      return
+    }
+
+    return floorId.split('#')[1]
+  }
+
   isValidBuildingId(id) {
     if (!this.isBuildingId(id)) {
       console.error(`建筑 id: ${id}, 不符合格式：V001_JZ0001`)
@@ -76,6 +118,36 @@ class MapBuildingUtils {
     }
 
     return true
+  }
+
+  isValidBuildingWkId(id) {
+    if (!this.isBuildingWK(id)) {
+      console.error(`建筑外壳 id: ${id}, 不符合格式：V001_JZ0001_WK`)
+      return false
+    }
+    return true
+  }
+
+  isValidFloorName(floorName) {
+    if (!this.isFloorName(floorName)) {
+      console.error(`楼层名称: ${floorName}, 不符合格式：B001 | F001.`)
+      return false
+    }
+
+    return true
+  }
+
+
+  createFloorGid(buildId, floorName) {
+    let floorGid = ''
+
+    if (this.isValidBuildingId(buildId)) {
+      floorGid = buildId + '_WK_' + floorName
+    } else if (this.isValidBuildingWkId(buildId)) {
+      floorGid = buildId + '_' + floorName
+    }
+
+    return floorGid
   }
 }
 
@@ -213,15 +285,19 @@ class MapBuildingApi extends MapBuildingBase {
    * 楼层动态分离
    */
   splitDynamicBuilding(id, height, duration, callback) {
-    // todo: 增加分离的状态，过程中如果再次触发了分离，且是同一楼层，则退出，等待完成。
     if (!this.build.utils.isBuildingId(id)) {
-      console.error(`建筑 id: ${id}, 不符合格式：V001_JZ0001`)
+      return
+    }
+
+    if (!this.core || !this.view3d) {
       return
     }
 
     const self = this
     this.core.showCover()
-    this.view3d.SplitDynamicBuilding(id, height, duration)
+    console.log('split building height: ', height)
+    // this.view3d.SplitDynamicBuilding(id, height, duration)
+    this.view3d.SplitBuilding(id, height, duration)
     setTimeout(() => {
       self.core.hideCover()
       callback && callback()
@@ -238,6 +314,130 @@ class MapBuildingApi extends MapBuildingBase {
       return waitSchedule(wait, this.view3d, this.view3d.ResetAllBuildings)
     }
   }
+
+  // 楼层相关
+  /**
+   * 获取楼层个数
+   * @param buildId
+   * @returns {*}
+   */
+  getFloorNum(buildId) {
+    if (!this.build.utils.isValidBuildingId(buildId)) {
+      return
+    }
+    if (this.view3d && functionExist(this.view3d, this.view3d.GetFloorNum)) {
+      return schedule(this.view3d, this.view3d.GetFloorNum, buildId)
+    }
+  }
+
+  /**
+   * 获取楼层名称列表
+   * @param buildId
+   * @returns {*}
+   */
+  getFloorNames(buildId) {
+    if (!this.build.utils.isValidBuildingId(buildId)) {
+      return
+    }
+    if (this.view3d && functionExist(this.view3d, this.view3d.GetFloorNames)) {
+      return schedule(this.view3d, this.view3d.GetFloorNames, buildId)
+    }
+  }
+
+  /**
+   * 获取楼层是否显示
+   * @param buildId
+   * @param floorName
+   * @returns {*}
+   */
+  getFloorVisible(buildId, floorName) {
+    if (!this.build.utils.isValidBuildingId(buildId)) {
+      return
+    }
+
+    if (!this.build.utils.isValidFloorName(floorName)) {
+      return
+    }
+
+    if (this.view3d && functionExist(this.view3d, this.view3d.GetFloorVisible)) {
+      return schedule(this.view3d, this.view3d.GetFloorVisible, buildId, floorName)
+    }
+  }
+
+  setFloorVisible(buildId, floorName, visible, wait = 20) {
+    if (!this.build.utils.isValidBuildingId(buildId)) {
+      return
+    }
+
+    if (!this.build.utils.isValidFloorName(floorName)) {
+      return
+    }
+
+    if (this.view3d && functionExist(this.view3d, this.view3d.SetFloorVisible)) {
+      return waitSchedule(wait, this.view3d, this.view3d.SetFloorVisible, buildId, floorName, visible)
+    }
+  }
+
+  getUpFloorNum(buildId, floorName) {
+    if (!this.build.utils.isValidBuildingId(buildId)) {
+      return
+    }
+
+    if (!this.build.utils.isValidFloorName(floorName)) {
+      return
+    }
+    if (this.view3d && functionExist(this.view3d, this.view3d.GetUpFloorNum)) {
+      return schedule(this.view3d, this.view3d.GetUpFloorNum, buildId, floorName)
+    }
+  }
+
+
+  getDownFloorNum(buildId, floorName) {
+    if (!this.build.utils.isValidBuildingId(buildId)) {
+      return
+    }
+
+    if (!this.build.utils.isValidFloorName(floorName)) {
+      return
+    }
+    if (this.view3d && functionExist(this.view3d, this.view3d.GetDownFloorNum)) {
+      return schedule(this.view3d, this.view3d.GetDownFloorNum, buildId, floorName)
+    }
+  }
+
+  getUpFloorNames(buildId, floorName) {
+    if (!this.build.utils.isValidBuildingId(buildId)) {
+      return
+    }
+
+    if (!this.build.utils.isValidFloorName(floorName)) {
+      return
+    }
+    if (this.view3d && functionExist(this.view3d, this.view3d.GetUpFloorNames)) {
+      return schedule(this.view3d, this.view3d.GetUpFloorNames, buildId, floorName)
+    }
+  }
+
+  getDownFloorNames(buildId, floorName) {
+    if (!this.build.utils.isValidBuildingId(buildId)) {
+      return
+    }
+
+    if (!this.build.utils.isValidFloorName(floorName)) {
+      return
+    }
+
+    if (this.view3d && functionExist(this.view3d, this.view3d.GetDownFloorNames)) {
+      return schedule(this.view3d, this.view3d.GetDownFloorNames, buildId, floorName)
+    }
+  }
+
+  // 地面的显示和隐藏
+  setGroundVisible(visible = true, wait = 10) {
+    if (this.view3d && functionExist(this.view3d, this.view3d.SetGroundVisible)) {
+      return waitSchedule(wait, this.view3d, this.view3d.SetGroundVisible, visible)
+    }
+  }
 }
 
 /**
@@ -247,38 +447,48 @@ class MapBuild extends MapBuildingBase {
   constructor() {
     super()
 
+    // 地面默认是显示的
+    this.groundVisible = true
+
     // 功能函数类实例
     this.utils = new MapBuildingUtils(this)
 
     // 底层接口实例
     this.api = new MapBuildingApi(this)
 
-    this.buildingNames = []
+    this.buildingInfo = null
 
-    this.buildingInfo = new Map()
+    // TODO: 增加每栋楼分层的状态 - 是否在分离中，是否分离结束
   }
 
   init(mapViewer) {
     super.init(mapViewer)
+
     this.api.init(mapViewer)
+
+    // 初始楼栋楼层信息
+    this.initBuildingInfo()
   }
 
 
   // 获取一遍所有的楼层实体信息，会包含：楼层边界点位：bmax,bmin
   // 因为这是不紧急的任务，所以，不应该阻塞页面
-  getAllBuildingInfo() {
-    this.getBuildingNames((buildingNames, callback) => {
-      let buildingNumbers = buildingNames.length
-      let i = 0
-      for (let build of buildingNames) {
-        this.getBuildingInfo(build.id, info => {
-          i++
+  initBuildingInfo() {
+    if (this.buildingInfo) {
+      return this.buildingInfo
+    }
 
-          this.setBuildingInfo(build, info)
+    this.buildingInfo = {}
 
-          if (i === buildingNumbers - 1) {
-            callback && callback(this.buildingInfo)
-          }
+    const self = this
+    this.api.getBuildingNames().then(buildings => {
+      if (Array.isArray(buildings)) {
+        buildings.forEach(build => {
+          // 获取楼栋详情信息
+          self.setBuildingInfo(build)
+
+          // 获取楼栋内楼层的信息
+          self.setFloorInfo(build.id)
         })
       }
     })
@@ -287,33 +497,126 @@ class MapBuild extends MapBuildingBase {
   /**
    * 获取单个建筑的实体信息
    */
-  getBuildingInfo(buildId, callback) {
-    const mapViewer = getMapViewer()
-    if (mapViewer) {
-      mapViewer.drawer.findObjectById(buildId).then(res => {
-        callback && callback(res)
+  getBuildingInfo(buildId) {
+    if (!this.buildingInfo) {
+      return null
+    }
+
+    if (buildId !== undefined) {
+      return this.buildingInfo[buildId]
+    }
+
+    return this.buildingInfo
+  }
+
+  /**
+   * 设置单个楼栋的信息
+   */
+  setBuildingInfo(build) {
+    if (!this.buildingInfo) {
+      this.buildingInfo = {}
+    }
+
+    const self = this
+
+    this.buildingInfo[build.id] = {
+      ...build,
+      floor: []
+    }
+
+    // 获取对应的楼栋的详情
+    if (this.mapViewer) {
+      this.mapViewer.drawer.findObjectById(build.id).then(res => {
+        self.buildingInfo[build.id] = {
+          ...build,
+          details: res
+        }
       })
     }
   }
 
-
-  // 楼层操作 API
-  // 获取楼层数
-  getFloorNum(buildId, callback) {
-    const mapViewer = getMapViewer()
-    if (mapViewer) {
-      mapViewer.core.view3d.GetFloorNum(buildId, res => {
-        callback && callback(res)
-      })
+  // 获取某栋楼内的所有楼层信息 - 名称列表
+  getFloorInfo(buildId) {
+    if (!this.utils.isBuildingId(buildId)) {
+      return
     }
+
+    if (!this.buildingInfo) {
+      return
+    }
+
+    return this.buildingInfo[buildId]
   }
 
-  // 获取楼层名称列表
-  getFloorNames(buildId, callback) {
-    const mapViewer = getMapViewer()
-    if (mapViewer) {
-      mapViewer.core.view3d.GetFloorNames(buildId, res => {
-        callback && callback(res)
+  setFloorInfo(buildId) {
+    const self = this
+
+    // 如果没有获取过，获取一次
+    this.api.getFloorNames(buildId).then(floors => {
+      if (Array.isArray(floors)) {
+        self.buildingInfo[buildId].floorNum = floors.length
+        self.buildingInfo[buildId].floor = floors
+
+        floors.forEach((floor, i) => {
+          self.setFloorDetail(buildId, floor.floorname, i)
+        })
+      }
+    })
+  }
+
+  /**
+   * 获取楼层详情信息
+   * @param buildId
+   * @param floorName
+   */
+  getFloorDetail(buildId, floorName) {
+    if (!this.utils.isBuildingId(buildId)) {
+      return
+    }
+
+    // TODO: 验证 floorName
+    let floorInfo = null
+
+    const buildInfo = this.getBuildingInfo(buildId)
+    if (buildInfo && buildInfo.floor) {
+      for (let i = 0; i < buildInfo.floor.length; i++) {
+        const floor = buildInfo.floor
+        if (floor.floorname === floorName) {
+          floorInfo = floor
+          break
+        }
+      }
+    }
+
+    if (!floorInfo) {
+      console.warn(`无法找到给定的楼层信息。楼栋 id: ${buildId}, 楼层id: ${floorName} . `)
+      return null
+    }
+    return floorInfo
+  }
+
+  /**
+   * 设置楼层详情信息
+   * @param buildId
+   * @param floorName
+   * @param index
+   */
+  setFloorDetail(buildId, floorName, index) {
+    if (!this.utils.isBuildingId(buildId)) {
+      return
+    }
+    const floorGid = this.utils.createFloorGid(buildId, floorName)
+    if (floorGid) {
+      this.api.setFloorVisible(buildId, floorName, true).then(() => {
+        this.mapViewer.drawer.findObjectById(floorGid).then(res => {
+          const buildInfo = this.getBuildingInfo(buildId)
+          if (buildInfo && Array.isArray(buildInfo.floor)) {
+            const floorInfo = buildInfo.floor[index]
+            if (floorInfo) {
+              floorInfo.details = res
+            }
+          }
+        })
       })
     }
   }
@@ -321,17 +624,17 @@ class MapBuild extends MapBuildingBase {
   /**
    * 楼层动态侧平移
    * @param buildId
-   * @param floorId
+   * @param floorName
    * @param height
    * @param duration
    * @param callback
    * @TODO: 传参优化
    */
-  splitDynamicFloor(buildId, floorId, height, duration, callback) {
+  splitDynamicFloor(buildId, floorName, height, duration, callback) {
     const mapViewer = getMapViewer()
     if (mapViewer) {
       mapViewer.core.showCover()
-      mapViewer.core.view3d.SplitDynamicFloor(buildId, floorId, height, duration)
+      mapViewer.core.view3d.SplitDynamicFloor(buildId, floorName, height, duration)
       setTimeout(() => {
         mapViewer.core.hideCover()
         callback && callback()
@@ -343,11 +646,51 @@ class MapBuild extends MapBuildingBase {
   /**
    * 楼层显示和隐藏 - 无动态效果
    * @param buildId
-   * @param floorId
+   * @param floorName
    * @param visible
    */
-  setFloorVisible(buildId, floorId, visible) {
+  setFloorVisible(buildId, floorName, visible) {
+    if (!this.utils.isValidBuildingId(buildId)) {
+      return
+    }
 
+    if (!this.utils.isValidFloorName(floorName)) {
+      return
+    }
+
+    const floorSign = floorName[0]
+
+    if (floorSign === 'B') {
+      // 隐藏地面
+      if (this.groundVisible) {
+        this.groundVisible = !this.groundVisible
+        this.api.setGroundVisible(this.groundVisible)
+      }
+    } else {
+      // 显示地面
+      if (!this.groundVisible) {
+        this.groundVisible = !this.groundVisible
+        this.api.setGroundVisible(this.groundVisible)
+      }
+    }
+
+    const buildInfo = this.getBuildingInfo(buildId)
+    const floorNumber = this.utils.getFloorNumberFromFloorName(floorName)
+
+    if (buildInfo && Array.isArray(buildInfo.floor)) {
+
+      for (let floor of buildInfo.floor) {
+        let floorVisible = false
+
+        const currentFloorName = floor.floorname
+
+        const currentFloorNumber = this.utils.getFloorNumberFromFloorName(currentFloorName)
+
+        floorVisible = currentFloorNumber <= floorNumber
+
+        this.api.setFloorVisible(buildId, currentFloorName, floorVisible)
+      }
+    }
   }
 }
 
