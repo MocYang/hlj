@@ -285,7 +285,7 @@ class MapBuildingApi extends MapBuildingBase {
    * 楼层动态分离
    */
   splitDynamicBuilding(id, height, duration, callback) {
-    if (!this.build.utils.isBuildingId(id)) {
+    if (!this.build.utils.isValidBuildingId(id)) {
       return
     }
 
@@ -295,11 +295,37 @@ class MapBuildingApi extends MapBuildingBase {
 
     const self = this
     this.core.showCover()
-    console.log('split building height: ', height)
-    // this.view3d.SplitDynamicBuilding(id, height, duration)
-    this.view3d.SplitBuilding(id, height, duration)
+    // @bug: 实际的高度 = 设置的高度 * 2
+    this.view3d.SplitDynamicBuilding(id, height, duration)
     setTimeout(() => {
       self.core.hideCover()
+      callback && callback()
+    }, (duration + 0.3) * 1000)
+  }
+
+  /**
+   * 楼层动态侧平移
+   * @param buildId
+   * @param floorName
+   * @param height
+   * @param duration
+   * @param callback
+   * @TODO: 传参优化
+   */
+  splitDynamicFloor(buildId, floorName, height, duration, callback) {
+    if (!this.build.utils.isValidBuildingId(buildId)) {
+      return
+    }
+
+    if (!this.core || !this.view3d) {
+      return
+    }
+
+    this.core.showCover()
+    // TODO: 如果改用 updateObjects 来动态移动楼体，需要知道要终点的坐标(上下移动+z，左右移动，需要整体计算终点的x,y)
+    this.view3d.SplitDynamicFloor(buildId, floorName, height, duration)
+    setTimeout(() => {
+      this.core.hideCover()
       callback && callback()
     }, (duration + 0.3) * 1000)
   }
@@ -622,28 +648,6 @@ class MapBuild extends MapBuildingBase {
   }
 
   /**
-   * 楼层动态侧平移
-   * @param buildId
-   * @param floorName
-   * @param height
-   * @param duration
-   * @param callback
-   * @TODO: 传参优化
-   */
-  splitDynamicFloor(buildId, floorName, height, duration, callback) {
-    const mapViewer = getMapViewer()
-    if (mapViewer) {
-      mapViewer.core.showCover()
-      mapViewer.core.view3d.SplitDynamicFloor(buildId, floorName, height, duration)
-      setTimeout(() => {
-        mapViewer.core.hideCover()
-        callback && callback()
-      }, (duration + 0.3) * 1000)
-    }
-  }
-
-
-  /**
    * 楼层显示和隐藏 - 无动态效果
    * @param buildId
    * @param floorName
@@ -694,15 +698,4 @@ class MapBuild extends MapBuildingBase {
   }
 }
 
-/**
- * 楼层操作相关类
- */
-class MapFloor extends MapBuildingBase {
-  constructor(mapViewer) {
-    super(mapViewer)
-  }
-}
-
-
 export default new MapBuild()
-

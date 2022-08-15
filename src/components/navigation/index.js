@@ -21,6 +21,8 @@ function Navigation({onChange}) {
         Build.api.splitDynamicBuilding(buildId, splitHeight, 1)
       } else {
         Build.api.splitBuildingReset(buildId)
+        setActiveFloorId(null)
+        onChange(null)
       }
     }
   }, [open])

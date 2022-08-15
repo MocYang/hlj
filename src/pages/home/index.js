@@ -58,8 +58,9 @@ function Index() {
     // 默认定位到指定视角
     resetHome()
 
-    // todo: fetchCameraList
     handleFetchCameraList()
+
+    addCameraHandler()
   }, [])
 
   // 计算楼层分层后的点位的高度
@@ -67,7 +68,8 @@ function Index() {
     const configFile = getConfigJson()
     return {
       ...position,
-      z: position.z + (floorNumber - 1) * configFile.splitHeight * 100
+      // * 2是因为 底层接口设置的高度，为高度参数的 2 倍
+      z: position.z + (floorNumber - 1) * configFile.splitHeight * 100 * 2
     }
   }
 
@@ -102,7 +104,8 @@ function Index() {
 
         mapViewer.model.getController().addMany(cameraIconConfig, {
           onSuccess: () => {
-            console.log('模型添加完毕!')
+            // console.log('模型添加完毕!')
+            mapViewer.event.reBind()
           }
         })
       } else {
@@ -113,7 +116,6 @@ function Index() {
 
 
   const handleSetActiveFloor = (floor) => {
-    // todo: 复原后，设置激活的 floor 为 null
     if (activeFloor !== floor) {
       setActiveFloor(floor)
     }
