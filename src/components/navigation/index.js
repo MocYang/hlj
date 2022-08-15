@@ -15,11 +15,11 @@ function Navigation() {
   useEffect(() => {
     const mapViewer = getMapViewer()
 
-    if (mapViewer) {
+    if (mapViewer && Build.api) {
       if (open) {
-        Build.splitDynamicBuilding(buildId, 10, 1)
+        Build.api.splitDynamicBuilding(buildId, 10, 1)
       } else {
-        Build.splitBuildingReset(buildId)
+        Build.api.splitBuildingReset(buildId)
       }
     }
   }, [open])

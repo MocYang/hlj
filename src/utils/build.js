@@ -8,7 +8,7 @@
 import { getMapViewer } from '../components/MapContainer'
 
 const scheduler = window.mapv3d.scheduler
-const mapv3dUtils = window.mapv3d.utils
+// const mapv3dUtils = window.mapv3d.utils
 
 const { schedule, waitSchedule } = scheduler
 
@@ -51,6 +51,32 @@ class MapBuildingUtils {
     const reg = /^V\d+_JZ\d+_WK$/
     return reg.test(id)
   }
+
+  getBuildingIdFromGid(gid) {
+    if (this.isBuildingId(gid)) {
+      return gid
+    }
+
+    if (!this.isBuildingWK(gid)) {
+      return ''
+    }
+
+    const buildingIdArr = gid.split('_')
+    if (buildingIdArr.length === 3) {
+      buildingIdArr.pop()
+    }
+
+    return buildingIdArr.join('_')
+  }
+
+  isValidBuildingId(id) {
+    if (!this.isBuildingId(id)) {
+      console.error(`建筑 id: ${id}, 不符合格式：V001_JZ0001`)
+      return false
+    }
+
+    return true
+  }
 }
 
 class MapBuildingEvent {
@@ -79,7 +105,7 @@ class MapBuildingApi extends MapBuildingBase {
    * @returns {Promise<{num: Number}>}
    */
   getBuildingNum() {
-    if (functionExist(this.view3d, this.view3d.GetBuildingNum)) {
+    if (this.view3d && functionExist(this.view3d, this.view3d.GetBuildingNum)) {
       return schedule(this.view3d, this.view3d.GetBuildingNum)
     }
   }
@@ -89,7 +115,7 @@ class MapBuildingApi extends MapBuildingBase {
    * @returns {Promise<Array<{id: String, name: String, visible: Boolean}>>}
    */
   getBuildingNames() {
-    if (functionExist(this.view3d, this.view3d.GetBuildingNames)) {
+    if (this.view3d && functionExist(this.view3d, this.view3d.GetBuildingNames)) {
       return schedule(this.view3d, this.view3d.GetBuildingNames)
     }
   }
@@ -101,7 +127,7 @@ class MapBuildingApi extends MapBuildingBase {
    * @returns {Promise<Array<{id: String, name: String, visible: Boolean}>>}
    */
   getSplitBuildingNames() {
-    if (functionExist(this.view3d, this.view3d.GetSplitBuildingNames)) {
+    if (this.view3d && functionExist(this.view3d, this.view3d.GetSplitBuildingNames)) {
       return schedule(this.view3d, this.view3d.GetSplitBuildingNames)
     }
   }
@@ -112,12 +138,11 @@ class MapBuildingApi extends MapBuildingBase {
    * @return {Promise<{name: String, visible: Boolean}> | undefined}
    */
   getBuildingVisible(id) {
-    if (!this.build.utils.isBuildingId(id)) {
-      console.error(`建筑 id: ${id}, 不符合格式：V001_JZ0001`)
+    if (!this.build.utils.isValidBuildingId(id)) {
       return
     }
 
-    if (functionExist(this.view3d, this.view3d.GetBuildingVisible)) {
+    if (this.view3d && functionExist(this.view3d, this.view3d.GetBuildingVisible)) {
       return schedule(this.view3d, this.view3d.GetBuildingVisible, id)
     }
   }
@@ -131,42 +156,85 @@ class MapBuildingApi extends MapBuildingBase {
    * @returns {*}
    */
   setBuildingVisible(id, visible, wait = 20) {
-    if (!this.build.utils.isBuildingId(id)) {
-      console.error(`建筑 id: ${id}, 不符合格式：V001_JZ0001`)
+    if (!this.build.utils.isValidBuildingId(id)) {
       return
     }
 
-    if (functionExist(this.view3d, this.view3d.SetBuildingVisible)) {
+    if (this.view3d && functionExist(this.view3d, this.view3d.SetBuildingVisible)) {
       return waitSchedule(wait, this.view3d, this.view3d.SetBuildingVisible, id, visible)
     }
   }
 
   /**
    * 设置建筑物外壳的显示和隐藏
+   * @BUG 有 bug，第一次显示的状态下，调隐藏外壳，无效。第一次掉显示外壳反而隐藏了外壳，后续的调用彻底无效不管显示还是隐藏
    * @param id
    * @param visible
    * @param wait
    * @returns {*}
    */
-  setBuildingWkVisible (id, visible, wait = 20) {
-    if (!this.build.utils.isBuildingId(id)) {
-      console.error(`建筑 id: ${id}, 不符合格式：V001_JZ0001`)
+  setBuildingWkVisible(id, visible, wait = 20) {
+    if (!this.build.utils.isValidBuildingId(id)) {
       return
     }
 
-    console.log('set building wk visible: ', id, visible)
-    if (functionExist(this.view3d, this.view3d.SetBuildingWkVisible)) {
+    if (this.view3d && functionExist(this.view3d, this.view3d.SetBuildingWkVisible)) {
       return waitSchedule(wait, this.view3d, this.view3d.SetBuildingWkVisible, id, visible)
     }
   }
 
   /**
-   *
+   * 楼层分离
+   */
+  splitBuilding(id, height, wait = 20) {
+    if (!this.build.utils.isValidBuildingId(id)) {
+      return
+    }
+
+    if (this.view3d && functionExist(this.view3d, this.view3d.SplitBuilding)) {
+      return waitSchedule(wait, this.view3d, this.view3d.SplitBuilding, id, height)
+    }
+  }
+
+  /**
+   * 楼层复原 - 单个建筑
+   */
+  splitBuildingReset(id, wait = 20) {
+    if (!this.build.utils.isValidBuildingId(id)) {
+      return
+    }
+
+    if (this.view3d && functionExist(this.view3d, this.view3d.SplitBuildingReset)) {
+      return waitSchedule(wait, this.view3d, this.view3d.SplitBuildingReset, id)
+    }
+  }
+
+  /**
+   * 楼层动态分离
+   */
+  splitDynamicBuilding(id, height, duration, callback) {
+    // todo: 增加分离的状态，过程中如果再次触发了分离，且是同一楼层，则退出，等待完成。
+    if (!this.build.utils.isBuildingId(id)) {
+      console.error(`建筑 id: ${id}, 不符合格式：V001_JZ0001`)
+      return
+    }
+
+    const self = this
+    this.core.showCover()
+    this.view3d.SplitDynamicBuilding(id, height, duration)
+    setTimeout(() => {
+      self.core.hideCover()
+      callback && callback()
+    }, (duration + 0.3) * 1000)
+  }
+
+  /**
+   * 重置所有建筑的状态
    * @param wait {Number}
    * @returns {Promise<any>}
    */
   resetAllBuildings(wait = 20) {
-    if (functionExist(this.view3d, this.view3d.ResetAllBuildings)) {
+    if (this.view3d && functionExist(this.view3d, this.view3d.ResetAllBuildings)) {
       return waitSchedule(wait, this.view3d, this.view3d.ResetAllBuildings)
     }
   }
@@ -228,35 +296,6 @@ class MapBuild extends MapBuildingBase {
     }
   }
 
-  /**
-   * 楼层动态分离
-   * @param buildId
-   * @param height
-   * @param duration
-   * @param callback
-   */
-  splitDynamicBuilding(buildId, height, duration = 1, callback) {
-    const mapViewer = getMapViewer()
-    if (mapViewer) {
-      mapViewer.core.showCover()
-      mapViewer.core.view3d.SplitDynamicBuilding(buildId, height, duration)
-      setTimeout(() => {
-        mapViewer.core.hideCover()
-        callback && callback()
-      }, (duration + 0.3) * 1000)
-    }
-  }
-
-  // 单个建筑还原
-  splitBuildingReset(buildId) {
-    if (!buildId) {
-      return
-    }
-    const mapViewer = getMapViewer()
-    if (mapViewer) {
-      mapViewer.core.view3d.SplitBuildingReset(buildId, 5)
-    }
-  }
 
   // 楼层操作 API
   // 获取楼层数
