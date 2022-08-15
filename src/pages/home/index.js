@@ -10,18 +10,21 @@ import Admin from '../../components/Admin'
 import Navigation from '../../components/navigation'
 
 import useHomePosition from '../../hooks/useHomePosition'
+import Build from '../../utils/build'
 
 function Index() {
 
   const { resetHome } = useHomePosition()
 
   // 地图初始化成功后的回调
-  const handleSuccess = useCallback(() => {
+  const handleSuccess = useCallback((mapViewer) => {
     const config = getConfigJson()
 
     let api = config.api
 
     initUrlConfig(api)
+
+    Build.init(mapViewer)
 
     // environments = MOCK 才用mock server
     if (config && config.environments === 'MOCK') {
