@@ -12,5 +12,14 @@ export const urlConfig = {
   sysConfigList: `/sys/config/list`,
 
   // 监控列表
-  cameraList: `/device/camera/list`
+  cameraList: `/device/camera/list`,
+
+  hik: {
+    // TODO：如何指定某个第三方接口
+    // 云台控制
+    postVideoControl: `/jwvisual/service/api/jwvisual/v3/ulanqab3D/video/controlling`,
+
+    // 获取取流地址
+    getPreviewUrl: `/jwvisual/service/api/jwvisual/v2/bff-core/getPreviewUrl`,
+  }
 }

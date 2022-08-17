@@ -1,18 +1,19 @@
 /**
  * @Author: yangqixin
  * @TIME: 2021/9/28 22:21
- * @FILE: VideoPreviewPopup.js
+ * @FILE: index.js
  * @Email: 958292256@qq.com
  * @Description:
  */
 
 import { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
-import PopupContainer from '../../../components/popup/PopupContainer'
-import SimplePlayerForReact from '../../../components/videoControl/HSilplePlayer'
-import { selectClickCameraConfig, selectIsVideoPreviewPopupShow, setIsVideoPreviewPopupShow } from '../retentionSlice'
-import { postVideoControl } from '../retentionApi'
-
+import useRequest from '../../../../hooks/useRequest'
+import PopupContainer from '../../../../components/popup/PopupContainer'
+import SimplePlayerForReact from '../../../../components/videoControl/HSilplePlayer'
+import { selectClickCameraConfig, selectIsVideoPreviewPopupShow, setIsVideoPreviewPopupShow } from './slice'
+import { postVideoControlConfig } from './api'
+import './index.scss'
 
 const COMMAND_LEFT = 'LEFT'
 const COMMAND_RIGHT = 'RIGHT'
@@ -21,7 +22,11 @@ const COMMAND_DOWN = 'DOWN'
 const COMMAND_ZOOM_IN = 'ZOOM_IN'
 const COMMAND_ZOOM_OUT = 'ZOOM_OUT'
 
-function VideoPreviewPopup() {
+function Index({ platformIp }) {
+  const {
+    run: postVideoControl
+  } = useRequest()
+
   const isVideoPreviewPopupShow = useSelector(selectIsVideoPreviewPopupShow)
   const clickCameraConfig = useSelector(selectClickCameraConfig)
   const [cameraControlShow, setCameraControlShow] = useState(false)
@@ -31,7 +36,7 @@ function VideoPreviewPopup() {
   const playRef = useRef(null)
 
   useEffect(() => {
-    if (clickCameraConfig.url && playRef.current) {
+    if (clickCameraConfig && clickCameraConfig.url && playRef.current) {
       if (playRef.current.initPlayer) {
         playRef.current.initPlayer()
         setTimeout(() => {
@@ -54,19 +59,19 @@ function VideoPreviewPopup() {
   }
 
   const handleControlCamera = (command) => {
-    postVideoControl({
+    postVideoControl(postVideoControlConfig({
       cameraIndexCode: clickCameraConfig.detail_info.cameraIndexCode,
       command,
       action: 1 // 鼠标按下，开始控制
-    })
+    }))
   }
 
   const handleStopControlCamera = (command) => {
-    postVideoControl({
+    postVideoControl(postVideoControlConfig({
       cameraIndexCode: clickCameraConfig.detail_info.cameraIndexCode,
       command,
       action: 0  // 鼠标抬起停止控制
-    })
+    }))
   }
 
   const handleMouseEnter = () => {
@@ -94,7 +99,7 @@ function VideoPreviewPopup() {
 
   const handleCloseSound = () => {
     setOpenSound(false)
-    if(playRef.current) {
+    if (playRef.current) {
       playRef.current.sound(false)
     }
   }
@@ -155,7 +160,7 @@ function VideoPreviewPopup() {
         isVideoPreviewPopupShow && clickCameraConfig.url && (
           <SimplePlayerForReact
             initConfig={{
-              strPlatIp: '192.168.8.5'
+              strPlatIp: platformIp
               // strToken: clickCameraConfig.token // token
             }}
             src={clickCameraConfig.url}
@@ -208,4 +213,4 @@ function VideoPreviewPopup() {
   )
 }
 
-export default VideoPreviewPopup
+export default Index

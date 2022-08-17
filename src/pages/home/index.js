@@ -1,19 +1,30 @@
 import { useCallback, useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import MapContainer, { getConfigJson, getMapViewer } from '../../components/MapContainer'
+
 import { cameraListConfig, initUrlConfig } from '../../api'
 
 import makeServer from '../../api/mock/server'
-
 import Header from '../../components/Header'
 import Background from '../../components/Background'
 import Admin from '../../components/Admin'
-import Navigation from '../../components/navigation'
 
+import Navigation from '../../components/navigation'
 import useHomePosition from '../../hooks/useHomePosition'
 import Build from '../../utils/build'
+import VideoPreviewPopup from './popup/VideoPreviewPopup'
+
 import useRequest from '../../hooks/useRequest'
+import { setIsVideoPreviewPopupShow, setClickCameraConfig } from './popup/VideoPreviewPopup/slice'
+import { previewUrlConfig } from './popup/VideoPreviewPopup/api'
+import { usePopupController } from '../../components/popup/PopupContainer'
 
 function Index() {
+  const dispatch = useDispatch()
+  const popupController = usePopupController()
+
+  // config.json配置文件
+  const [configFile, setConfigFile] = useState({})
 
   // 监控列表数据
   const [cameraList, setCameraList] = useState([])
@@ -24,11 +35,31 @@ function Index() {
 
   const { run: fetchCameraList } = useRequest()
 
+  const { run: fetchPreviewUrl } = useRequest()
+
   const addCameraHandler = () => {
-    // TODO: 监听监控点击事件
+    // 监听监控点击事件
     const mapViewer = getMapViewer()
     mapViewer.event.onClick("CAMERA", res => {
       console.log(res)
+
+      popupController.activate(setIsVideoPreviewPopupShow)
+
+      const cameraInfo = res.attr
+      if (cameraInfo) {
+        // 通过监控编码，获取取流地址
+        fetchPreviewUrl(previewUrlConfig({
+          cameraIndexCode: cameraInfo.device_code,
+          transmode: 1
+        })).then(res => {
+          if (res) {
+            dispatch(setClickCameraConfig({
+              ...cameraInfo,
+              url: res.data.url
+            }))
+          }
+        })
+      }
     })
   }
 
@@ -46,7 +77,10 @@ function Index() {
 
     let api = config.api
 
-    initUrlConfig(api)
+    initUrlConfig({
+      url: api,
+      hik: config.hikPlatform
+    })
 
     Build.init(mapViewer)
 
@@ -61,6 +95,8 @@ function Index() {
     handleFetchCameraList()
 
     addCameraHandler()
+
+    setConfigFile(config)
   }, [])
 
   // 计算楼层分层后的点位的高度
@@ -96,6 +132,11 @@ function Index() {
         // 生成要上图的监控图标配置
         const cameraIconConfig = cameraInCurrentFloor.map(camera => {
           return mapViewer.drawer.config.image({
+            attr: {
+              id: camera.id,
+              device_code: camera.device_code,
+              device_name: camera.device_name
+            },
             gid: `CAMERA_${camera.model_url}`,
             location: handleGetSplitEntitiesHeight(camera.list_style, floorNumber),
             style: 'qiangji_icon'
@@ -104,8 +145,10 @@ function Index() {
 
         mapViewer.model.getController().addMany(cameraIconConfig, {
           onSuccess: () => {
-            // console.log('模型添加完毕!')
-            mapViewer.event.reBind()
+            console.log('模型添加完毕!')
+            setTimeout(() => {
+              mapViewer.event.reBind()
+            }, 100)
           }
         })
       } else {
@@ -138,6 +181,9 @@ function Index() {
 
       {/*开发环境下，会显示的测试面板*/}
       <Admin />
+
+      {/*视频预览弹窗*/}
+      <VideoPreviewPopup platformIp={configFile && configFile.hikVideoPlatformIp || ''} />
     </>
   )
 }

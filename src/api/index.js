@@ -32,11 +32,21 @@ function precessPreSlash(url) {
 
 /**
  * 初始化一下接口地址
- * @param url{String} config.json文件中的接口地址
+ * @param urlConfig{Object} config.json文件中的接口地址
  */
-export function initUrlConfig(url = '') {
+export function initUrlConfig(urlConfig = '') {
+
   for (let [k, v] of Object.entries(originUrlConfig)) {
-    urls[k] = precessPostSlash(url) + precessPreSlash(v)
+    if(typeof v === 'string') {
+      urls[k] = precessPostSlash(urlConfig.url) + precessPreSlash(v)
+    } else if (typeof v === 'object') {
+      for (let [k2, v2] of Object.entries(v)) {
+        if (!urls[k]) {
+          urls[k] = {}
+        }
+        urls[k][k2] = precessPostSlash(urlConfig[k]) + precessPreSlash(v2)
+      }
+    }
   }
 }
 

@@ -3,6 +3,7 @@ import { createServer } from 'miragejs'
 import { urls } from '../index'
 
 import cameraListHandler from './cameraListHandler'
+import previewUrlHandle from './previewUrlHandler'
 
 function makeServer(environment = 'development') {
   createServer({
@@ -35,6 +36,8 @@ function makeServer(environment = 'development') {
       // })
 
       this.post(urls.cameraList, cameraListHandler)
+
+      this.post(urls.hik.getPreviewUrl, previewUrlHandle)
     }
   })
 }
