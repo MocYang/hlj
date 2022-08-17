@@ -43,7 +43,6 @@ function Index() {
     mapViewer.event.onClick("CAMERA", res => {
       console.log(res)
 
-      popupController.activate(setIsVideoPreviewPopupShow)
 
       const cameraInfo = res.attr
       if (cameraInfo) {
@@ -60,6 +59,9 @@ function Index() {
           }
         })
       }
+
+      popupController.activate(setIsVideoPreviewPopupShow)
+
     })
   }
 
@@ -75,12 +77,8 @@ function Index() {
   const handleSuccess = useCallback((mapViewer) => {
     const config = getConfigJson()
 
-    let api = config.api
-
-    initUrlConfig({
-      url: api,
-      hik: config.hikPlatform
-    })
+    console.log(config)
+    initUrlConfig(config)
 
     Build.init(mapViewer)
 
@@ -131,15 +129,26 @@ function Index() {
 
         // 生成要上图的监控图标配置
         const cameraIconConfig = cameraInCurrentFloor.map(camera => {
-          return mapViewer.drawer.config.image({
+          // return mapViewer.drawer.config.image({
+          //   attr: {
+          //     id: camera.id,
+          //     device_code: camera.device_code,
+          //     device_name: camera.device_name
+          //   },
+          //   gid: `CAMERA_${camera.model_url}`,
+          //   location: handleGetSplitEntitiesHeight(camera.list_style, floorNumber),
+          //   style: 'qiangji_icon'
+          // })
+          return mapViewer.drawer.config.model({
             attr: {
               id: camera.id,
               device_code: camera.device_code,
               device_name: camera.device_name
             },
+            scale: 2,
             gid: `CAMERA_${camera.model_url}`,
             location: handleGetSplitEntitiesHeight(camera.list_style, floorNumber),
-            style: 'qiangji_icon'
+            fileName: 'qiangji'
           })
         })
 

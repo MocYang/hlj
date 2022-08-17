@@ -44,7 +44,7 @@ export function initUrlConfig(urlConfig = '') {
         if (!urls[k]) {
           urls[k] = {}
         }
-        urls[k][k2] = precessPostSlash(urlConfig[k]) + precessPreSlash(v2)
+        urls[k][k2] = precessPostSlash(urlConfig[k][k2]) + precessPreSlash(v2)
       }
     }
   }

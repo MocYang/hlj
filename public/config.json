@@ -5,11 +5,14 @@
     "key": "real",
     "url": "http://192.168.0.19:19901/aimapvision3d",
     "projectId": "7873295b0a064144806b9886e1a3c373",
+    "//projectId": "52d99d467ddf4f0daef1d8333e2e9752",
     "mapkey": "db52598939c493e14691900048a26020",
     "splitHeight": 5,
-    "hikVideoPlatformIp": "192.168.8.5",
-    "videoPreviewCdi": "http://192.168.8.5:17150",
-    "hikPlatform": "http://192.168.8.5:17009"
+    "hik": {
+      "hikVideoPlatformIp": "192.168.8.5",
+      "videoPreviewCdi": "http://192.168.8.5:17150",
+      "hikPlatform": "http://192.168.8.5:17009"
+    }
   },
   "liaoning": {
     "url": "http://192.168.0.220:19901/aimapvision3d",

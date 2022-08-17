@@ -40,6 +40,7 @@ function Index({ platformIp }) {
       if (playRef.current.initPlayer) {
         playRef.current.initPlayer()
         setTimeout(() => {
+          // debugger
           playRef.current.startPlayRealByUrl()
         }, 200)
       }

@@ -15,7 +15,7 @@ export const urlConfig = {
   cameraList: `/device/camera/list`,
 
   hik: {
-    // TODO：如何指定某个第三方接口
+    // 如何指定某个第三方接口
     // 云台控制
     postVideoControl: `/jwvisual/service/api/jwvisual/v3/ulanqab3D/video/controlling`,
 
