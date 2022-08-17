@@ -1,0 +1,113 @@
+@import "../../assets/styles/utils";
+
+@mixin fadeIn($name, $time, $delay) {
+  @keyframes #{$name} {
+    0% {
+      display: block;
+      pointer-events: auto;
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+      display: block;
+      pointer-events: auto;
+    }
+  }
+  animation: $name $time linear $delay forwards;
+}
+
+@mixin fadeOut($name, $time, $delay) {
+  @keyframes #{$name} {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+  animation: $name $time linear $delay forwards;
+}
+
+.layout-container {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.2s;
+  z-index: 1;
+
+  &.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 11;
+  }
+}
+
+.panel__sub-title {
+  height: px2vw(25);
+  font-size: px2vw(22px);
+  font-family: Adobe Heiti Std;
+  font-weight: normal;
+  color: #FFFFFF;
+  @include flex-center;
+
+  .icon__sub-title {
+    width: px2vw(11);
+    height: px2vw(25);
+    margin-right: px2vw(12);
+    background-image: url("../../assets/images/icon-sub-title.png");
+    @include bg-size;
+  }
+
+  &.sub-right {
+    justify-content: flex-end;
+
+    .icon__sub-title {
+      margin-left: px2vw(16);
+      background-image: url("../../assets/images/icon-sub-title-left.png");
+    }
+  }
+}
+
+.chart__legend {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: px2vw(24);
+  padding-right: px2vw(12);
+  line-height: 1.2;
+  width: 100%;
+  cursor: pointer;
+
+  .legend__circle {
+    position: absolute;
+    left: px2vw(6);
+    top: 50%;
+    width: px2vw(8);
+    height: px2vw(8);
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+
+  .legend__label,
+  .legend__number,
+  .legend__unit {
+    font-size: px2vw(16px);
+    font-family: Adobe Heiti Std;
+    font-weight: normal;
+    color: #FFFFFF;
+  }
+}
+
+.separator {
+  display: inline-block;
+  height: 100%;
+  width: px2vw(2);
+  margin-left: px2vw(8);
+  margin-right: px2vw(8);
+  background: #1A3B5C;
+}
+
+
