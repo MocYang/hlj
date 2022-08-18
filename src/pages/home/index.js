@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import MapContainer, { getConfigJson, getMapViewer } from '../../components/MapContainer'
 
-import { cameraListConfig, initUrlConfig } from '../../api'
+import { allRoomUseStatusConfig, cameraListConfig, initUrlConfig } from '../../api'
 
 import makeServer from '../../api/mock/server'
 import Header from '../../components/Header'
@@ -29,6 +29,9 @@ function Index() {
   // 监控列表数据
   const [cameraList, setCameraList] = useState([])
 
+  // 所有房间的使用情况
+  const [allUseRoomInfo, setAllUseRoomInfo] = useState([])
+
   const [activeFloor, setActiveFloor] = useState(null)
 
   const { resetHome } = useHomePosition()
@@ -37,13 +40,12 @@ function Index() {
 
   const { run: fetchPreviewUrl } = useRequest()
 
+  const { run: fetchAllUseRoomInfo} = useRequest()
+
   const addCameraHandler = () => {
     // 监听监控点击事件
     const mapViewer = getMapViewer()
     mapViewer.event.onClick("CAMERA", res => {
-      console.log(res)
-
-
       const cameraInfo = res.attr
       if (cameraInfo) {
         // 通过监控编码，获取取流地址
@@ -61,10 +63,10 @@ function Index() {
       }
 
       popupController.activate(setIsVideoPreviewPopupShow)
-
     })
   }
 
+  // 获取所有监控列表
   const handleFetchCameraList = () => {
     fetchCameraList(cameraListConfig()).then(res => {
       if (res.code === 0) {
@@ -73,11 +75,19 @@ function Index() {
     })
   }
 
+  // 获取所有房间的使用情况
+  const handleFetchAllUseRoomInfo = ()=> {
+    fetchAllUseRoomInfo(allRoomUseStatusConfig()).then(res =>{
+      if (res.code === 0) {
+        setAllUseRoomInfo(res.data)
+      }
+    })
+  }
+
   // 地图初始化成功后的回调
   const handleSuccess = useCallback((mapViewer) => {
     const config = getConfigJson()
 
-    console.log(config)
     initUrlConfig(config)
 
     Build.init(mapViewer)
@@ -126,7 +136,6 @@ function Index() {
           return camera.build_id === buildId && cameraFloorName === floorName
         })
 
-
         // 生成要上图的监控图标配置
         const cameraIconConfig = cameraInCurrentFloor.map(camera => {
           // return mapViewer.drawer.config.image({
@@ -135,6 +144,7 @@ function Index() {
           //     device_code: camera.device_code,
           //     device_name: camera.device_name
           //   },
+          //   scale: 1,
           //   gid: `CAMERA_${camera.model_url}`,
           //   location: handleGetSplitEntitiesHeight(camera.list_style, floorNumber),
           //   style: 'qiangji_icon'
@@ -145,7 +155,7 @@ function Index() {
               device_code: camera.device_code,
               device_name: camera.device_name
             },
-            scale: 2,
+            scale: 1,
             gid: `CAMERA_${camera.model_url}`,
             location: handleGetSplitEntitiesHeight(camera.list_style, floorNumber),
             fileName: 'qiangji'
@@ -154,7 +164,6 @@ function Index() {
 
         mapViewer.model.getController().addMany(cameraIconConfig, {
           onSuccess: () => {
-            console.log('模型添加完毕!')
             setTimeout(() => {
               mapViewer.event.reBind()
             }, 100)

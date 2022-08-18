@@ -1,0 +1,14 @@
+2.1.2根据房间设备编码，获取浏览url - done
+/api/jwvisual/v2/bff-core/getPreviewUrl
+
+2.2.11云台操作 - done
+/api/jwvisual/v3/ulanqab3D/video/controlling
+
+2.3.7获取所有房间使用情况
+/api/jwvisual/v2/visualFor3D/getAllUseRoom
+
+2.7.1根据房间编号获取环境状态信息
+api/v2/environment/searchByRoomCode
+
+2.8.1根据留置房间编号获取留置对象详情信息
+http://ip:17163/dwc-web/service/rs/api/v2/suspect/searchByRoomCode

@@ -5,11 +5,13 @@ import Build from '../../utils/build'
 import expand from './images/icon-open.png'
 import icon from './images/icon-fold.png'
 import './index.scss'
+import useHomePosition from '../../hooks/useHomePosition'
 
 function Navigation({onChange}) {
   // 是否点击了分层，
   const [open, setOpen] = useState(false)
   const [activeFloorId, setActiveFloorId] = useState(-1)
+  const { resetHome } = useHomePosition()
 
   useEffect(() => {
     const mapViewer = getMapViewer()
@@ -23,6 +25,8 @@ function Navigation({onChange}) {
         Build.api.splitBuildingReset(buildId)
         setActiveFloorId(null)
         onChange(null)
+
+        resetHome()
       }
     }
   }, [open])
@@ -36,6 +40,14 @@ function Navigation({onChange}) {
 
     // 设置楼层分层显示
     Build.setFloorVisible(buildId, floor.floorId)
+
+    setTimeout(()=>{
+      const mapViewer = getMapViewer()
+      mapViewer.camera.flyToPositionByOptions({
+        position: floor.position,
+        duration: 1
+      })
+    },300)
 
     if (onChange) {
       onChange(floor)

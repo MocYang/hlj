@@ -38,13 +38,13 @@ export function initUrlConfig(urlConfig = '') {
 
   for (let [k, v] of Object.entries(originUrlConfig)) {
     if(typeof v === 'string') {
-      urls[k] = precessPostSlash(urlConfig.url) + precessPreSlash(v)
+      urls[k] = precessPostSlash(urlConfig.api) + precessPreSlash(v)
     } else if (typeof v === 'object') {
       for (let [k2, v2] of Object.entries(v)) {
         if (!urls[k]) {
           urls[k] = {}
         }
-        urls[k][k2] = precessPostSlash(urlConfig[k][k2]) + precessPreSlash(v2)
+        urls[k][k2] = precessPostSlash(urlConfig[k]['url']) + precessPreSlash(v2)
       }
     }
   }
@@ -55,5 +55,32 @@ export function cameraListConfig (data = null) {
     url: urls.cameraList,
     method: 'POST',
     data
+  }
+}
+
+/**
+ * 房间使用情况
+ * @returns {{method: string, data, url: string}}
+ */
+export function allRoomUseStatusConfig() {
+  return {
+    url: urls.jwvisual.allRoomInfo,
+    method: 'GET',
+    params: null
+  }
+}
+
+/**
+ * 根据房间编码，获取留置对象详情
+ * @param roomIndexCode
+ * @returns {{method: string, data: {roomIndexCode}, url: string}}
+ */
+export function suspectInfoConfig(roomIndexCode){
+  return {
+    url: urls.dwcWeb.suspectInfo,
+    method: 'POST',
+    data: {
+      roomIndexCode
+    }
   }
 }

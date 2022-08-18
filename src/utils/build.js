@@ -5,7 +5,6 @@
  * @Email: 958292256@qq.com
  * @Description:
  */
-import { getMapViewer } from '../components/MapContainer'
 
 const scheduler = window.mapv3d.scheduler
 // const mapv3dUtils = window.mapv3d.utils
@@ -13,7 +12,6 @@ const scheduler = window.mapv3d.scheduler
 const { schedule, waitSchedule } = scheduler
 
 const { functionExist } = window.mapv3d.error
-
 
 /**
  * 楼栋管理基类
