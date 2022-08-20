@@ -3,6 +3,9 @@ import { createServer } from 'miragejs'
 import { urls } from '../index'
 
 import cameraListHandler from './cameraListHandler'
+import previewUrlHandle from './previewUrlHandler'
+import allRoomUseHandler from './allRoomUseHandler'
+import suspectInfoHandler from './suspectInfoHandler'
 
 function makeServer(environment = 'development') {
   createServer({
@@ -34,7 +37,19 @@ function makeServer(environment = 'development') {
       //   }
       // })
 
+      //  mock - 监控列表
       this.post(urls.cameraList, cameraListHandler)
+
+      // mock - 取流地址
+      this.post(urls.jwvisual.getPreviewUrl, previewUrlHandle)
+
+      // TODO：mock - 云台控制
+
+      // 获取所有房间的使用情况
+      this.get(urls.jwvisual.allRoomInfo, allRoomUseHandler)
+
+      // 根据房间编码，获取留置对象详情
+      this.post(urls.dwcWeb.suspectInfo, suspectInfoHandler)
     }
   })
 }

@@ -9,12 +9,12 @@ import { useCallback } from 'react'
 import { getMapViewer } from '../../components/MapContainer'
 
 const homePosition = {
-  pitch: 58.651084899902344,
-  roll: 0.00005850227898918092,
-  x: -40850.140625,
-  y: -19520.83203125,
-  yaw: -179.82424926757812,
-  z: 9029.3408203125
+  pitch: 37.819576263427734,
+  roll: 0.00007462591020157561,
+  x: -36908.7265625,
+  y: -19848.73046875,
+  yaw: 179.79800415039062,
+  z: 10834.1015625
 }
 
 function useHomePosition() {

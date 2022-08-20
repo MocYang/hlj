@@ -110,6 +110,29 @@ function Admin({mapReady = false}) {
     })
   }
 
+  const handleAddModel = () => {
+    const mapViewer = getMapViewer()
+    mapViewer.event.setMousePositionCallback(position => {
+      mapViewer.drawer.create.model({
+        filename: 'qiangji',
+        scale: 5,
+        location: position
+      }, true)
+    })
+  }
+
+  const handleAddPOI = () => {
+    const mapViewer = getMapViewer()
+    mapViewer.event.setMousePositionCallback(position => {
+      mapViewer.drawer.create.imageLabel({
+        screen: true,
+        iconStyle: 'men-10.png',
+        scale: 1,
+        location: position
+      }, true)
+    })
+  }
+
   const handleBuildingSplit = () => {
     const mapViewer = getMapViewer()
     mapViewer.core.view3d.SplitDynamicBuilding(buildId, 5, 2)
@@ -219,7 +242,8 @@ function Admin({mapReady = false}) {
       <div className="panel--item" onClick={removeMouseClickCallback}>移除点击事件</div>
       <div className="panel--item" onClick={handleGetCurrentPosition}>获取当前位置</div>
       <div className="panel--item" onClick={handleAddImage}>添加图片</div>
-      <div className="panel--item" onClick={handleGetCurrentPosition}>添加模型</div>
+      <div className="panel--item" onClick={handleAddModel}>添加模型</div>
+      <div className="panel--item" onClick={handleAddPOI}>添加POI</div>
       {/*<div className="panel--item" onClick={handleBuildingSplit}>建筑炸裂</div>*/}
       {/*<div className="panel--item" onClick={handleFloorSplit}>单个楼层分离</div>*/}
       {/*<div className="panel--item" onClick={handleFloorSplit}>添加楼层点击分离事件</div>*/}

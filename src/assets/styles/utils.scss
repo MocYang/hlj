@@ -4,14 +4,32 @@ $layoutWidth: 1920;
 // 设计稿的实际宽度
 $layoutHeight: 1080;
 
-// @param [$px] number 不带单位的像素值
-@function px2vw($px) {
-  @return $px / $layoutWidth * 1vw * 100；;
+/// 单位移除
+/// @param {Number} $number - 需要移除单位的
+/// @return {Number} - 无单位的数字
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
 }
 
-// @param [$px] number 不带单位的像素值
+@function px2vw($px) {
+  $px_number: strip-unit($px);
+  @return $px_number / $layoutWidth * 1vw * 100;
+}
+
 @function px2vh($px) {
-  @return $px / $layoutHeight * 1vh * 100；;
+  $px_number: strip-unit($px);
+  @return $px_number / $layoutHeight * 1vh * 100;
+}
+
+// 单行文本溢出显示省略号
+@mixin text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 // 单行文本的溢出显示省略号
@@ -63,3 +81,18 @@ $layoutHeight: 1080;
   justify-content: center;
   align-items: center;
 } ;
+
+
+@mixin text-shadow {
+  text-shadow: 1px px2vw(5px) px2vh(16px) #FFFFFF;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin bg-size {
+  background-size: 100% 100%;
+}

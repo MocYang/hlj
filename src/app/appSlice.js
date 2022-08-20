@@ -6,7 +6,6 @@
  * @description 1
  */
 import { createSlice } from '@reduxjs/toolkit'
-
 export const appSlice = createSlice({
   name: 'app',
   initialState: {

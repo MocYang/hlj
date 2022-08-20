@@ -2,6 +2,7 @@
   "name": "hlj_jw",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.2",
     "axios": "^0.26.1",
