@@ -5,17 +5,74 @@
  * @Email: 958292256@qq.com
  * @Description: 开发用的面板
  */
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-import mapContainer, { getMapViewer } from '../MapContainer'
+import { getMapViewer } from '../MapContainer'
 import Build from '../../utils/build'
+// import polygonEntity from './polygon'
 import "./index.scss"
 
 const defaultBuildId = "V001_JZ0001"
 
-function Admin() {
+function Admin({mapReady = false}) {
   const [buildId, setBuildId] = useState(defaultBuildId)
   const clickCallbackRef = useRef(null)
+  const [material, setMaterial] = useState('SplineOrangeHighlight')
+
+  const materialEntityRef = useRef(null)
+
+  const handleMaterialChange = (e) => {
+    let m = e.target.value
+    setMaterial(m)
+  }
+
+  useEffect(() => {
+    const mapViewer = getMapViewer()
+    if (mapViewer) {
+      mapViewer.event.onDrag(res => {
+        console.log('onDrag trigger====')
+      })
+    }
+  }, [])
+
+
+  const handleDrawLine = () => {
+    if (material) {
+      const mapViewer = getMapViewer()
+      if (materialEntityRef.current) {
+        mapViewer.drawer.remove.one(materialEntityRef.current)
+      }
+
+      mapViewer.drawer.create.drawLine({
+        drawPoints: true,
+        pointsVisible: true,
+        style: material,
+        onFinish: function (entity) {
+          materialEntityRef.current = entity
+        }
+      })
+    }
+  }
+
+  const handleDrawPolygon = () => {
+    if (material) {
+      const mapViewer = getMapViewer()
+
+      if (materialEntityRef.current) {
+        mapViewer.drawer.remove.one(materialEntityRef.current)
+      }
+      mapViewer.drawer.create.drawPolygon({
+        drawPoints: true,
+        pointsVisible: true,
+        style: material,
+        onFinish: function (entity) {
+          materialEntityRef.current = entity
+
+          console.log(JSON.stringify(entity))
+        }
+      })
+    }
+  }
 
   const handleAddClickHandler = () => {
     const mapViewer = getMapViewer()
@@ -131,6 +188,33 @@ function Admin() {
 
   return (
     <div className="app-admin-panel">
+
+      <div className="panel--item">
+        <select value={material} onChange={handleMaterialChange}>
+          <option value="SplineOrangeHighlight">红色高亮</option>
+          <option value="SplineOrangeHighlight1">红色高亮闪烁</option>
+          <option value="SWJZ_line">蓝色高亮</option>
+          <option value="sim_arraw_Cyan">导航绿色箭头路线</option>
+          <option value="sim_spot">导航蓝色点状路线</option>
+          <option value="sim_arraw">高亮绿色导航路线</option>
+          <option value="sim_dashed">高亮绿色箭头导航路线</option>
+          <option value="sim_flash">多段高亮绿色导航路线</option>
+          <option value="sim_scan">单段导航路线</option>
+          <option value="SplineOrange">橘黄色</option>
+          <option value="YellowMaterial">黄色</option>
+          <option value="RedMaterial">红色</option>
+          <option value="GreenMaterial">绿色</option>
+          <option value="BlueMaterial">蓝色</option>
+          <option value="OpacityMaterial">黄色半透材质</option>
+          <option value="ZouL_line">黄色高亮</option>
+          <option value="FJ_line">金黄色高亮</option>
+          <option value="GD">绿色高亮</option>
+          <option value="CRK_line">浅绿色高亮</option>
+        </select>
+      </div>
+      <div className="panel--item" onClick={handleDrawLine}>绘制线</div>
+      <div className="panel--item" onClick={handleDrawPolygon}>绘制面</div>
+
       <div className="panel--item" onClick={handleAddClickHandler}>添加点击事件</div>
       <div className="panel--item" onClick={removeMouseClickCallback}>移除点击事件</div>
       <div className="panel--item" onClick={handleGetCurrentPosition}>获取当前位置</div>

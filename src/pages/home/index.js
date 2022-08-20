@@ -20,12 +20,11 @@ function Index() {
 
   const [activeFloor, setActiveFloor] = useState(null)
 
-  const { resetHome } = useHomePosition()
+  const { flyToHomePosition, setHome } = useHomePosition()
 
   const { run: fetchCameraList } = useRequest()
 
   const addCameraHandler = () => {
-    // TODO: 监听监控点击事件
     const mapViewer = getMapViewer()
     mapViewer.event.onClick("CAMERA", res => {
       console.log(res)
@@ -48,15 +47,15 @@ function Index() {
 
     initUrlConfig(api)
 
-    Build.init(mapViewer)
-
     // environments = MOCK 才用mock server
     if (config && config.environments === 'MOCK') {
       makeServer()
     }
 
     // 默认定位到指定视角
-    resetHome()
+    flyToHomePosition(() => {
+      Build.init(mapViewer)
+    })
 
     handleFetchCameraList()
 
@@ -125,19 +124,19 @@ function Index() {
     <>
       <MapContainer
         onSuccess={handleSuccess}
-      />
+      >
+        {/*背景边框*/}
+        <Background />
 
-      {/*背景边框*/}
-      <Background />
+        {/*页头*/}
+        <Header />
 
-      {/*页头*/}
-      <Header />
+        {/*楼层分层按钮*/}
+        <Navigation onChange={handleSetActiveFloor} />
 
-      {/*楼层分层按钮*/}
-      <Navigation onChange={handleSetActiveFloor} />
-
-      {/*开发环境下，会显示的测试面板*/}
-      <Admin />
+        {/*开发环境下，会显示的测试面板*/}
+        <Admin />
+      </MapContainer>
     </>
   )
 }
