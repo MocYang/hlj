@@ -51,7 +51,7 @@ class MapBuildingUtils {
   }
 
   /**
-   * 是否房间名称，格式：F001
+   * 是否楼层名称，格式：F001
    * @param floorName
    * @returns {boolean}
    */
@@ -61,10 +61,16 @@ class MapBuildingUtils {
     return reg.test(floorName)
   }
 
-  // V001_JZ0001#F001
+  // V001_JZ0001#F001 或者 V001_JZ0001_WK_F001
+  /**
+   * 是否完整的楼层ID
+   * @param floorId
+   * @returns {boolean}
+   */
   isFloorId(floorId) {
     const reg = /^V\d+_JZ\d+#[F|B]\d+$/
-    return reg.test(floorId)
+    const wkFloorReg = /^V\d+_JZ\d+_WK_[F|B]\d+$/
+    return reg.test(floorId) ||wkFloorReg.test(floorId)
   }
 
   /**

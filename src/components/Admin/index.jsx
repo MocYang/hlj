@@ -66,7 +66,9 @@ function Admin({mapReady = false}) {
       mapViewer.drawer.create.drawPolygon({
         drawPoints: true,
         pointsVisible: true,
-        style: material,
+        color: '#f00',
+        opacity: 0.3,
+        // style: material,
         onFinish: function (entity) {
           materialEntityRef.current = entity
 
@@ -82,6 +84,7 @@ function Admin({mapReady = false}) {
       clickCallbackRef.current = (res) => {
         console.log(res)
       }
+      debugger
       mapViewer.event.onClick("*", clickCallbackRef.current)
     }
   }
