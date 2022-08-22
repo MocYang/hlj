@@ -42,7 +42,7 @@ class MapBuildingUtils {
   }
 
   /**
-   *
+   * 是否建筑外壳，格式：V001_JZ0001_WK
    * @param id
    */
   isBuildingWK(id) {
@@ -50,6 +50,11 @@ class MapBuildingUtils {
     return reg.test(id)
   }
 
+  /**
+   * 是否房间名称，格式：F001
+   * @param floorName
+   * @returns {boolean}
+   */
   isFloorName(floorName) {
     const reg = /^[B|F]\d+$/
 
@@ -60,6 +65,16 @@ class MapBuildingUtils {
   isFloorId(floorId) {
     const reg = /^V\d+_JZ\d+#[F|B]\d+$/
     return reg.test(floorId)
+  }
+
+  /**
+   * 是否房间的 ID
+   * @param roomId
+   * @returns {boolean}
+   */
+  isRoomId(roomId) {
+    const reg = /^V\d+_JZ\d+_WK_F\d+_U\d+_H\d+$/
+    return reg.test(roomId)
   }
 
   getBuildingIdFromGid(gid) {
