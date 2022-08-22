@@ -207,6 +207,12 @@ function Admin({mapReady = false}) {
     Build.api.splitBuildingReset(buildId)
   }
 
+  const getFloorRoomNames = () => {
+    Build.api.getBuildingNames().then(res => {
+      console.log(res)
+    })
+  }
+
   if (process.env.NODE_ENV === 'production') {
     return null
   }
@@ -261,6 +267,9 @@ function Admin({mapReady = false}) {
       <div className="panel--item" onClick={setBuildingVisible}>设置建筑物的显示/隐藏</div>
       <div className="panel--item" onClick={setBuildingWkVisible}>设置建筑物的外壳显示/隐藏</div>
       <div className="panel--item" onClick={splitBuildingReset}>楼层复原 - 单个建筑</div>
+
+
+      <div className="panel--item" onClick={getFloorRoomNames}>获取房间名称</div>
 
 
     </div>
