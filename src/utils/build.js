@@ -462,6 +462,91 @@ class MapBuildingApi extends MapBuildingBase {
       return waitSchedule(wait, this.view3d, this.view3d.SetGroundVisible, visible)
     }
   }
+
+  // 房间相关的
+  /**
+   * 获取房间数量
+   * @param buildId
+   * @param floorName
+   * @returns {*}
+   */
+  getFloorRoomNum(buildId, floorName) {
+    if (!this.build.utils.isValidBuildingId(buildId)) {
+      return
+    }
+
+    if (!this.build.utils.isValidFloorName(floorName)) {
+      return
+    }
+
+    if (this.view3d && functionExist(this.view3d, this.view3d.GetFloorNum)) {
+      return schedule(this.view3d, this.view3d.GetFloorNum, buildId, floorName)
+    }
+  }
+
+  /**
+   * 获取房间名称列表
+   * @param buildId
+   * @param floorName
+   * @returns {*}
+   */
+  getFloorRoomNames(buildId, floorName) {
+    if (!this.build.utils.isValidBuildingId(buildId)) {
+      return
+    }
+
+    if (!this.build.utils.isValidFloorName(floorName)) {
+      return
+    }
+
+    if (this.view3d && functionExist(this.view3d, this.view3d.GetFloorNames)) {
+      return schedule(this.view3d, this.view3d.GetFloorNames, buildId, floorName)
+    }
+  }
+
+  /**
+   *
+   * @param buildId
+   * @param floorName
+   * @param roomName
+   * @returns {*}
+   */
+  getFloorRoomVisible(buildId, floorName, roomName) {
+    if (!this.build.utils.isValidBuildingId(buildId)) {
+      return
+    }
+
+    if (!this.build.utils.isValidFloorName(floorName)) {
+      return
+    }
+
+    if (this.view3d && functionExist(this.view3d, this.view3d.GetFloorRoomVisible)) {
+      return schedule(this.view3d, this.view3d.GetFloorRoomVisible, buildId, floorName, roomName)
+    }
+  }
+
+  /**
+   *
+   * @param buildId {String}
+   * @param floorName {String}
+   * @param roomName {String}
+   * @param visible {Boolean}
+   * @param opacity {Number}
+   * @param wait {Number}
+   */
+  setFloorRoomVisible(buildId, floorName, roomName, visible = true, opacity = 1, wait = 20) {
+    if (!this.build.utils.isValidBuildingId(buildId)) {
+      return
+    }
+
+    if (!this.build.utils.isValidFloorName(floorName)) {
+      return
+    }
+
+    if (this.view3d && functionExist(this.view3d, this.view3d.SetFloorRoomVisible)) {
+      return waitSchedule(wait, this.view3d, this.view3d.SetFloorRoomVisible, buildId, floorName, roomName, visible, opacity)
+    }
+  }
 }
 
 /**
@@ -659,7 +744,7 @@ class MapBuild extends MapBuildingBase {
       buildId,
       floorName,
       visible = false,
-      multiple = false, // 是否同时显示多个楼层
+      multiple = false // 是否同时显示多个楼层
     } = options
 
     if (!this.utils.isValidBuildingId(buildId)) {
@@ -690,7 +775,7 @@ class MapBuild extends MapBuildingBase {
     const floorNumber = this.utils.getFloorNumberFromFloorName(floorName)
 
 
-    if(!multiple) {
+    if (!multiple) {
       // 正常的分层显示
       if (buildInfo && Array.isArray(buildInfo.floor)) {
 
