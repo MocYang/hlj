@@ -65,6 +65,7 @@ function Index() {
     return () => {
       const mapViewer = getMapViewer()
       if (mapViewer) {
+        // 页面卸载前，先视角设置为初始视角，下次页面再打开就直接能显示初始视角。
         setHome()
       }
     }
