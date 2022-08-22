@@ -29,9 +29,11 @@ function Admin({mapReady = false}) {
   useEffect(() => {
     const mapViewer = getMapViewer()
     if (mapViewer) {
-      mapViewer.event.onDrag(res => {
-        console.log('onDrag trigger====')
-      })
+      if (mapViewer.event) {
+        mapViewer.event.onDrag(res => {
+          console.log('onDrag trigger====')
+        })
+      }
     }
   }, [])
 

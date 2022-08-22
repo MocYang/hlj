@@ -11,12 +11,13 @@ function Navigation({onChange}) {
   // 是否点击了分层，
   const [open, setOpen] = useState(false)
   const [activeFloorId, setActiveFloorId] = useState(-1)
-  const { resetHome } = useHomePosition()
+  const { flyToHomePosition } = useHomePosition()
 
   useEffect(() => {
     const mapViewer = getMapViewer()
 
     if (mapViewer && Build.api) {
+      // const
       if (open) {
         const configJson = getConfigJson()
         const splitHeight = configJson.splitHeight
@@ -26,7 +27,7 @@ function Navigation({onChange}) {
         setActiveFloorId(null)
         onChange(null)
 
-        resetHome()
+        // flyToHomePosition()
       }
     }
   }, [open])
@@ -39,19 +40,23 @@ function Navigation({onChange}) {
     setActiveFloorId(floor.id)
 
     // 设置楼层分层显示
-    Build.setFloorVisible(buildId, floor.floorId)
+    Build.setFloorVisible({
+      buildId,
+      floorName: floor.floorId
+    })
 
     setTimeout(()=>{
       const mapViewer = getMapViewer()
       mapViewer.camera.flyToPositionByOptions({
         position: floor.position,
-        duration: 1
+        duration: 1,
+        onFinish: () => {
+          if (onChange) {
+            onChange(floor)
+          }
+        }
       })
     },300)
-
-    if (onChange) {
-      onChange(floor)
-    }
   }
 
   return (

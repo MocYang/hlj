@@ -1,5 +1,5 @@
-import { useCallback, useState } from 'react'
-import MapContainer, { getConfigJson } from '../../components/MapContainer'
+import { useCallback, useState, useEffect } from 'react'
+import MapContainer, { getConfigJson, getMapViewer } from '../../components/MapContainer'
 
 import { initUrlConfig } from '../../api'
 
@@ -28,7 +28,6 @@ function Index() {
   const { fetchCamera } = useCamera({
     floor: activeFloor
   })
-
 
   useRoomStatus({
     floor: activeFloor
@@ -61,6 +60,15 @@ function Index() {
       setActiveFloor(floor)
     }
   }
+
+  useEffect(() => {
+    return () => {
+      const mapViewer = getMapViewer()
+      if (mapViewer) {
+        setHome()
+      }
+    }
+  }, [])
 
   return (
     <>

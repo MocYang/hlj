@@ -32,25 +32,27 @@ const useCamera = ({ floor }) => {
   const addCameraHandler = () => {
     // 监听监控点击事件
     const mapViewer = getMapViewer()
-    mapViewer.event.onClick("CAMERA", res => {
-      const cameraInfo = res.attr
-      if (cameraInfo) {
-        // 通过监控编码，获取取流地址
-        fetchPreviewUrl(previewUrlConfig({
-          cameraIndexCode: cameraInfo.device_code,
-          transmode: 1
-        })).then(res => {
-          if (res) {
-            dispatch(setClickCameraConfig({
-              ...cameraInfo,
-              url: res.data.url
-            }))
-          }
-        })
-      }
+    if (mapViewer.event) {
+      mapViewer.event.onClick("CAMERA", res => {
+        const cameraInfo = res.attr
+        if (cameraInfo) {
+          // 通过监控编码，获取取流地址
+          fetchPreviewUrl(previewUrlConfig({
+            cameraIndexCode: cameraInfo.device_code,
+            transmode: 1
+          })).then(res => {
+            if (res) {
+              dispatch(setClickCameraConfig({
+                ...cameraInfo,
+                url: res.data.url
+              }))
+            }
+          })
+        }
 
-      popupController.activate(setIsVideoPreviewPopupShow)
-    })
+        popupController.activate(setIsVideoPreviewPopupShow)
+      })
+    }
   }
 
   // 获取所有监控列表
@@ -100,13 +102,15 @@ const useCamera = ({ floor }) => {
           })
         })
 
-        mapViewer.model.getController().addMany(cameraIconConfig, {
-          onSuccess: () => {
-            setTimeout(() => {
-              mapViewer.event.reBind()
-            }, 100)
-          }
-        })
+        if (mapViewer.model) {
+          mapViewer.model.getController().addMany(cameraIconConfig, {
+            onSuccess: () => {
+              setTimeout(() => {
+                mapViewer.event.reBind()
+              }, 100)
+            }
+          })
+        }
       } else {
         mapViewer.drawer.remove.all()
       }

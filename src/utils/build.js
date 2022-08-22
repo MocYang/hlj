@@ -545,6 +545,8 @@ class MapBuild extends MapBuildingBase {
 
     this.buildingInfo[build.id] = {
       ...build,
+      // 默认都不是处于分层的状态
+      split: false,
       floor: []
     }
 
@@ -647,11 +649,19 @@ class MapBuild extends MapBuildingBase {
 
   /**
    * 楼层显示和隐藏 - 无动态效果
-   * @param buildId
-   * @param floorName
-   * @param visible
+   *
+   * @param options.buildId {String}
+   * @param options.floorName {String}
+   * @param options.visible {Boolean}
    */
-  setFloorVisible(buildId, floorName, visible) {
+  setFloorVisible(options) {
+    const {
+      buildId,
+      floorName,
+      visible = false,
+      multiple = false, // 是否同时显示多个楼层
+    } = options
+
     if (!this.utils.isValidBuildingId(buildId)) {
       return
     }
@@ -679,18 +689,31 @@ class MapBuild extends MapBuildingBase {
     const buildInfo = this.getBuildingInfo(buildId)
     const floorNumber = this.utils.getFloorNumberFromFloorName(floorName)
 
-    if (buildInfo && Array.isArray(buildInfo.floor)) {
 
-      for (let floor of buildInfo.floor) {
-        let floorVisible = false
+    if(!multiple) {
+      // 正常的分层显示
+      if (buildInfo && Array.isArray(buildInfo.floor)) {
 
-        const currentFloorName = floor.floorname
+        for (let floor of buildInfo.floor) {
+          let floorVisible = false
 
-        const currentFloorNumber = this.utils.getFloorNumberFromFloorName(currentFloorName)
+          const currentFloorName = floor.floorname
 
-        floorVisible = currentFloorNumber <= floorNumber
+          const currentFloorNumber = this.utils.getFloorNumberFromFloorName(currentFloorName)
 
-        this.api.setFloorVisible(buildId, currentFloorName, floorVisible)
+          floorVisible = currentFloorNumber <= floorNumber
+
+          this.api.setFloorVisible(buildId, currentFloorName, floorVisible)
+        }
+      }
+    } else {
+      // 多楼层可见的显示
+      if (Array.isArray(floorName)) {
+        for (let floor of buildInfo.floor) {
+          const currentFloorName = floor.floorname
+          let floorVisible = floorName.indexOf(currentFloorName) !== -1
+          this.api.setFloorVisible(buildId, currentFloorName, floorVisible)
+        }
       }
     }
   }
