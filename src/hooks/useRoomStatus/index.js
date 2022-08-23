@@ -9,6 +9,7 @@
 import { useEffect, useState } from 'react'
 import { allRoomUseStatusConfig } from '../../api'
 import useRequest from '../useRequest'
+import { getMapViewer } from '../../components/MapContainer'
 
 
 const useRoomStatus = ({floor}) => {
@@ -19,7 +20,7 @@ const useRoomStatus = ({floor}) => {
   // 获取所有房间的使用情况
   const fetchRoomUseStatus = ()=> {
     fetchAllUseRoomInfo(allRoomUseStatusConfig()).then(res =>{
-      if (res.code === 0) {
+      if (Number(res.code) === 0) {
         setRoomUseStatus(res.data)
       }
     })
@@ -34,10 +35,16 @@ const useRoomStatus = ({floor}) => {
 
 
   useEffect(()=> {
-    if(roomUseStatus.length > 0) {
+    if(roomUseStatus.length > 0 && floor) {
+      console.log(roomUseStatus, floor)
+      const mapViewer = getMapViewer()
 
+      // 先过滤出使用中的房间
+      const usedRoomInfo = roomUseStatus.filter(room => Number(room.roomStatus) === 1)
+
+      // 然后是当前楼层的房间
     }
-  },[roomUseStatus])
+  },[roomUseStatus, floor])
 
   return {
     fetchRoomUseStatus
