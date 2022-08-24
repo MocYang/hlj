@@ -41,19 +41,20 @@ function MapContainer({
         mapViewer = new window.mapv3d.MapViewer({
           // id: 'mapvision3d',
           id: mapContainerId,
-          ...config,
-          ...defaultProps,
-          defaultLocate: defaultLocate,
+          defaultLocate,
+          debug: true,
           defaultSetResolution: true,
           // 先给 0.5，目前地图如果设置 4K 分辨率，(3840 * 1080)，会被拉伸
           resolutionScale: 1,
-          complete(view) {
+          ...config,
+          ...defaultProps,
+          complete() {
             setReady(true)
             if (process.env.NODE_ENV === 'development') {
               window.$map = mapViewer
             }
             onSuccess(mapViewer)
-          }
+          },
         })
       })
     }
