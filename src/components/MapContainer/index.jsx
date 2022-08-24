@@ -6,7 +6,7 @@
  * @Description:
  */
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './index.scss'
 
 const { createUUID, fetchConfig } = window.mapv3d.utils
@@ -33,12 +33,13 @@ function MapContainer({
   ...defaultProps
 }) {
   const [ready, setReady] = useState(false)
-
+  const fetchConfigRef = useRef(false)
   useEffect(() => {
-    if (!ready) {
+    if (!ready && !fetchConfigRef.current) {
+      fetchConfigRef.current = true
       fetchConfig().then(config => {
         configFile = config
-        mapViewer = new window.mapv3d.MapViewer({
+        new window.mapv3d.MapViewer({
           // id: 'mapvision3d',
           id: mapContainerId,
           defaultLocate,
@@ -48,8 +49,10 @@ function MapContainer({
           resolutionScale: 1,
           ...config,
           ...defaultProps,
-          complete() {
+          complete(mapInstance) {
+            mapViewer = mapInstance
             setReady(true)
+
             if (process.env.NODE_ENV === 'development') {
               window.$map = mapViewer
             }

@@ -16,7 +16,7 @@ const mapUtils = window.mapv3d.utils
 const throttle = mapUtils.throttle
 const createUUID = mapUtils.createUUID
 
-const useZoom = ({ onChange, key = createUUID }) => {
+const useZoom = ({ onChange, key = createUUID } = {}) => {
   const zoomTimer = useRef(null)
   const zoomHandlerRef = useRef(null)
 
@@ -69,18 +69,20 @@ const useZoom = ({ onChange, key = createUUID }) => {
       }
 
       const mapViewer = getMapViewer()
-      mapViewer.core.view3d.GetCurrentPosition(p => {
-        // 派发缩放事件
-        listenerMap.forEach((handler) => {
-          if (typeof handler === 'function') {
-            handler({
-              ...p,
-              // 单位： 米
-              z: p.z / 100
-            })
-          }
+      if (mapViewer) {
+        mapViewer.core.view3d.GetCurrentPosition(p => {
+          // 派发缩放事件
+          listenerMap.forEach((handler) => {
+            if (typeof handler === 'function') {
+              handler({
+                ...p,
+                // 单位： 米
+                z: p.z / 100
+              })
+            }
+          })
         })
-      })
+      }
     }, 300)
 
     $mapContainer.addEventListener('mousewheel', zoomHandlerRef.current)

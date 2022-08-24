@@ -6,7 +6,7 @@
  * @Description 房间的使用情况 - 包括房间模型变色，加载人物图标，监听房间点击事件，监听房间点击事件
  */
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { allRoomUseStatusConfig } from '../../api'
 import useRequest from '../useRequest'
 import { getMapViewer } from '../../components/MapContainer'
@@ -41,6 +41,8 @@ export const useRoomIconClick = () => {
 const useRoomStatus = ({ floor }) => {
   const [personIconEntities, setPersonIconEntities] = useState([])
 
+  const personIconEntitiesRef = useRef(personIconEntities)
+
   // 所有房间的使用情况
   const [roomUseStatus, setRoomUseStatus] = useState([])
   const { run: fetchAllUseRoomInfo } = useRequest()
@@ -49,7 +51,10 @@ const useRoomStatus = ({ floor }) => {
   const { subscribe, unsubscribe } = useZoom({
     key: 'roomPersonIcon',
     onChange: function (p) {
-      console.log(p)
+      console.log(p, floor)
+      // 根据最大高度做显示,根据可显示高度做比例缩放
+      if (personIconEntitiesRef.current.length > 0) {
+      }
     }
   })
 

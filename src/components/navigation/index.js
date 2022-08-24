@@ -62,8 +62,8 @@ function Navigation({ onChange }) {
             }
           }
         })
-      }, 100)
-    }, 50)
+      }, 10)
+    }, 10)
   }
 
   return (

@@ -17,13 +17,15 @@ import MachineInfoPopup from './popup/machineInfoPopup'
 
 import useCamera from '../../hooks/useCamera'
 import useRoomStatus, { useRoomIconClick } from '../../hooks/useRoomStatus'
-
+import useZoom from '../../hooks/useZoom'
 function Index() {
 
   // config.json配置文件
   const [configFile, setConfigFile] = useState({})
 
   const [activeFloor, setActiveFloor] = useState(null)
+
+  const {init} = useZoom()
 
   const {
     flyToHomePosition,
@@ -48,15 +50,15 @@ function Index() {
 
     initUrlConfig(config)
 
-    // environments = MOCK 才用mock server
-    if (config && config.environments === 'MOCK') {
-      makeServer()
-    }
-
     // 默认定位到指定视角
     flyToHomePosition(() => {
       Build.init(mapViewer)
     })
+
+    // environments = MOCK 才用mock server
+    if (config && config.environments === 'MOCK') {
+      makeServer()
+    }
 
     fetchCamera()
 
@@ -64,6 +66,9 @@ function Index() {
 
     // 监听人物图标的点击
     addPersonIconClick()
+
+    // zoom init
+    init()
   }, [])
 
 
