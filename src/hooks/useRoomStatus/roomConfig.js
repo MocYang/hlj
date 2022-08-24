@@ -6,31 +6,954 @@
  * @Description
  */
 // 配置所有房间的编码和定位中心点，人物图标位置信息
- export default [
+export default [
   {
-    "roomIndexCode": "17feb07c20784496864aad0276124135",
-
-    "roomName": "B区智慧留置室1",
-
+    "roomIndexCode": "0ddbe5aff9ab420aaceb402a9cebe6cb",
+    "roomName": "A区留置室1",
+    "roomRemark": "",
+    "roomStatus": "0",
     "roomType": "roomType.2001",
-
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "fcf64eede70a4ab3a35963fdade7bc3e",
+    "roomName": "A区留置室2",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "bc9ca22bf42c4ccbb784e11a3d09e90a",
+    "roomName": "A区留置室3",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "063115c3d5bd4639b2e7f9e145d0a794",
+    "roomName": "A区留置室4",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "9668b98a8de545ad8f02bbcd82bd1553",
+    "roomName": "A区留置室5",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "535717c1704446aca18ebc6aec087adf",
+    "roomName": "A区留置室6",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "fbc9ef93553f4d499530bcb4cb0a77bf",
+    "roomName": "A区留置室7",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "1113592ba37b44a7978af86d2128b878",
+    "roomName": "A区留置室8",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "f7cabb544d1f4afe95074b253ad9ecb9",
+    "roomName": "A区留置室9",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "1609fe99e6314184b3edd553a7509640",
+    "roomName": "A区留置室10",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "57cb05cebe214c77b8364a8423e9c41b",
+    "roomName": "A区留置室11",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "00169723e6be4f40a98e02c3a44aa8c7",
+    "roomName": "A区留置室12",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "b31a259aa83141a2a7f0dafaf60664e3",
+    "roomName": "A区留置室13",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "c3768419255b4caea759c550f5fc9ff8",
+    "roomName": "A区留置室14",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "5445f92999784711ae2f544396f9262b",
+    "roomName": "A区留置室15",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "7e66a5d1c7794a5fbf94a6bdaf9d9754",
+    "roomName": "A区留置室16",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "ef672e8bbe5c4c33b8f70fde2722a4c5",
+    "roomName": "A区留置室17",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "a21248c8cbab46ff893d65853291046e",
+    "roomName": "A区留置室18",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "d1d213387b2b49df9ceb3328eace772b",
+    "roomName": "A区讯问室1",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "b1d1741d2f3f4177b5bac942becb7319",
+    "roomName": "A区讯问室2",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "fbfd2bfd79684ddc90866247fb84c7fe",
+    "roomName": "A区讯问室3",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "fa6d5fdf253c4430ba0dc147975125da",
+    "roomName": "A区讯问室4",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "b80855aeb62f491aa7570d3825d05e95",
+    "roomName": "A区讯问室5",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "fa9e286108f443d5af9174bfa4e7112c",
+    "roomName": "A区讯问室6",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "e10cc4344aba4a89a487871e5b7ef9ec",
+    "roomName": "A区讯问室7",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "8a96eb7490434011b4bc050cc907e0ae",
+    "roomName": "A区讯问室8",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "1a2e380cfcff420595019e7c07684de1",
+    "roomName": "A区讯问室9",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "0312c487b0354c5a80ddfbfcdf64e0ac",
+    "roomName": "A区讯问室10",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "3af09e9646fd4e65b451e5eaddd7bba5",
+    "roomName": "A区讯问室11",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "cc66beed4068444395df8052972290c1",
+    "roomName": "A区讯问室12",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "bf44e4bc54cf40389f97f891e0b94839",
+    "roomName": "A区讯问室13",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "fe0baaad97b047348abee4bbe1ddbc78",
+    "roomName": "A区讯问室14",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "969697516a86441986ff6a3a5b3b2790",
+    "roomName": "A区讯问室15",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "b15fa7692830423e86d2dccff5eff841",
+    "roomName": "B区智慧留置室1",
+    "roomRemark": "",
+    "roomType": "roomType.2001",
     "roomTypeName": "留置室",
-
-    "roomRemark": "备注",
-
     "build_id": "V001_JZ0001",
-
     "floor_id": "V001_JZ0001#F001",
-
     // 房间状态信息 0=空闲,1=再用
-    "roomStatus": 1,
+    "roomStatus": "1",
     // center表示房间的定位中心点
     "center": {
-
+      pitch: 68.3167724609375,
+      roll: 0.0001247819309355691,
+      x: -44776.06640625,
+      y: -22652.96875,
+      yaw: 90.73133087158203,
+      z: 1567.2015380859375
     },
     // location 表示人物图标的位置中心点
     "location": {
-
-    }
+      "x": -44758.32421875,
+      "y": -22094.49609375,
+      "z": 409.2530517578125,
+      "pitch": 0,
+      "yaw": 0,
+      "roll": 0
+      }
+  },
+  {
+    "roomIndexCode": "fd8cc1507fe2430b9eef202a631ec568",
+    "roomName": "B区智慧留置室2",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "3895a9cd45b54a259b2dfb5b1d11a788",
+    "roomName": "B区智慧留置室3",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "c76e9fa09aa34ff1950e76a176b73f4b",
+    "roomName": "B区智慧留置室4",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "c1e46acf804441e691c1ee1892cb5acc",
+    "roomName": "B区智慧留置室5",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "689fe41503a34aa6a1f09aa97efb0e5a",
+    "roomName": "B区智慧留置室6",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "218f65510c4042b2a879f9b1a07902d9",
+    "roomName": "B区智慧留置室7",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "17d35117c4204c5989ecd2339acd0b3c",
+    "roomName": "B区智慧留置室8",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "ceedf2f935764b4397d684d393ac08b6",
+    "roomName": "B区智慧留置室9",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "34c524b218a745d289859e3fe169869c",
+    "roomName": "B区智慧留置室10",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "f05ba6a5e8d4438282026d564b97c16f",
+    "roomName": "B区智慧留置室11",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "c60d8abbcaa54db686c95b75cc283d84",
+    "roomName": "B区智慧留置室12",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "cc13e28215f24ec29a3c6556846a8010",
+    "roomName": "B区智慧留置室13",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "f306cbf0059d49aaac117ce70690aa08",
+    "roomName": "B区留置室14",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "b2fda9e59ea04fd58f294d8b72361fab",
+    "roomName": "B区留置室15",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "708f73a963f34572a5fa5c8485f11afa",
+    "roomName": "B区留置室16",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "f77851539c9a4a0c8aaf5e0b1560cd7c",
+    "roomName": "B区留置室17",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "d6ddc073095149e2b094d31fe6012b3c",
+    "roomName": "B区讯问室1",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "93a362f7d9a34f89839f40854aceafde",
+    "roomName": "B区讯问室2",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "d610a108692f4136b70229821c844dc5",
+    "roomName": "B区讯问室3",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "720e99c321a543ad8814f42d90ac8848",
+    "roomName": "B区讯问室4",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "e2e985d154e248d79ef7f96e73ab7147",
+    "roomName": "B区讯问室5",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "97219db3139b4370b42f6709d6b7ec2c",
+    "roomName": "B区讯问室6",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "3596ca96c5da48b59e3004d749a964b9",
+    "roomName": "B区讯问室7",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "bc2452b36211486fbac074807500427d",
+    "roomName": "B区讯问室8",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "7c68d5f5fefd4775a51d21d0bc08a0f8",
+    "roomName": "B区讯问室9",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "80c68b66eeb14b558730067e6d6ff22f",
+    "roomName": "B区讯问室10",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "8ea7a402e1924ce1b5be681c7f539883",
+    "roomName": "B区讯问室11",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "9059483ba9764d429e9a2b7553881ef0",
+    "roomName": "B区讯问室12",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "e51913fa86e240be99c2604e00b4c28c",
+    "roomName": "B区讯问室13",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "ad976af306d442ffa796f20c53d40280",
+    "roomName": "C区留置室1",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "9e1a459e50f24812b7d9418e325bba76",
+    "roomName": "C区留置室2",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "1c9b3cda287847679aba2f1a4b1fddbc",
+    "roomName": "C区留置室3",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "c9eb2630a7fc4f8e9156bc54635c2e93",
+    "roomName": "C区留置室4",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "d4f5a2baba5249f7bb42f7057c1f83b4",
+    "roomName": "C区留置室5",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2001",
+    "roomTypeName": "留置室"
+  },
+  {
+    "roomIndexCode": "10de4f1e4cf84813955ca3567bd05b46",
+    "roomName": "C区讯问室1",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "cd641267d5a64a8a8fe9875ded7d26de",
+    "roomName": "C区讯问室2",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "17419b39b17447b9a68e8c03c0934714",
+    "roomName": "C区讯问室3",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "7cb8f0dcf8e34e828ba15c0b81b0a69e",
+    "roomName": "C区讯问室4",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1001",
+    "roomTypeName": "讯问室"
+  },
+  {
+    "roomIndexCode": "01c2c04df18549329c5cb0d9e3f577e7",
+    "roomName": "安全员值班室1",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "e4dd7234d7074a3b8c125f51f2110720",
+    "roomName": "安全员值班室2",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "e078a8dc0557421c975afec1b1945282",
+    "roomName": "安全员值班室3",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "4d9be6cb54fd432fa4a5d60cf7631f00",
+    "roomName": "安全员值班室4",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "f9a7d9a269444275a6a65620b7500199",
+    "roomName": "安全员值班室5",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "1819170931e04a7298c8b4139ff87131",
+    "roomName": "安全员值班室6",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "ff54bd4b3c8741c69df611bbf3b68769",
+    "roomName": "安全员值班室7",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "c2b4d8d262b84800957f0c167dc5bf11",
+    "roomName": "安全员值班室8",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "8a8fb363959640c4afed35ab6f4fad33",
+    "roomName": "安全员值班室9",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "fce635072149498c804c654c12df04ab",
+    "roomName": "安全员值班室10",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "ce836ca4828147eb9c858b0a4186bc93",
+    "roomName": "安全员值班室11",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "9c351864b60c49b7ba1afcdbd4fb649a",
+    "roomName": "安全员值班室12",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "f36cad5c06b44e07bb96339534153228",
+    "roomName": "安全员值班室13",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "139367ef58b143ab8ad41de535480b56",
+    "roomName": "安全员值班室14",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "abc955f71b804360a246bb86af50d3bf",
+    "roomName": "安全员值班室15",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "910d1c1f7c034888bc449b8293eba91a",
+    "roomName": "安全员值班室16",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "db36563819624edd8d85f5c1f4c1e006",
+    "roomName": "安全员值班室17",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "b0f03ecac3054479960689108f0a575d",
+    "roomName": "安全员值班室18",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "496d319f759342d391f85c6df3913ba6",
+    "roomName": "安全员值班室19",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "13ee65c44e5a4f28992cecbc7d546f23",
+    "roomName": "安全员值班室20",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "89008b31b43c47bf9b4a081c8aae6533",
+    "roomName": "安全员值班室21",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "04041e13fcb14ba9b20e552f6b58aa62",
+    "roomName": "安全员值班室22",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.2009",
+    "roomTypeName": "安全员值班室"
+  },
+  {
+    "roomIndexCode": "01c7465c54b04096960029028d832eab",
+    "roomName": "研判指挥室1",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
+  },
+  {
+    "roomIndexCode": "b9cb79432c08467ca14f4b51053f79bb",
+    "roomName": "研判指挥室2",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
+  },
+  {
+    "roomIndexCode": "9971c44ec3ae4ac7bfc7de92b8dcd6e8",
+    "roomName": "研判指挥室3",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
+  },
+  {
+    "roomIndexCode": "7ad8f9cb0ad84503beb8caaf8a583803",
+    "roomName": "研判指挥室4",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
+  },
+  {
+    "roomIndexCode": "2c375743ca704a0496d915a8a7354274",
+    "roomName": "研判指挥室5",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
+  },
+  {
+    "roomIndexCode": "525c7d9e12f048f5b04346e08fa83180",
+    "roomName": "研判指挥室6",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
+  },
+  {
+    "roomIndexCode": "029e666facad4886b86a4053f75d91eb",
+    "roomName": "研判指挥室7",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
+  },
+  {
+    "roomIndexCode": "65a6e82ebc0e4fc0883d483e02561036",
+    "roomName": "研判指挥室8",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
+  },
+  {
+    "roomIndexCode": "e86a9fb9825a49d7b3dd712f66d5845b",
+    "roomName": "研判指挥室9",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
+  },
+  {
+    "roomIndexCode": "ea0d11cb4bc4423baa43d56448ef27d5",
+    "roomName": "研判指挥室10",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
+  },
+  {
+    "roomIndexCode": "6313173258bc4cee8df6330687adccac",
+    "roomName": "研判指挥室11",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
+  },
+  {
+    "roomIndexCode": "5172dd88076543b69bc62a2779163a82",
+    "roomName": "研判指挥室12",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
+  },
+  {
+    "roomIndexCode": "d3fa4df20acc4ec186f94676c2748d05",
+    "roomName": "研判指挥室13",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
+  },
+  {
+    "roomIndexCode": "dfdb208b47864108a9286c22cee9c963",
+    "roomName": "研判指挥室14",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
+  },
+  {
+    "roomIndexCode": "f669f334ff0a4e6893674c085d384ecd",
+    "roomName": "研判指挥室15",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
+  },
+  {
+    "roomIndexCode": "cff3fd44d90d494daa72f0e011e7cdff",
+    "roomName": "研判指挥室16",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
+  },
+  {
+    "roomIndexCode": "ca252b4197dc4c37800c5d76e9dc446b",
+    "roomName": "研判指挥室17",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
+  },
+  {
+    "roomIndexCode": "c83ee6c1b8b14aada2e33d0b88d76af3",
+    "roomName": "研判指挥室18",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
+  },
+  {
+    "roomIndexCode": "3db70fb8877d4398ac7ed43292a6ffb7",
+    "roomName": "研判指挥室19",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
+  },
+  {
+    "roomIndexCode": "63bece9897c94503b5db9fa3fb2ef161",
+    "roomName": "研判指挥室20",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
+  },
+  {
+    "roomIndexCode": "af03797c6caa484fbf9b72ef1bd3774b",
+    "roomName": "研判指挥室21",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
+  },
+  {
+    "roomIndexCode": "5c918206fbee4f919d078e7c48b5c4ba",
+    "roomName": "研判指挥室22",
+    "roomRemark": "",
+    "roomStatus": "0",
+    "roomType": "roomType.1004",
+    "roomTypeName": "指挥室"
   }
 ]

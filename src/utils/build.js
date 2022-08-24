@@ -122,6 +122,11 @@ class MapBuildingUtils {
     return Number(floorName.slice(1)) * floorSign
   }
 
+  /**
+   * V001_JZ0001#F001 => F001
+   * @param floorId
+   * @returns {*}
+   */
   getFloorNameFromFloorId(floorId) {
     if (!this.isFloorId(floorId)) {
       return
