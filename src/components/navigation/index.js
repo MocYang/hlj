@@ -7,7 +7,7 @@ import icon from './images/icon-fold.png'
 import './index.scss'
 import useHomePosition from '../../hooks/useHomePosition'
 
-function Navigation({onChange}) {
+function Navigation({ onChange }) {
   // 是否点击了分层，
   const [open, setOpen] = useState(false)
   const [activeFloorId, setActiveFloorId] = useState(-1)
@@ -37,26 +37,33 @@ function Navigation({onChange}) {
   }
 
   const handleFloorClick = (floor) => {
+    const mapViewer = getMapViewer()
+
     setActiveFloorId(floor.id)
 
-    // 设置楼层分层显示
-    Build.setFloorVisible({
-      buildId,
-      floorName: floor.floorId
-    })
+    // 统一在这里删除所有的模型，后续监控，和房间内图标就只负责上图
+    mapViewer.drawer.remove.all()
 
-    setTimeout(()=>{
-      const mapViewer = getMapViewer()
-      mapViewer.camera.flyToPositionByOptions({
-        position: floor.position,
-        duration: 1,
-        onFinish: () => {
-          if (onChange) {
-            onChange(floor)
-          }
-        }
+    setTimeout(() => {
+      // 设置楼层分层显示
+      Build.setFloorVisible({
+        buildId,
+        floorName: floor.floorId
       })
-    },300)
+
+      setTimeout(() => {
+        mapViewer.camera.flyToPositionByOptions({
+          position: floor.position,
+          duration: 1,
+          onFinish: () => {
+            if (onChange) {
+
+              onChange(floor)
+            }
+          }
+        })
+      }, 100)
+    }, 50)
   }
 
   return (

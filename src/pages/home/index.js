@@ -12,6 +12,8 @@ import Navigation from '../../components/navigation'
 import useHomePosition from '../../hooks/useHomePosition'
 import Build from '../../utils/build'
 import VideoPreviewPopup from './popup/VideoPreviewPopup'
+import RoomInfoPopup from './popup/roomInfoPopup'
+import MachineInfoPopup from './popup/machineInfoPopup'
 
 import useCamera from '../../hooks/useCamera'
 import useRoomStatus from '../../hooks/useRoomStatus'
@@ -23,12 +25,17 @@ function Index() {
 
   const [activeFloor, setActiveFloor] = useState(null)
 
-  const { flyToHomePosition, setHome } = useHomePosition()
+  const {
+    flyToHomePosition,
+    setHome
+  } = useHomePosition()
 
+  // 监控信息
   const { fetchCamera } = useCamera({
     floor: activeFloor
   })
 
+  // 房间使用信息
   useRoomStatus({
     floor: activeFloor
   })
@@ -90,6 +97,12 @@ function Index() {
 
         {/*视频预览弹窗*/}
         <VideoPreviewPopup platformIp={configFile && configFile.hikVideoPlatformIp || ''} />
+
+        {/*房间内-人员，环境信息弹窗*/}
+        <RoomInfoPopup/>
+
+        {/*机房信息弹窗*/}
+        <MachineInfoPopup/>
       </MapContainer>
     </>
   )

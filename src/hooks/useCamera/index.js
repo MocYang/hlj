@@ -75,7 +75,6 @@ const useCamera = ({ floor }) => {
     if (mapViewer) {
       if (cameraList.length > 0 && floor) {
         const mapViewer = getMapViewer()
-        mapViewer.drawer.remove.all()
 
         const buildId = floor.buildId
         const floorName = floor.floorId

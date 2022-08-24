@@ -12,12 +12,12 @@ export default function (){
     "msg": "SUCCESS",
     "data": [
       {
-        "roomIndexCode": "17feb07c20784496864aad0276124135",
-        "roomName": "岗哨室-谈话",
-        "roomType": "roomType.2005",
-        "roomTypeName": "岗哨室",
+        "roomIndexCode": "b15fa7692830423e86d2dccff5eff841",
+        "roomName": "B区智慧留置室1",
+        "roomType": "roomType.2001",
+        "roomTypeName": "留置室",
         "roomRemark": "备注",
-        "roomStatus": "备注"
+        "roomStatus": 1
       }
     ]
   }

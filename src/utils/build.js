@@ -122,6 +122,11 @@ class MapBuildingUtils {
     return Number(floorName.slice(1)) * floorSign
   }
 
+  /**
+   * V001_JZ0001#F001 => F001
+   * @param floorId
+   * @returns {*}
+   */
   getFloorNameFromFloorId(floorId) {
     if (!this.isFloorId(floorId)) {
       return
@@ -484,8 +489,8 @@ class MapBuildingApi extends MapBuildingBase {
     }
   }
 
-  // 房间相关的
-  /**
+  /** ===== 房间相关的 =========== */
+  /*
    * 获取房间数量
    * @param buildId
    * @param floorName
@@ -500,15 +505,15 @@ class MapBuildingApi extends MapBuildingBase {
       return
     }
 
-    if (this.view3d && functionExist(this.view3d, this.view3d.GetFloorNum)) {
-      return schedule(this.view3d, this.view3d.GetFloorNum, buildId, floorName)
+    if (this.view3d && functionExist(this.view3d, this.view3d.GetFloorRoomNum)) {
+      return schedule(this.view3d, this.view3d.GetFloorRoomNum, buildId, floorName)
     }
   }
 
   /**
    * 获取房间名称列表
-   * @param buildId
-   * @param floorName
+   * @param buildId {String}
+   * @param floorName {String}
    * @returns {*}
    */
   getFloorRoomNames(buildId, floorName) {
@@ -520,13 +525,13 @@ class MapBuildingApi extends MapBuildingBase {
       return
     }
 
-    if (this.view3d && functionExist(this.view3d, this.view3d.GetFloorNames)) {
-      return schedule(this.view3d, this.view3d.GetFloorNames, buildId, floorName)
+    if (this.view3d && functionExist(this.view3d, this.view3d.GetFloorRoomNames)) {
+      return schedule(this.view3d, this.view3d.GetFloorRoomNames, buildId, floorName)
     }
   }
 
   /**
-   *
+   * 获取房间是否显示
    * @param buildId
    * @param floorName
    * @param roomName
@@ -547,7 +552,7 @@ class MapBuildingApi extends MapBuildingBase {
   }
 
   /**
-   *
+   * 设置房间的可见性
    * @param buildId {String}
    * @param floorName {String}
    * @param roomName {String}

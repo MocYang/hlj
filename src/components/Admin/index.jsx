@@ -14,7 +14,7 @@ import "./index.scss"
 
 const defaultBuildId = "V001_JZ0001"
 
-function Admin({mapReady = false}) {
+function Admin({ mapReady = false }) {
   const [buildId, setBuildId] = useState(defaultBuildId)
   const clickCallbackRef = useRef(null)
   const [material, setMaterial] = useState('SplineOrangeHighlight')
@@ -66,9 +66,9 @@ function Admin({mapReady = false}) {
       mapViewer.drawer.create.drawPolygon({
         drawPoints: true,
         pointsVisible: true,
-        color: '#f00',
-        opacity: 0.3,
-        // style: material,
+        color: 'red',
+        opacity: 0.1,
+        style: material,
         onFinish: function (entity) {
           materialEntityRef.current = entity
 
@@ -84,7 +84,6 @@ function Admin({mapReady = false}) {
       clickCallbackRef.current = (res) => {
         console.log(res)
       }
-      debugger
       mapViewer.event.onClick("*", clickCallbackRef.current)
     }
   }
@@ -105,13 +104,33 @@ function Admin({mapReady = false}) {
     })
   }
 
+  const handleGetMousePosition = ()=>{
+    const mapViewer = getMapViewer()
+
+    mapViewer.event.setMousePositionCallback(p =>{
+      console.log(JSON.stringify(p))
+    })
+  }
+
   const handleAddImage = () => {
     const mapViewer = getMapViewer()
     mapViewer.event.setMousePositionCallback(position => {
+
+      // const imageConfig = mapViewer.drawer.config.image({
+      //   style: 'qiangji_icon',
+      //   location: position
+      // })
+      // console.log(JSON.stringify(imageConfig))
+      // mapViewer.drawer.overLayerCreateObject(imageConfig).then(res =>{
+      //   console.log(res)
+      // })
       mapViewer.drawer.create.image({
-        style: 'qiangji_icon',
+        // style: 'qiangji_icon',
+        style: 'P_Marker',
         location: position
-      }, true)
+      }, true).then(res => {
+        console.log(JSON.stringify(res))
+      })
     })
   }
 
@@ -131,10 +150,32 @@ function Admin({mapReady = false}) {
     mapViewer.event.setMousePositionCallback(position => {
       mapViewer.drawer.create.imageLabel({
         screen: true,
-        iconStyle: 'men-10.png',
-        scale: 1,
+        // iconStyle: 'men-10.png',
+        iconStyle: 'P_Marker',
         location: position
       }, true)
+    })
+  }
+
+  const [niagara, setNiagara] = useState('P_Marker')
+  const [niagaraEntity, setNiagaraEntity] = useState(null)
+  const handleAddNiagara = () => {
+    // handleAddNiagara
+    const mapViewer = getMapViewer()
+
+    if (niagaraEntity) {
+      // mapViewer.drawer.remove.one(niagaraEntity)
+    }
+    mapViewer.event.setMousePositionCallback(position => {
+      mapViewer.drawer.overLayerCreateObject({
+        type: 'niagara',
+        // filename: 'P_Marker_1',
+        filename: niagara,
+        location: position
+      }, true).then(res => {
+        // setNiagaraEntity(res)
+        console.log(res)
+      })
     })
   }
 
@@ -210,10 +251,20 @@ function Admin({mapReady = false}) {
     Build.api.splitBuildingReset(buildId)
   }
 
-  const getFloorRoomNames = () => {
-    Build.api.getBuildingNames().then(res => {
+  const getFloorRoomNum = () => {
+    Build.api.getFloorRoomNum(buildId, "F001").then(res => {
       console.log(res)
     })
+  }
+
+  const getFloorRoomNames = () => {
+    Build.api.getFloorRoomNames(buildId, 'F001').then(res => {
+      console.log(res)
+    })
+  }
+
+  const getFloorRoomVisible = () => {
+
   }
 
   if (process.env.NODE_ENV === 'production') {
@@ -252,9 +303,29 @@ function Admin({mapReady = false}) {
       <div className="panel--item" onClick={handleAddClickHandler}>添加点击事件</div>
       <div className="panel--item" onClick={removeMouseClickCallback}>移除点击事件</div>
       <div className="panel--item" onClick={handleGetCurrentPosition}>获取当前位置</div>
+      <div className="panel--item" onClick={handleGetMousePosition}>获取鼠标点击的位置</div>
       <div className="panel--item" onClick={handleAddImage}>添加图片</div>
       <div className="panel--item" onClick={handleAddModel}>添加模型</div>
       <div className="panel--item" onClick={handleAddPOI}>添加POI</div>
+      <div className="panel--item" onClick={handleAddNiagara}>添加特殊粒子效果</div>
+
+      <div className="panel--item">
+        <select name="niagara" id="niagara" value={niagara} onChange={e => setNiagara(e.target.value)}>
+          <option value="P_Marker">P_Maker</option>
+          <option value="P_Marker_1">P_Maker_1</option>
+          <option value="P_Marker_2">P_Maker_2</option>
+          <option value="P_Marker_3">P_Maker_3</option>
+          <option value="P_Marker_4">P_Maker_4</option>
+          <option value="P_Marker_5">P_Maker_5</option>
+          <option value="P_Marker_6">P_Maker_6</option>
+          <option value="P_Marker_7">P_Maker_7</option>
+          <option value="P_Marker_8">P_Maker_8</option>
+          <option value="P_Marker_9">P_Maker_9</option>
+          <option value="P_Marker_10">P_Maker_10</option>
+          <option value="P_Marker_11">P_Maker_11</option>
+          <option value="P_Marker_12">P_Maker_12</option>
+        </select>
+      </div>
       {/*<div className="panel--item" onClick={handleBuildingSplit}>建筑炸裂</div>*/}
       {/*<div className="panel--item" onClick={handleFloorSplit}>单个楼层分离</div>*/}
       {/*<div className="panel--item" onClick={handleFloorSplit}>添加楼层点击分离事件</div>*/}
@@ -272,7 +343,10 @@ function Admin({mapReady = false}) {
       <div className="panel--item" onClick={splitBuildingReset}>楼层复原 - 单个建筑</div>
 
 
+      <div className="panel--item" onClick={getFloorRoomNum}>获取房间数量</div>
       <div className="panel--item" onClick={getFloorRoomNames}>获取房间名称</div>
+      <div className="panel--item" onClick={getFloorRoomVisible}>获取房间是否显示</div>
+      <div className="panel--item" onClick={getFloorRoomNames}>设置房间的可见性</div>
 
 
     </div>
