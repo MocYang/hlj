@@ -42,6 +42,9 @@ const useRoomStatus = ({ floor }) => {
   const [personIconEntities, setPersonIconEntities] = useState([])
 
   const personIconEntitiesRef = useRef(personIconEntities)
+  personIconEntitiesRef.cufrrent = personIconEntities
+  const floorRef = useRef(floor)
+  floorRef.current = floor
 
   // 所有房间的使用情况
   const [roomUseStatus, setRoomUseStatus] = useState([])
@@ -51,7 +54,8 @@ const useRoomStatus = ({ floor }) => {
   const { subscribe, unsubscribe } = useZoom({
     key: 'roomPersonIcon',
     onChange: function (p) {
-      console.log(p, floor)
+      const floorNumber = Build.utils.getFloorNumberFromFloorName(floorRef.current.floorId)
+      console.log(p, floorNumber)
       // 根据最大高度做显示,根据可显示高度做比例缩放
       if (personIconEntitiesRef.current.length > 0) {
       }

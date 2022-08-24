@@ -10,16 +10,16 @@ import { urls } from '../../../../api'
 // 留置人员信息详情
 export function suspectInfoConfig(data) {
   return {
-    url: urls,
+    url: urls.dwcWeb.suspectInfo,
     method: 'POST',
     data
   }
 }
 
 // 房间环境信息
-export function roomEnvironmentInfoConfig() {
+export function environmentInfoConfig(data) {
   return {
-    url: urls,
+    url: urls.dwcWeb.environmentInfo,
     method: 'POST',
     data
   }

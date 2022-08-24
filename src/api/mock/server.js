@@ -6,6 +6,7 @@ import cameraListHandler from './cameraListHandler'
 import previewUrlHandle from './previewUrlHandler'
 import allRoomUseHandler from './allRoomUseHandler'
 import suspectInfoHandler from './suspectInfoHandler'
+import environmentInfoHandler from './environmentInfoHandler'
 
 function makeServer(environment = 'development') {
   createServer({
@@ -50,6 +51,9 @@ function makeServer(environment = 'development') {
 
       // 根据房间编码，获取留置对象详情
       this.post(urls.dwcWeb.suspectInfo, suspectInfoHandler)
+
+      // 根据房间编码，获取房间环境信息
+      this.post(urls.dwcWeb.environmentInfo, environmentInfoHandler)
     }
   })
 }
