@@ -12,7 +12,7 @@ export const roomSlice = createSlice({
   name: 'room',
   initialState: {
     // 房间信息弹窗是否显示
-    roomPopUpVisible: false,
+    roomPopUpVisible: true,
 
     // 点击人物图标时，关联的房间相关信息
     roomInfo: null,
