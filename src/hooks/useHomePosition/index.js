@@ -20,13 +20,16 @@ const homePosition = {
 function useHomePosition() {
   const flyToHomePosition = useCallback((callback) => {
     const mapViewer = getMapViewer()
-    mapViewer.camera.flyToPositionByOptions({
-      position: homePosition,
-      duration: 1,
-      onFinish: () => {
-        callback && callback()
-      }
-    })
+    if(mapViewer) {
+      mapViewer.camera.flyToPositionByOptions({
+        position: homePosition,
+        duration: 1,
+        onFinish: () => {
+          callback && callback()
+        }
+      })
+    }
+
   }, [])
 
   const setHome = useCallback(() => {

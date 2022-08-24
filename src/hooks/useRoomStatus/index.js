@@ -15,6 +15,7 @@ import Build from '../../utils/build'
 import { useDispatch } from 'react-redux'
 import { usePopupController } from '../../components/popup/PopupContainer'
 import { setRoomInfo, setRoomPopUpVisible } from '../../pages/home/popup/roomInfoPopup/slice'
+import useZoom from '../useZoom'
 
 export const useRoomIconClick = () => {
   const dispatch = useDispatch()
@@ -38,15 +39,27 @@ export const useRoomIconClick = () => {
 }
 
 const useRoomStatus = ({ floor }) => {
+  const [personIconEntities, setPersonIconEntities] = useState([])
+
   // 所有房间的使用情况
   const [roomUseStatus, setRoomUseStatus] = useState([])
   const { run: fetchAllUseRoomInfo } = useRequest()
+
+  // 监听滚轮缩放，达到设定的高度时，更新人物图标的缩放比例
+  const { subscribe, unsubscribe } = useZoom({
+    key: 'roomPersonIcon',
+    onChange: function (p) {
+      console.log(p)
+    }
+  })
 
   // 获取所有房间的使用情况
   const fetchRoomUseStatus = () => {
     fetchAllUseRoomInfo(allRoomUseStatusConfig()).then(res => {
       if (Number(res.code) === 0) {
         setRoomUseStatus(res.data)
+
+        subscribe()
       }
     })
   }
@@ -55,6 +68,10 @@ const useRoomStatus = ({ floor }) => {
   useEffect(() => {
     if (floor) {
       fetchRoomUseStatus()
+      // subscribe()
+    } else {
+      // unsubscribe()
+      setPersonIconEntities([])
     }
   }, [floor])
 
@@ -98,6 +115,8 @@ const useRoomStatus = ({ floor }) => {
 
       const controller = mapViewer.model.getController()
       controller.addMany(roomPersonIconConfig)
+
+      setPersonIconEntities(roomPersonIconConfig)
     }
   }, [roomUseStatus, floor])
 
