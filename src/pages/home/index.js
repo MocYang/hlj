@@ -16,7 +16,7 @@ import RoomInfoPopup from './popup/roomInfoPopup'
 import MachineInfoPopup from './popup/machineInfoPopup'
 
 import useCamera from '../../hooks/useCamera'
-import useRoomStatus from '../../hooks/useRoomStatus'
+import useRoomStatus, { useRoomIconClick } from '../../hooks/useRoomStatus'
 
 function Index() {
 
@@ -40,6 +40,8 @@ function Index() {
     floor: activeFloor
   })
 
+  const {addPersonIconClick} = useRoomIconClick()
+
   // 地图初始化成功后的回调
   const handleSuccess = useCallback((mapViewer) => {
     const config = getConfigJson()
@@ -59,6 +61,9 @@ function Index() {
     fetchCamera()
 
     setConfigFile(config)
+
+    // 监听人物图标的点击
+    addPersonIconClick()
   }, [])
 
 

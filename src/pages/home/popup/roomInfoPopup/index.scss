@@ -1,3 +1,12 @@
 @import '../../../../assets/styles/utils';
 
+.popup__suspect-info {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
+  width: px2vw(917);
+  height: px2vh(656);
+
+
+}
