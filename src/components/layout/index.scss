@@ -1,0 +1,56 @@
+@import "../../assets/styles/utils";
+
+@mixin fadeIn($name, $time, $delay) {
+  @keyframes #{$name} {
+    0% {
+      display: block;
+      pointer-events: auto;
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+      display: block;
+      pointer-events: auto;
+    }
+  }
+  animation: $name $time linear $delay forwards;
+}
+
+@mixin fadeOut($name, $time, $delay) {
+  @keyframes #{$name} {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+  animation: $name $time linear $delay forwards;
+}
+
+.layout-container {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.2s;
+  z-index: 1;
+
+  &.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 11;
+  }
+}
+
+.separator {
+  display: inline-block;
+  height: 100%;
+  width: px2vw(2);
+  margin-left: px2vw(8);
+  margin-right: px2vw(8);
+  background: #1A3B5C;
+}
+
+

@@ -1,0 +1,24 @@
+{
+    "code": "0",
+    "msg": "SUCCESS",
+    "data": {
+        "roomIndexCode": "b15fa7692830423e86d2dccff5eff841",
+        "roomName": "智慧留置室1",
+        "suspectIndexCode": "4b5edd7c496a4b43b4133773987d9360",
+        "suspectNo": "20220819-2",
+        "suspectName": "20220819-2",
+        "gender": null,
+        "age": null,
+        "birthDay": null,
+        "nation": "未知",
+        "groupName": "20220819审查调查组-1",
+        "headman": "调查人员2",
+        "safeties": "安全员2",
+        "beginTime": "2022-08-19 14:31:41",
+        "healthInfo": {
+            "medicineHistory": null,
+            "foodTaboos": ""
+        },
+        "interrogateInfo": null
+    }
+}

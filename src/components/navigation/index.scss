@@ -1,0 +1,92 @@
+.navigation {
+  position: absolute;
+  top: 54px;
+  right: 60px;
+  z-index: 11;
+  cursor: pointer;
+
+
+  .fenceng {
+    position: relative;
+    background-image: url('images/btn_fenceng.png');
+    width: 92px;
+    height: 28px;
+
+    .text {
+      width: 42px;
+      height: 30px;
+      font-size: 17px;
+      font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+      color: #4EF9FF;
+      letter-spacing: 2px;
+      margin: 0 auto;
+      line-height: 1.4;
+      user-select: none;
+    }
+
+    .icon {
+      position: absolute;
+      right: 4px;
+      top: 4px;
+      width: 20px;
+      height: 20px;
+    }
+
+    .shouqi {
+
+    }
+
+    .expand {
+
+    }
+  }
+  .floor-list-wrapper {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 92px;
+    height: 128px;
+    background: transparent;
+    overflow: hidden;
+  }
+
+
+  .floor-list {
+    position: absolute;
+    left: 50%;
+    top: -100%;
+    transform: translateX(-50%);
+    transition: top .2s;
+
+    &.active {
+      top: 0;
+    }
+  }
+
+  .floor-item {
+    cursor: pointer;
+    user-select: none;
+
+    background: url('images/btn_lc.png') no-repeat;
+    background-size: 100% 100%;
+    width: 71px;
+    height: 27px;
+    margin: 0 auto;
+    margin-top: 5px;
+    color: #4EF9FF;
+
+    .text-f1 {
+      width: 21px;
+      height: 27px;
+      font-size: 18px;
+      font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+      margin: 0 auto;
+    }
+
+    &.active {
+      color: #4E9FFF;
+      background: url('images/btn_sele@2x.png') no-repeat;
+      background-size: 100% 100%;
+    }
+  }
+}

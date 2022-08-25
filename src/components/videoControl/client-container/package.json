@@ -1,0 +1,20 @@
+{
+  "name": "client-container",
+  "version": "0.2.38",
+  "description": "Package communication and display of local client",
+  "browser": "lib/index.js",
+  "scripts": {
+    "build-ts": "tsc -p tsconfig.json"
+  },
+  "private": false,
+  "author": "huming & maowei3",
+  "dependencies": {
+    "core-js": "^2.6.5",
+    "vue": "^2.6.10"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.5.1",
+    "@vue/cli-service": "^4.1.0",
+    "vue-template-compiler": "^2.6.10"
+  }
+}
