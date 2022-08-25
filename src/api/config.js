@@ -30,13 +30,9 @@ export const urlConfig = {
   // 环境监测组件服务接口
   dwcWeb: {
     // 2.8.1根据留置房间编号获取留置对象详情信息
-<<<<<<< HEAD
     suspectInfo: `/dwc-web/service/rs/api/v2/suspect/searchByRoomCode`,
 
     // 2.7.1根据房间编号获取环境状态信息
     environmentInfo: `/dwc-web/service/rs/api/v2/environment/searchByRoomCode`
-=======
-    suspectInfo: `/dwc-web/service/rs/api/v2/suspect/searchByRoomCode`
->>>>>>> cc04770de46141d43f763beb6813d08c222386d6
   }
 }

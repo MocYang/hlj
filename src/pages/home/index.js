@@ -17,27 +17,17 @@ import MachineInfoPopup from './popup/machineInfoPopup'
 
 import useCamera from '../../hooks/useCamera'
 import useRoomStatus, { useRoomIconClick } from '../../hooks/useRoomStatus'
-<<<<<<< HEAD
 import useZoom from '../../hooks/useZoom'
-=======
 
->>>>>>> cc04770de46141d43f763beb6813d08c222386d6
 function Index() {
-
   // config.json配置文件
   const [configFile, setConfigFile] = useState({})
 
   const [activeFloor, setActiveFloor] = useState(null)
 
-<<<<<<< HEAD
-  const {init} = useZoom()
+  const { init } = useZoom()
 
-=======
->>>>>>> cc04770de46141d43f763beb6813d08c222386d6
-  const {
-    flyToHomePosition,
-    setHome
-  } = useHomePosition()
+  const { flyToHomePosition, setHome } = useHomePosition()
 
   // 监控信息
   const { fetchCamera } = useCamera({
@@ -49,7 +39,7 @@ function Index() {
     floor: activeFloor
   })
 
-  const {addPersonIconClick} = useRoomIconClick()
+  const { addPersonIconClick } = useRoomIconClick()
 
   // 地图初始化成功后的回调
   const handleSuccess = useCallback((mapViewer) => {
@@ -57,42 +47,28 @@ function Index() {
 
     initUrlConfig(config)
 
-<<<<<<< HEAD
     mapViewer.event.debugger = true
-=======
-    // environments = MOCK 才用mock server
-    if (config && config.environments === 'MOCK') {
-      makeServer()
-    }
->>>>>>> cc04770de46141d43f763beb6813d08c222386d6
 
     // 默认定位到指定视角
     flyToHomePosition(() => {
       Build.init(mapViewer)
     })
 
-<<<<<<< HEAD
     // environments = MOCK 才用mock server
     if (config && config.environments === 'MOCK') {
       makeServer()
     }
 
-=======
->>>>>>> cc04770de46141d43f763beb6813d08c222386d6
     fetchCamera()
 
     setConfigFile(config)
 
     // 监听人物图标的点击
     addPersonIconClick()
-<<<<<<< HEAD
 
     // zoom init
     init()
-=======
->>>>>>> cc04770de46141d43f763beb6813d08c222386d6
   }, [])
-
 
   const handleSetActiveFloor = (floor) => {
     if (activeFloor !== floor) {
@@ -112,9 +88,7 @@ function Index() {
 
   return (
     <>
-      <MapContainer
-        onSuccess={handleSuccess}
-      >
+      <MapContainer onSuccess={handleSuccess}>
         {/*背景边框*/}
         <Background />
 
@@ -128,13 +102,15 @@ function Index() {
         <Admin />
 
         {/*视频预览弹窗*/}
-        <VideoPreviewPopup platformIp={configFile && configFile.hikVideoPlatformIp || ''} />
+        <VideoPreviewPopup
+          platformIp={(configFile && configFile.hikVideoPlatformIp) || ''}
+        />
 
         {/*房间内-人员，环境信息弹窗*/}
-        <RoomInfoPopup/>
+        <RoomInfoPopup />
 
         {/*机房信息弹窗*/}
-        <MachineInfoPopup/>
+        <MachineInfoPopup />
       </MapContainer>
     </>
   )

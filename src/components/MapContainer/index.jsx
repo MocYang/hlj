@@ -6,11 +6,7 @@
  * @Description:
  */
 
-<<<<<<< HEAD
 import React, { useEffect, useRef, useState } from 'react'
-=======
-import React, { useEffect, useState } from 'react'
->>>>>>> cc04770de46141d43f763beb6813d08c222386d6
 import './index.scss'
 
 const { createUUID, fetchConfig } = window.mapv3d.utils
@@ -37,12 +33,11 @@ function MapContainer({
   ...defaultProps
 }) {
   const [ready, setReady] = useState(false)
-<<<<<<< HEAD
   const fetchConfigRef = useRef(false)
   useEffect(() => {
     if (!ready && !fetchConfigRef.current) {
       fetchConfigRef.current = true
-      fetchConfig().then(config => {
+      fetchConfig().then((config) => {
         configFile = config
         new window.mapv3d.MapViewer({
           // id: 'mapvision3d',
@@ -58,33 +53,11 @@ function MapContainer({
             mapViewer = mapInstance
             setReady(true)
 
-=======
-
-  useEffect(() => {
-    if (!ready) {
-      fetchConfig().then(config => {
-        configFile = config
-        mapViewer = new window.mapv3d.MapViewer({
-          // id: 'mapvision3d',
-          id: mapContainerId,
-          ...config,
-          ...defaultProps,
-          defaultLocate: defaultLocate,
-          defaultSetResolution: true,
-          // 先给 0.5，目前地图如果设置 4K 分辨率，(3840 * 1080)，会被拉伸
-          resolutionScale: 1,
-          complete() {
-            setReady(true)
->>>>>>> cc04770de46141d43f763beb6813d08c222386d6
             if (process.env.NODE_ENV === 'development') {
               window.$map = mapViewer
             }
             onSuccess(mapViewer)
-<<<<<<< HEAD
-          },
-=======
           }
->>>>>>> cc04770de46141d43f763beb6813d08c222386d6
         })
       })
     }
@@ -95,9 +68,7 @@ function MapContainer({
       <div className="map-container">
         <div id={mapContainerId} className="map-instance" />
       </div>
-      {
-        ready && children
-      }
+      {ready && children}
     </>
   )
 }
