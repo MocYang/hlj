@@ -27,7 +27,10 @@ function Index() {
 
   const { init } = useZoom()
 
-  const { flyToHomePosition, setHome } = useHomePosition()
+  const {
+    flyToHomePosition,
+    setHome
+  } = useHomePosition()
 
   // 监控信息
   const { fetchCamera } = useCamera({
@@ -71,9 +74,7 @@ function Index() {
   }, [])
 
   const handleSetActiveFloor = (floor) => {
-    if (activeFloor !== floor) {
-      setActiveFloor(floor)
-    }
+    setActiveFloor(floor)
   }
 
   useEffect(() => {

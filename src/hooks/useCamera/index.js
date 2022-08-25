@@ -73,21 +73,40 @@ const useCamera = ({ floor }) => {
     const mapViewer = getMapViewer()
 
     if (mapViewer) {
-      if (cameraList.length > 0 && floor) {
+      if (cameraList.length > 0 && floor && floor.length > 0) {
         const mapViewer = getMapViewer()
 
-        const buildId = floor.buildId
-        const floorName = floor.floorId
-        const floorNumber = Build.utils.getFloorNumberFromFloorName(floorName)
+
+        // const buildId = floor.buildId
+        // const floorName = floor.floorId
 
         // 提取指定楼层的监控
         const cameraInCurrentFloor = cameraList.filter(camera => {
-          const cameraFloorName = Build.utils.getFloorNameFromFloorId(camera.floor_id)
-          return camera.build_id === buildId && cameraFloorName === floorName
+          const currentCameraBuildId = camera.build_id
+          const currentCameraFloorId = camera.floor_id
+          const currentCameraFloorName = Build.utils.getFloorNameFromFloorId(currentCameraFloorId)
+
+          let isCameraShow = false
+          for (let activeFloor of floor) {
+            if (!activeFloor.active) {
+              continue
+            }
+            const activeFloorName = activeFloor.floorId
+            const activeBuildId = activeFloor.buildId
+
+            if (currentCameraBuildId === activeBuildId && activeFloorName === currentCameraFloorName) {
+             isCameraShow = true
+            }
+          }
+
+          return isCameraShow
         })
 
         // 生成要上图的监控图标配置
         const cameraIconConfig = cameraInCurrentFloor.map(camera => {
+          const currentFloorName = Build.utils.getFloorNameFromFloorId(camera.floor_id)
+          const currentFloorNumber = Build.utils.getFloorNumberFromFloorName(currentFloorName)
+
           return mapViewer.drawer.config.model({
             attr: {
               id: camera.id,
@@ -96,7 +115,7 @@ const useCamera = ({ floor }) => {
             },
             scale: 1.5,
             gid: `CAMERA_${camera.model_url}`,
-            location: handleGetSplitEntitiesHeight(camera.list_style, floorNumber),
+            location: handleGetSplitEntitiesHeight(camera.list_style, currentFloorNumber),
             fileName: 'banqiu'
           })
         })

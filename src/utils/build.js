@@ -9,7 +9,10 @@
 const scheduler = window.mapv3d.scheduler
 // const mapv3dUtils = window.mapv3d.utils
 
-const { schedule, waitSchedule } = scheduler
+const {
+  schedule,
+  waitSchedule
+} = scheduler
 
 const { functionExist } = window.mapv3d.error
 
@@ -70,7 +73,7 @@ class MapBuildingUtils {
   isFloorId(floorId) {
     const reg = /^V\d+_JZ\d+#[F|B]\d+$/
     const wkFloorReg = /^V\d+_JZ\d+_WK_[F|B]\d+$/
-    return reg.test(floorId) ||wkFloorReg.test(floorId)
+    return reg.test(floorId) || wkFloorReg.test(floorId)
   }
 
   /**
@@ -490,6 +493,7 @@ class MapBuildingApi extends MapBuildingBase {
   }
 
   /** ===== 房间相关的 =========== */
+
   /*
    * 获取房间数量
    * @param buildId
@@ -777,7 +781,7 @@ class MapBuild extends MapBuildingBase {
       return
     }
 
-    if (!this.utils.isValidFloorName(floorName)) {
+    if (typeof floorName === "string" && !this.utils.isValidFloorName(floorName)) {
       return
     }
 
@@ -798,10 +802,11 @@ class MapBuild extends MapBuildingBase {
     }
 
     const buildInfo = this.getBuildingInfo(buildId)
-    const floorNumber = this.utils.getFloorNumberFromFloorName(floorName)
 
 
     if (!multiple) {
+      const floorNumber = this.utils.getFloorNumberFromFloorName(floorName)
+
       // 正常的分层显示
       if (buildInfo && Array.isArray(buildInfo.floor)) {
 

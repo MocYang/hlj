@@ -6,7 +6,13 @@
     "url": "http://192.168.0.19:19901/aimapvision3d",
     "projectId": "7873295b0a064144806b9886e1a3c373",
     "mapkey": "db52598939c493e14691900048a26020",
-    "splitHeight": 5
+    "splitHeight": 5,
+    "jwvisual": {
+      "url": "http://102.168.9.12:17009"
+    },
+    "dwcWeb": {
+      "url": "http://102.168.9.12:17163"
+    }
   },
   "liaoning": {
     "url": "http://192.168.0.220:19901/aimapvision3d",

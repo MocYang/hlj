@@ -18,7 +18,7 @@ const homePosition = {
 }
 
 function useHomePosition() {
-  const flyToHomePosition = useCallback((callback) => {
+  const flyToHomePosition = useCallback((callback = () => null) => {
     const mapViewer = getMapViewer()
     if (mapViewer) {
       mapViewer.camera.flyToPositionByOptions({

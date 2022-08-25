@@ -58,13 +58,13 @@ const useRoomStatus = ({ floor }) => {
   const { subscribe, unsubscribe } = useZoom({
     key: 'roomPersonIcon',
     onChange: function (p) {
-      const floorNumber = Build.utils.getFloorNumberFromFloorName(
-        floorRef.current.floorId
-      )
-      console.log(p, floorNumber)
-      // 根据最大高度做显示,根据可显示高度做比例缩放
-      if (personIconEntitiesRef.current.length > 0) {
-      }
+      // const floorNumber = Build.utils.getFloorNumberFromFloorName(
+      //   floorRef.current.floorId
+      // )
+      // console.log(p, floorNumber)
+      // // 根据最大高度做显示,根据可显示高度做比例缩放
+      // if (personIconEntitiesRef.current.length > 0) {
+      // }
     }
   })
 
@@ -82,9 +82,9 @@ const useRoomStatus = ({ floor }) => {
   useEffect(() => {
     if (floor) {
       fetchRoomUseStatus()
-      // subscribe()
+      subscribe()
     } else {
-      // unsubscribe()
+      unsubscribe()
       setPersonIconEntities([])
     }
   }, [floor])
@@ -108,14 +108,18 @@ const useRoomStatus = ({ floor }) => {
           const currentFloorName = Build.utils.getFloorNameFromFloorId(
             roomInfo.floor_id
           )
-          if (floor.floorId === currentFloorName) {
-            roomUsedInfo.push(roomInfo)
+
+          for (let activeFloor of floor) {
+            if (!activeFloor.active) {
+              continue
+            }
+
+            if (activeFloor.floorId === currentFloorName) {
+              roomUsedInfo.push(roomInfo)
+            }
           }
         }
       })
-
-
-
 
       const roomPersonIconConfig = []
       for (let roomConfig of roomUsedInfo) {
@@ -139,6 +143,8 @@ const useRoomStatus = ({ floor }) => {
       controller.addMany(roomPersonIconConfig)
 
       setPersonIconEntities(roomPersonIconConfig)
+    } else {
+      setPersonIconEntities([])
     }
   }, [roomUseStatus, floor])
 
