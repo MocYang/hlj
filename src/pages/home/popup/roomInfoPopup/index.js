@@ -13,6 +13,7 @@ import {
   selectRoomInfo,
   selectRoomPopupVisible,
   selectSuspectInfo,
+<<<<<<< HEAD
   setRoomPopUpVisible, setSuspectInfo
 } from './slice'
 import './index.scss'
@@ -53,6 +54,21 @@ const SuspectInfoPopup = () => {
           setSuspectInfo(res.data)
         }
       }).catch(e => console.error(e))
+=======
+  setRoomPopUpVisible
+} from './slice'
+import './index.scss'
+
+const SuspectInfoPopup = () => {
+  const isRoomPopupVisible = useSelector(selectRoomPopupVisible)
+  const roomInfo = useSelector(selectRoomInfo)
+  const suspectInfo = useSelector(selectSuspectInfo)
+  const environmentInfo = useSelector(selectEnvironmentInfo)
+
+  useEffect(() => {
+    if (isRoomPopupVisible && roomInfo) {
+      // TODO: 请求人员、环境信息
+>>>>>>> cc04770de46141d43f763beb6813d08c222386d6
     }
   }, [isRoomPopupVisible, roomInfo])
 

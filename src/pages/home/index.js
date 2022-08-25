@@ -17,7 +17,11 @@ import MachineInfoPopup from './popup/machineInfoPopup'
 
 import useCamera from '../../hooks/useCamera'
 import useRoomStatus, { useRoomIconClick } from '../../hooks/useRoomStatus'
+<<<<<<< HEAD
 import useZoom from '../../hooks/useZoom'
+=======
+
+>>>>>>> cc04770de46141d43f763beb6813d08c222386d6
 function Index() {
 
   // config.json配置文件
@@ -25,8 +29,11 @@ function Index() {
 
   const [activeFloor, setActiveFloor] = useState(null)
 
+<<<<<<< HEAD
   const {init} = useZoom()
 
+=======
+>>>>>>> cc04770de46141d43f763beb6813d08c222386d6
   const {
     flyToHomePosition,
     setHome
@@ -50,27 +57,40 @@ function Index() {
 
     initUrlConfig(config)
 
+<<<<<<< HEAD
     mapViewer.event.debugger = true
+=======
+    // environments = MOCK 才用mock server
+    if (config && config.environments === 'MOCK') {
+      makeServer()
+    }
+>>>>>>> cc04770de46141d43f763beb6813d08c222386d6
 
     // 默认定位到指定视角
     flyToHomePosition(() => {
       Build.init(mapViewer)
     })
 
+<<<<<<< HEAD
     // environments = MOCK 才用mock server
     if (config && config.environments === 'MOCK') {
       makeServer()
     }
 
+=======
+>>>>>>> cc04770de46141d43f763beb6813d08c222386d6
     fetchCamera()
 
     setConfigFile(config)
 
     // 监听人物图标的点击
     addPersonIconClick()
+<<<<<<< HEAD
 
     // zoom init
     init()
+=======
+>>>>>>> cc04770de46141d43f763beb6813d08c222386d6
   }, [])
 
 

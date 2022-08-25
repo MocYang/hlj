@@ -62,8 +62,13 @@ function Navigation({ onChange }) {
             }
           }
         })
+<<<<<<< HEAD
       }, 10)
     }, 10)
+=======
+      }, 100)
+    }, 50)
+>>>>>>> cc04770de46141d43f763beb6813d08c222386d6
   }
 
   return (

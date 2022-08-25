@@ -6,7 +6,11 @@
  * @Description 房间的使用情况 - 包括房间模型变色，加载人物图标，监听房间点击事件，监听房间点击事件
  */
 
+<<<<<<< HEAD
 import { useCallback, useEffect, useRef, useState } from 'react'
+=======
+import { useCallback, useEffect, useState } from 'react'
+>>>>>>> cc04770de46141d43f763beb6813d08c222386d6
 import { allRoomUseStatusConfig } from '../../api'
 import useRequest from '../useRequest'
 import { getMapViewer } from '../../components/MapContainer'
@@ -15,7 +19,10 @@ import Build from '../../utils/build'
 import { useDispatch } from 'react-redux'
 import { usePopupController } from '../../components/popup/PopupContainer'
 import { setRoomInfo, setRoomPopUpVisible } from '../../pages/home/popup/roomInfoPopup/slice'
+<<<<<<< HEAD
 import useZoom from '../useZoom'
+=======
+>>>>>>> cc04770de46141d43f763beb6813d08c222386d6
 
 export const useRoomIconClick = () => {
   const dispatch = useDispatch()
@@ -39,6 +46,7 @@ export const useRoomIconClick = () => {
 }
 
 const useRoomStatus = ({ floor }) => {
+<<<<<<< HEAD
   const [personIconEntities, setPersonIconEntities] = useState([])
 
   const personIconEntitiesRef = useRef(personIconEntities)
@@ -46,10 +54,13 @@ const useRoomStatus = ({ floor }) => {
   const floorRef = useRef(floor)
   floorRef.current = floor
 
+=======
+>>>>>>> cc04770de46141d43f763beb6813d08c222386d6
   // 所有房间的使用情况
   const [roomUseStatus, setRoomUseStatus] = useState([])
   const { run: fetchAllUseRoomInfo } = useRequest()
 
+<<<<<<< HEAD
   // 监听滚轮缩放，达到设定的高度时，更新人物图标的缩放比例
   const { subscribe, unsubscribe } = useZoom({
     key: 'roomPersonIcon',
@@ -62,13 +73,18 @@ const useRoomStatus = ({ floor }) => {
     }
   })
 
+=======
+>>>>>>> cc04770de46141d43f763beb6813d08c222386d6
   // 获取所有房间的使用情况
   const fetchRoomUseStatus = () => {
     fetchAllUseRoomInfo(allRoomUseStatusConfig()).then(res => {
       if (Number(res.code) === 0) {
         setRoomUseStatus(res.data)
+<<<<<<< HEAD
 
         subscribe()
+=======
+>>>>>>> cc04770de46141d43f763beb6813d08c222386d6
       }
     })
   }
@@ -77,10 +93,13 @@ const useRoomStatus = ({ floor }) => {
   useEffect(() => {
     if (floor) {
       fetchRoomUseStatus()
+<<<<<<< HEAD
       // subscribe()
     } else {
       // unsubscribe()
       setPersonIconEntities([])
+=======
+>>>>>>> cc04770de46141d43f763beb6813d08c222386d6
     }
   }, [floor])
 
@@ -124,8 +143,11 @@ const useRoomStatus = ({ floor }) => {
 
       const controller = mapViewer.model.getController()
       controller.addMany(roomPersonIconConfig)
+<<<<<<< HEAD
 
       setPersonIconEntities(roomPersonIconConfig)
+=======
+>>>>>>> cc04770de46141d43f763beb6813d08c222386d6
     }
   }, [roomUseStatus, floor])
 

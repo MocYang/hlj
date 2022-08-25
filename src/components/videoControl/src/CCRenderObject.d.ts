@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { EleRect } from "./CCRectFunctions";
 declare global {
     interface Element {
@@ -23,3 +24,30 @@ declare class CCRenderObject {
     update(domFlowIndex: number): CCRenderObject;
 }
 export default CCRenderObject;
+=======
+import { EleRect } from "./CCRectFunctions";
+declare global {
+    interface Element {
+        HikCCRenderObject: CCRenderObject | undefined;
+    }
+}
+declare class CCRenderObject {
+    element: Element;
+    private domFlowIndex;
+    private ownerWindow;
+    private position;
+    private zIndex;
+    private iZIndex;
+    private withZIndex;
+    hikccAbsoluteZIndex: number;
+    constructor(element: Element, domFlowIndex: number);
+    compare(other: CCRenderObject): number;
+    renderRect(): EleRect;
+    getZIndex(): number;
+    isStaticPosition(): boolean;
+    isWithZIndex(): boolean;
+    isNeedToUpdate(): boolean;
+    update(domFlowIndex: number): CCRenderObject;
+}
+export default CCRenderObject;
+>>>>>>> cc04770de46141d43f763beb6813d08c222386d6
