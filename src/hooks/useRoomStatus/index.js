@@ -114,6 +114,9 @@ const useRoomStatus = ({ floor }) => {
         }
       })
 
+
+
+
       const roomPersonIconConfig = []
       for (let roomConfig of roomUsedInfo) {
         if (roomConfig.location !== undefined) {
