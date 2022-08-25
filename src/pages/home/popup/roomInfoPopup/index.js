@@ -46,6 +46,7 @@ const SuspectInfoPopup = () => {
       )
         .then((res) => {
           if (res.code === 0) {
+            console.log(res)
             setSuspectInfo(res.data)
           }
         })
