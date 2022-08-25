@@ -27,6 +27,7 @@ const SuspectInfoPopup = () => {
   // 留置人员详情
   const suspectInfo = useSelector(selectSuspectInfo)
 
+  
   // 房间环境信息
   const environmentInfo = useSelector(selectEnvironmentInfo)
 
