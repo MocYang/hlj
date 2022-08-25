@@ -57,13 +57,13 @@ function Navigation({ onChange }) {
           duration: 1,
           onFinish: () => {
             if (onChange) {
-
               onChange(floor)
             }
           }
         })
       }, 10)
     }, 10)
+
   }
 
   return (

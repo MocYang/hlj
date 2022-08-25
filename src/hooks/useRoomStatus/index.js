@@ -14,7 +14,10 @@ import roomConfig from './roomConfig'
 import Build from '../../utils/build'
 import { useDispatch } from 'react-redux'
 import { usePopupController } from '../../components/popup/PopupContainer'
-import { setRoomInfo, setRoomPopUpVisible } from '../../pages/home/popup/roomInfoPopup/slice'
+import {
+  setRoomInfo,
+  setRoomPopUpVisible
+} from '../../pages/home/popup/roomInfoPopup/slice'
 import useZoom from '../useZoom'
 
 export const useRoomIconClick = () => {
@@ -24,12 +27,14 @@ export const useRoomIconClick = () => {
 
   const addPersonIconClick = useCallback(() => {
     const mapViewer = getMapViewer()
-    mapViewer.event.onClick('PERSON', res => {
+    mapViewer.event.onClick('PERSON', (res) => {
       popupController.activate(setRoomPopUpVisible)
 
-      dispatch(setRoomInfo({
-        roomIndexCode: res.attr.roomIndexCode
-      }))
+      dispatch(
+        setRoomInfo({
+          roomIndexCode: res.attr.roomIndexCode
+        })
+      )
     })
   }, [])
 
@@ -45,7 +50,6 @@ const useRoomStatus = ({ floor }) => {
   personIconEntitiesRef.cufrrent = personIconEntities
   const floorRef = useRef(floor)
   floorRef.current = floor
-
   // 所有房间的使用情况
   const [roomUseStatus, setRoomUseStatus] = useState([])
   const { run: fetchAllUseRoomInfo } = useRequest()
@@ -54,7 +58,9 @@ const useRoomStatus = ({ floor }) => {
   const { subscribe, unsubscribe } = useZoom({
     key: 'roomPersonIcon',
     onChange: function (p) {
-      const floorNumber = Build.utils.getFloorNumberFromFloorName(floorRef.current.floorId)
+      const floorNumber = Build.utils.getFloorNumberFromFloorName(
+        floorRef.current.floorId
+      )
       console.log(p, floorNumber)
       // 根据最大高度做显示,根据可显示高度做比例缩放
       if (personIconEntitiesRef.current.length > 0) {
@@ -64,7 +70,7 @@ const useRoomStatus = ({ floor }) => {
 
   // 获取所有房间的使用情况
   const fetchRoomUseStatus = () => {
-    fetchAllUseRoomInfo(allRoomUseStatusConfig()).then(res => {
+    fetchAllUseRoomInfo(allRoomUseStatusConfig()).then((res) => {
       if (Number(res.code) === 0) {
         setRoomUseStatus(res.data)
 
@@ -72,7 +78,6 @@ const useRoomStatus = ({ floor }) => {
       }
     })
   }
-
 
   useEffect(() => {
     if (floor) {
@@ -84,22 +89,25 @@ const useRoomStatus = ({ floor }) => {
     }
   }, [floor])
 
-
   useEffect(() => {
     if (roomUseStatus.length > 0 && floor) {
-
       const mapViewer = getMapViewer()
 
       // 先过滤出使用中的房间
-      const usedRoomInfo = roomUseStatus.filter(room => Number(room.roomStatus) === 1)
-
+      const usedRoomInfo = roomUseStatus.filter(
+        (room) => Number(room.roomStatus) === 1
+      )
 
       const roomUsedInfo = []
       // 然后是当前楼层的房间
-      usedRoomInfo.forEach(room => {
-        const roomInfo = roomConfig.find(roomInfo => roomInfo.roomIndexCode === room.roomIndexCode)
+      usedRoomInfo.forEach((room) => {
+        const roomInfo = roomConfig.find(
+          (roomInfo) => roomInfo.roomIndexCode === room.roomIndexCode
+        )
         if (roomInfo) {
-          const currentFloorName = Build.utils.getFloorNameFromFloorId(roomInfo.floor_id)
+          const currentFloorName = Build.utils.getFloorNameFromFloorId(
+            roomInfo.floor_id
+          )
           if (floor.floorId === currentFloorName) {
             roomUsedInfo.push(roomInfo)
           }
@@ -112,16 +120,18 @@ const useRoomStatus = ({ floor }) => {
       const roomPersonIconConfig = []
       for (let roomConfig of roomUsedInfo) {
         if (roomConfig.location !== undefined) {
-          roomPersonIconConfig.push(mapViewer.drawer.config.imageLabel({
-            gid: "PERSON_" + roomConfig.roomIndexCode,
-            attr: {
-              roomIndexCode: roomConfig.roomIndexCode
-            },
-            screen: true,
-            scale: 0.5,
-            iconStyle: 'person-men3.png',
-            location: roomConfig.location
-          }))
+          roomPersonIconConfig.push(
+            mapViewer.drawer.config.imageLabel({
+              gid: 'PERSON_' + roomConfig.roomIndexCode,
+              attr: {
+                roomIndexCode: roomConfig.roomIndexCode
+              },
+              screen: true,
+              scale: 0.5,
+              iconStyle: 'person-men3.png',
+              location: roomConfig.location
+            })
+          )
         }
       }
 

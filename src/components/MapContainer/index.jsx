@@ -37,7 +37,7 @@ function MapContainer({
   useEffect(() => {
     if (!ready && !fetchConfigRef.current) {
       fetchConfigRef.current = true
-      fetchConfig().then(config => {
+      fetchConfig().then((config) => {
         configFile = config
         new window.mapv3d.MapViewer({
           // id: 'mapvision3d',
@@ -57,7 +57,7 @@ function MapContainer({
               window.$map = mapViewer
             }
             onSuccess(mapViewer)
-          },
+          }
         })
       })
     }
@@ -68,9 +68,7 @@ function MapContainer({
       <div className="map-container">
         <div id={mapContainerId} className="map-instance" />
       </div>
-      {
-        ready && children
-      }
+      {ready && children}
     </>
   )
 }

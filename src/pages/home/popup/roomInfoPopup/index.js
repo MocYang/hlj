@@ -13,7 +13,8 @@ import {
   selectRoomInfo,
   selectRoomPopupVisible,
   selectSuspectInfo,
-  setRoomPopUpVisible, setSuspectInfo
+  setRoomPopUpVisible,
+  setSuspectInfo
 } from './slice'
 import './index.scss'
 import useRequest from '../../../../hooks/useRequest'
@@ -39,21 +40,30 @@ const SuspectInfoPopup = () => {
     if (isRoomPopupVisible && roomInfo) {
       const roomIndexCode = roomInfo.roomIndexCode
       // 请求人员、环境信息
-      fetchSuspectInfo(suspectInfoConfig({
-        roomIndexCode
-      })).then(res => {
-        if (res.code === 0) {
-          setSuspectInfo(res.data)
-        }
-      }).catch(e => console.error(e))
+      fetchSuspectInfo(
+        suspectInfoConfig({
+          roomIndexCode
+        })
+      )
+        .then((res) => {
+          if (res.code === 0) {
+            console.log(res)
+            setSuspectInfo(res.data)
+          }
+        })
+        .catch((e) => console.error(e))
 
-      fetchEnvironmentInfo(environmentInfoConfig({
-        roomIndexCode
-      })).then(res => {
-        if (res.code === 0) {
-          setSuspectInfo(res.data)
-        }
-      }).catch(e => console.error(e))
+      fetchEnvironmentInfo(
+        environmentInfoConfig({
+          roomIndexCode
+        })
+      )
+        .then((res) => {
+          if (res.code === 0) {
+            setSuspectInfo(res.data)
+          }
+        })
+        .catch((e) => console.error(e))
     }
   }, [isRoomPopupVisible, roomInfo])
 
@@ -69,7 +79,7 @@ const SuspectInfoPopup = () => {
           <div className="popup__title-border">
             <a href="#personnel">被留置人员</a>
             <a href="#room">房间环境</a>
-          </div >
+          </div>
           <ul className="popup__personnel-info">
             <li>
               <p>
@@ -126,35 +136,30 @@ const SuspectInfoPopup = () => {
               <p>询问一室</p>
             </li>
             <li>
-      
               <p>2021-08-21</p>
               <p>2021-08-21 09:30:45</p>
               <p>2021-08-21 12:30:45</p>
               <p>询问一室</p>
             </li>
             <li>
-        
               <p>2021-08-21</p>
               <p>2021-08-21 09:30:45</p>
               <p>2021-08-21 12:30:45</p>
               <p>询问一室</p>
             </li>
             <li>
-       
               <p>2021-08-21</p>
               <p>2021-08-21 09:30:45</p>
               <p>2021-08-21 12:30:45</p>
               <p>询问一室</p>
             </li>
             <li>
-       
               <p>2021-08-21</p>
               <p>2021-08-21 09:30:45</p>
               <p>2021-08-21 12:30:45</p>
               <p>询问一室</p>
             </li>
             <li>
-        
               <p>2021-08-21</p>
               <p>2021-08-21 09:30:45</p>
               <p>2021-08-21 12:30:45</p>
@@ -167,11 +172,11 @@ const SuspectInfoPopup = () => {
             <a href="#personnel">被留置人员</a>
             <a href="#room">房间环境</a>
           </div>
-          <div className='popup__room-title'>
+          <div className="popup__room-title">
             <p>房间环境信息</p>
           </div>
-          <div className='popup__room-main'>
-            <div className='popup__room-main-bottom'>
+          <div className="popup__room-main">
+            <div className="popup__room-main-bottom">
               <p></p>
               <p>温度</p>
               <p>
@@ -179,7 +184,7 @@ const SuspectInfoPopup = () => {
                 <span>℃</span>
               </p>
             </div>
-            <div className='popup__room-main-bottom'>
+            <div className="popup__room-main-bottom">
               <p></p>
               <p>湿度</p>
               <p>
@@ -187,7 +192,7 @@ const SuspectInfoPopup = () => {
                 <span>%</span>
               </p>
             </div>
-            <div className='popup__room-main-bottom'>
+            <div className="popup__room-main-bottom">
               <p></p>
               <p>空气质量</p>
               <p>
@@ -195,7 +200,7 @@ const SuspectInfoPopup = () => {
                 <span>pm</span>
               </p>
             </div>
-            <div className='popup__room-main-bottom'>
+            <div className="popup__room-main-bottom">
               <p></p>
               <p>光照度</p>
               <p>

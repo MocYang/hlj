@@ -18,19 +18,16 @@ import MachineInfoPopup from './popup/machineInfoPopup'
 import useCamera from '../../hooks/useCamera'
 import useRoomStatus, { useRoomIconClick } from '../../hooks/useRoomStatus'
 import useZoom from '../../hooks/useZoom'
-function Index() {
 
+function Index() {
   // config.json配置文件
   const [configFile, setConfigFile] = useState({})
 
   const [activeFloor, setActiveFloor] = useState(null)
 
-  const {init} = useZoom()
+  const { init } = useZoom()
 
-  const {
-    flyToHomePosition,
-    setHome
-  } = useHomePosition()
+  const { flyToHomePosition, setHome } = useHomePosition()
 
   // 监控信息
   const { fetchCamera } = useCamera({
@@ -42,7 +39,7 @@ function Index() {
     floor: activeFloor
   })
 
-  const {addPersonIconClick} = useRoomIconClick()
+  const { addPersonIconClick } = useRoomIconClick()
 
   // 地图初始化成功后的回调
   const handleSuccess = useCallback((mapViewer) => {
@@ -73,7 +70,6 @@ function Index() {
     init()
   }, [])
 
-
   const handleSetActiveFloor = (floor) => {
     if (activeFloor !== floor) {
       setActiveFloor(floor)
@@ -92,9 +88,7 @@ function Index() {
 
   return (
     <>
-      <MapContainer
-        onSuccess={handleSuccess}
-      >
+      <MapContainer onSuccess={handleSuccess}>
         {/*背景边框*/}
         <Background />
 
@@ -108,13 +102,15 @@ function Index() {
         <Admin />
 
         {/*视频预览弹窗*/}
-        <VideoPreviewPopup platformIp={configFile && configFile.hikVideoPlatformIp || ''} />
+        <VideoPreviewPopup
+          platformIp={(configFile && configFile.hikVideoPlatformIp) || ''}
+        />
 
         {/*房间内-人员，环境信息弹窗*/}
-        <RoomInfoPopup/>
+        <RoomInfoPopup />
 
         {/*机房信息弹窗*/}
-        <MachineInfoPopup/>
+        <MachineInfoPopup />
       </MapContainer>
     </>
   )
