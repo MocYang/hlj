@@ -5,7 +5,7 @@
  * @File: index.js
  * @Description 留置人员详情弹窗
  */
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import PopupContainer from '../../../../components/popup/PopupContainer'
 import {
@@ -27,10 +27,10 @@ const SuspectInfoPopup = () => {
 
   // 留置人员详情
   const suspectInfo = useSelector(selectSuspectInfo)
-
+  const room = useRef(null)
   // 房间环境信息
   const environmentInfo = useSelector(selectEnvironmentInfo)
-
+  const evnt = useRef(null)
   const { run: fetchSuspectInfo } = useRequest()
 
   const { run: fetchEnvironmentInfo } = useRequest()
@@ -48,6 +48,7 @@ const SuspectInfoPopup = () => {
           if (Number(res.code) === 0) {
             setSuspectInfo(res.data)
             console.log('11111', res.data)
+            room.current = res.data
           }
         })
         .catch((e) => console.error(e))
@@ -58,6 +59,8 @@ const SuspectInfoPopup = () => {
       )
         .then((res) => {
           if (Number(res.code) === 0) {
+            console.log('2222', res.data)
+            evnt.current = res.data
             setSuspectInfo(res.data)
           }
         })
@@ -70,8 +73,11 @@ const SuspectInfoPopup = () => {
       className="popup__suspect-info"
       show={isRoomPopupVisible}
       action={setRoomPopUpVisible}
+      s
     >
-      <div className="popup__title">房间名称</div>
+      <div className="popup__title">
+        {(room.current && room.current.roomName) || ''}
+      </div>
       <div className="popup__main">
         <div className="popup__personnel" id="personnel">
           <div className="popup__title-border">
@@ -83,38 +89,39 @@ const SuspectInfoPopup = () => {
               <p>
                 <img src={require('./images/icon_people.png')} />
               </p>
-              <p>4758216</p>
-              <p>63岁</p>
+              <p>{(room.current && room.current.suspectName) || ''}</p>
+              <p>{(room.current && room.current.age) || ''}岁</p>
             </li>
             <li>
               <span>出生日期</span>
-              <p>1959-02-07</p>
+              <p>{(room.current && room.current.birthDay) || ''}</p>
               <span>民族</span>
-              <p>汉</p>
+              <p>{(room.current && room.current.nation) || ''}</p>
               <span>性别</span>
-              <p>男</p>
+              <p>{(room.current && room.current.gender) || ''}</p>
             </li>
             <li>
               <span>审讯调查组名称</span>
-              <p>黑龙江省监察纪委调查三组</p>
+              <p>{(room.current && room.current.groupName) || ''}</p>
+              <span>留置开始时间</span>
+              <p>{(room.current && room.current.beginTime) || ''}</p>
             </li>
             <li>
               <span>组长</span>
-              <p>张书文</p>
+              <p>{(room.current && room.current.headman) || ''}</p>
               <span>安全员</span>
-              <p>陈济东</p>
-            </li>
-            <li>
-              <span>留置开始时间</span>
-              <p>1979-02-07</p>
-              <span>健康信息</span>
-              <p>健康</p>
+              <p>{(room.current && room.current.safeties) || ''}</p>
             </li>
             <li>
               <span>既往病史</span>
-              <p>健康</p>
+              <p>
+                {(room.current && room.current.healthInfo.medicineHistory) ||
+                  ''}
+              </p>
               <span>饮食禁忌</span>
-              <p>忌荤腥</p>
+              <p>
+                {(room.current && room.current.healthInfo.foodTaboos) || ''}
+              </p>
             </li>
           </ul>
           <div className="popup__title2">
@@ -127,42 +134,26 @@ const SuspectInfoPopup = () => {
             <p>讯问室名称</p>
           </div>
           <ul className="popup__personnel-inquire">
-            <li>
+            {(room.current &&
+              room.current.interrogateInfo &&
+              room.current.interrogateInfo.map((item, index) => {
+                return (
+                  <li key={index}>
+                    <p>{item.interrogateDate}</p>
+                    <p>{item.interrogateBeginTime}</p>
+                    <p>{item.interrogateEndTime}</p>
+                    <p>{item.interrogateRoomName}</p>
+                  </li>
+                )
+              })) ||
+              ''}
+
+            {/* <li>
               <p>2021-08-21</p>
               <p>2021-08-21 09:30:45</p>
               <p>2021-08-21 12:30:45</p>
               <p>询问一室</p>
-            </li>
-            <li>
-              <p>2021-08-21</p>
-              <p>2021-08-21 09:30:45</p>
-              <p>2021-08-21 12:30:45</p>
-              <p>询问一室</p>
-            </li>
-            <li>
-              <p>2021-08-21</p>
-              <p>2021-08-21 09:30:45</p>
-              <p>2021-08-21 12:30:45</p>
-              <p>询问一室</p>
-            </li>
-            <li>
-              <p>2021-08-21</p>
-              <p>2021-08-21 09:30:45</p>
-              <p>2021-08-21 12:30:45</p>
-              <p>询问一室</p>
-            </li>
-            <li>
-              <p>2021-08-21</p>
-              <p>2021-08-21 09:30:45</p>
-              <p>2021-08-21 12:30:45</p>
-              <p>询问一室</p>
-            </li>
-            <li>
-              <p>2021-08-21</p>
-              <p>2021-08-21 09:30:45</p>
-              <p>2021-08-21 12:30:45</p>
-              <p>询问一室</p>
-            </li>
+            </li> */}
           </ul>
         </div>
         <div className="popup__room" id="room">
@@ -178,7 +169,7 @@ const SuspectInfoPopup = () => {
               <p></p>
               <p>温度</p>
               <p>
-                <span>32.8</span>
+                <span>{(room.current && evnt.current.temperature) || ''}</span>
                 <span>℃</span>
               </p>
             </div>
@@ -186,7 +177,7 @@ const SuspectInfoPopup = () => {
               <p></p>
               <p>湿度</p>
               <p>
-                <span>45.2</span>
+                <span>{(room.current && evnt.current.humidity) || ''}</span>
                 <span>%</span>
               </p>
             </div>
@@ -194,7 +185,7 @@ const SuspectInfoPopup = () => {
               <p></p>
               <p>空气质量</p>
               <p>
-                <span>3.28</span>
+                <span>{(room.current && evnt.current.cleanliness) || ''}</span>
                 <span>pm</span>
               </p>
             </div>
@@ -202,7 +193,7 @@ const SuspectInfoPopup = () => {
               <p></p>
               <p>光照度</p>
               <p>
-                <span>100</span>
+                <span>{(room.current && evnt.current.brightness) || ''}</span>
                 <span>Lx</span>
               </p>
             </div>
