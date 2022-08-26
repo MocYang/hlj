@@ -61,13 +61,15 @@ function Admin({ mapReady = false }) {
       const mapViewer = getMapViewer()
 
       if (materialEntityRef.current) {
-        mapViewer.drawer.remove.one(materialEntityRef.current)
+        // mapViewer.drawer.remove.one(materialEntityRef.current)
       }
+
       mapViewer.drawer.create.drawPolygon({
         drawPoints: true,
         pointsVisible: true,
-        color: 'red',
-        opacity: 0.1,
+        // style: 'red',
+        // color: '#ff0000',
+        // opacity: 0.1,
         style: material,
         onFinish: function (entity) {
           materialEntityRef.current = entity
@@ -276,6 +278,15 @@ function Admin({ mapReady = false }) {
 
       <div className="panel--item">
         <select value={material} onChange={handleMaterialChange}>
+          <option value="opacity">opacity</option>
+          <option value="opacity_0">opacity_0</option>
+          <option value="Opacity_cheng">Opacity_cheng</option>
+          <option value="Opacity_hong">Opacity_hong</option>
+          <option value="Opacity_huang">Opacity_huang</option>
+          <option value="Opacity_lan">Opacity_lan</option>
+          <option value="Opacity_lv">Opacity_lv</option>
+          <option value="Opacity_qing">Opacity_qing</option>
+
           <option value="SplineOrangeHighlight">红色高亮</option>
           <option value="SplineOrangeHighlight1">红色高亮闪烁</option>
           <option value="SWJZ_line">蓝色高亮</option>
@@ -295,6 +306,7 @@ function Admin({ mapReady = false }) {
           <option value="FJ_line">金黄色高亮</option>
           <option value="GD">绿色高亮</option>
           <option value="CRK_line">浅绿色高亮</option>
+
         </select>
       </div>
       <div className="panel--item" onClick={handleDrawLine}>绘制线</div>
