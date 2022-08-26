@@ -28,7 +28,6 @@ const SuspectInfoPopup = () => {
   // 留置人员详情
   const suspectInfo = useSelector(selectSuspectInfo)
 
-  
   // 房间环境信息
   const environmentInfo = useSelector(selectEnvironmentInfo)
 
@@ -47,12 +46,11 @@ const SuspectInfoPopup = () => {
       )
         .then((res) => {
           if (Number(res.code) === 0) {
-            console.log(res)
             setSuspectInfo(res.data)
+            console.log('11111', res.data)
           }
         })
         .catch((e) => console.error(e))
-
       fetchEnvironmentInfo(
         environmentInfoConfig({
           roomIndexCode
