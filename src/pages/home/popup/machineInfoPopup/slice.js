@@ -11,7 +11,7 @@ export const machineSlice = createSlice({
   name: 'machine',
   initialState: {
     // 机房信息弹窗是否显示
-    machinePopUpVisible: true,
+    machinePopUpVisible: false,
 
     // 接口中返回的机房信息
     machineInfo: {}
