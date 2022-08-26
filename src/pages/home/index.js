@@ -14,7 +14,7 @@ import Build from '../../utils/build'
 import VideoPreviewPopup from './popup/VideoPreviewPopup'
 import RoomInfoPopup from './popup/roomInfoPopup'
 import MachineInfoPopup from './popup/machineInfoPopup'
-
+import useMachineInfo from '../../hooks/useMachineInfo'
 import useCamera from '../../hooks/useCamera'
 import useRoomStatus, { useRoomIconClick } from '../../hooks/useRoomStatus'
 import useZoom from '../../hooks/useZoom'
@@ -39,6 +39,10 @@ function Index() {
 
   // 房间使用信息
   useRoomStatus({
+    floor: activeFloor
+  })
+
+  useMachineInfo({
     floor: activeFloor
   })
 

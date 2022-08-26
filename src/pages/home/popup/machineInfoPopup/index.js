@@ -7,28 +7,40 @@
  */
 
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import PopupContainer from '../../../../components/popup/PopupContainer'
 import {
   selectMachineInfo,
-  selectMachinePopupVisible,
+  selectMachinePopupVisible, setMachineInfo,
   setMachinePopUpVisible
 } from './slice'
 import './index.scss'
 
+import useRequest from '../../../../hooks/useRequest'
+import { machineInfoConfig } from './api'
+
 const MachinePopup = () => {
+  const dispatch = useDispatch()
   const isMachinePopupVisible = useSelector(selectMachinePopupVisible)
 
   const machineInfo = useSelector(selectMachineInfo)
+
+  const {
+    run: fetchMachineInfo
+  } = useRequest()
 
   const handleCloseMachinePopup = () => {
 
   }
 
-
   useEffect(() => {
     if (isMachinePopupVisible) {
-      // TODO: 根据房间编码去获取机房相关信息
+      // 获取机房相关信息
+      fetchMachineInfo(machineInfoConfig()).then(res => {
+        if (Number(res) === 0) {
+          dispatch(setMachineInfo(res.data))
+        }
+      })
     }
   }, [isMachinePopupVisible])
 

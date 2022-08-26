@@ -33,6 +33,8 @@ export const urlConfig = {
     suspectInfo: `/dwc-web/service/rs/api/v2/suspect/searchByRoomCode`,
 
     // 2.7.1根据房间编号获取环境状态信息
-    environmentInfo: `/dwc-web/service/rs/api/v2/environment/searchByRoomCode`
+    environmentInfo: `/dwc-web/service/rs/api/v2/environment/searchByRoomCode`,
+
+    machineInfo: `dwc-web/service/rs/api/v2/generatorRoom/getServerInfo`
   }
 }
