@@ -185,8 +185,10 @@ function Admin({ mapReady = false }) {
       // mapViewer.drawer.remove.one(niagaraEntity)
     }
     mapViewer.event.setMousePositionCallback(position => {
-      mapViewer.drawer.overLayerCreateObject({
+      // mapViewer.drawer.overLayerCreateObject({
+      mapViewer.drawer.create.niagara({
         type: 'niagara',
+        scale: 10,
         // filename: 'P_Marker_1',
         filename: niagara,
         location: position
@@ -352,6 +354,8 @@ function Admin({ mapReady = false }) {
 
       <div className="panel--item">
         <select name="niagara" id="niagara" value={niagara} onChange={e => setNiagara(e.target.value)}>
+          <option value="TB">TB</option>
+          <option value="TB1">TB1</option>
           <option value="P_Marker">P_Maker</option>
           <option value="P_Marker_1">P_Maker_1</option>
           <option value="P_Marker_2">P_Maker_2</option>

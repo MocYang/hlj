@@ -7,6 +7,7 @@ import previewUrlHandle from './previewUrlHandler'
 import allRoomUseHandler from './allRoomUseHandler'
 import suspectInfoHandler from './suspectInfoHandler'
 import environmentInfoHandler from './environmentInfoHandler'
+import machineInfoHandler from './machineInfoHandler'
 
 function makeServer(environment = 'development') {
   createServer({
@@ -54,6 +55,8 @@ function makeServer(environment = 'development') {
 
       // 根据房间编码，获取房间环境信息
       this.post(urls.dwcWeb.environmentInfo, environmentInfoHandler)
+
+      this.post(urls.dwcWeb.machineInfo, machineInfoHandler)
     }
   })
 }

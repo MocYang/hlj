@@ -5,4 +5,12 @@
  * @File: api.js
  * @Description
  */
- 
+import { urls } from '../../../../api'
+
+export function machineInfoConfig() {
+  return {
+    url: urls.dwcWeb.machineInfo,
+    method: "POST",
+    data: null
+  }
+}
