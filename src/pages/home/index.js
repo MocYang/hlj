@@ -102,16 +102,16 @@ function Index() {
         {/*开发环境下，会显示的测试面板*/}
         <Admin />
 
-        {/*视频预览弹窗*/}
-        <VideoPreviewPopup
-          platformIp={(configFile && configFile.hikVideoPlatformIp) || ''}
-        />
-
         {/*房间内-人员，环境信息弹窗*/}
         <RoomInfoPopup />
 
         {/*机房信息弹窗*/}
         <MachineInfoPopup />
+
+        {/*视频预览弹窗*/}
+        <VideoPreviewPopup
+          platformIp={(configFile && configFile.hikVideoPlatformIp) || ''}
+        />
       </MapContainer>
     </>
   )
