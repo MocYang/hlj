@@ -26,16 +26,16 @@ function Admin({ mapReady = false }) {
     setMaterial(m)
   }
 
-  useEffect(() => {
-    const mapViewer = getMapViewer()
-    if (mapViewer) {
-      if (mapViewer.event) {
-        mapViewer.event.onDrag(res => {
-          console.log('onDrag trigger====')
-        })
-      }
-    }
-  }, [])
+  // useEffect(() => {
+  //   const mapViewer = getMapViewer()
+  //   if (mapViewer) {
+  //     if (mapViewer.event) {
+  //       mapViewer.event.onDrag(res => {
+  //         console.log('onDrag trigger====')
+  //       })
+  //     }
+  //   }
+  // }, [])
 
 
   const handleDrawLine = () => {
@@ -106,10 +106,10 @@ function Admin({ mapReady = false }) {
     })
   }
 
-  const handleGetMousePosition = ()=>{
+  const handleGetMousePosition = () => {
     const mapViewer = getMapViewer()
 
-    mapViewer.event.setMousePositionCallback(p =>{
+    mapViewer.event.setMousePositionCallback(p => {
       console.log(JSON.stringify(p))
     })
   }
@@ -136,6 +136,7 @@ function Admin({ mapReady = false }) {
     })
   }
 
+  const modelEntityRef = useRef(null)
   const handleAddModel = () => {
     const mapViewer = getMapViewer()
     mapViewer.event.setMousePositionCallback(position => {
@@ -143,7 +144,22 @@ function Admin({ mapReady = false }) {
         filename: 'qiangji',
         scale: 5,
         location: position
-      }, true)
+      }, true).then(res => {
+        modelEntityRef.current = res
+      })
+    })
+  }
+
+  const handleUpdateModelPosition = () => {
+    if (!modelEntityRef.current) {
+      return
+    }
+    const mapViewer = getMapViewer()
+    mapViewer.event.setMousePositionCallback(p => {
+      modelEntityRef.current.location = p
+      setTimeout(() => {
+        mapViewer.drawer.updateObjects([modelEntityRef.current])
+      }, 100)
     })
   }
 
@@ -265,6 +281,18 @@ function Admin({ mapReady = false }) {
     })
   }
 
+  const handleFloorClick = () => {
+    const mapViewer = getMapViewer()
+    mapViewer.event.onClick("floor_click", function (e) {
+      console.log(e, 1111111111)
+    }, {
+      compare: (gid) => {
+        return Build.utils.isBuildingWK(gid)
+      }
+    })
+  }
+
+
   const getFloorRoomVisible = () => {
 
   }
@@ -318,6 +346,7 @@ function Admin({ mapReady = false }) {
       <div className="panel--item" onClick={handleGetMousePosition}>获取鼠标点击的位置</div>
       <div className="panel--item" onClick={handleAddImage}>添加图片</div>
       <div className="panel--item" onClick={handleAddModel}>添加模型</div>
+      <div className="panel--item" onClick={handleUpdateModelPosition}>更新位置</div>
       <div className="panel--item" onClick={handleAddPOI}>添加POI</div>
       <div className="panel--item" onClick={handleAddNiagara}>添加特殊粒子效果</div>
 
@@ -359,6 +388,7 @@ function Admin({ mapReady = false }) {
       <div className="panel--item" onClick={getFloorRoomNames}>获取房间名称</div>
       <div className="panel--item" onClick={getFloorRoomVisible}>获取房间是否显示</div>
       <div className="panel--item" onClick={getFloorRoomNames}>设置房间的可见性</div>
+      <div className="panel--item" onClick={handleFloorClick}>楼层单击</div>
 
 
     </div>

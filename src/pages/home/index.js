@@ -50,7 +50,7 @@ function Index() {
 
     initUrlConfig(config)
 
-    mapViewer.event.debugger = true
+    mapViewer.event.debug = true
 
     // 默认定位到指定视角
     flyToHomePosition(() => {
