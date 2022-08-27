@@ -47,7 +47,7 @@ const SuspectInfoPopup = () => {
         .then((res) => {
           if (Number(res.code) === 0) {
             setSuspectInfo(res.data)
-            console.log('11111', res.data)
+            // console.log('11111', res.data)
             room.current = res.data
           }
         })

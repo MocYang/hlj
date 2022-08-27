@@ -124,11 +124,13 @@
 
     p {
             width: 20%;
+            height: px2vh(24);
             font-size: 0.7vw;
             text-align: center;
             font-weight: 400;
             color: #ffffff;
             line-height: 19px;
+            overflow: hidden;
         }
     }
     

@@ -6,12 +6,13 @@
  * @Description 机房信息弹窗
  */
 
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import PopupContainer from '../../../../components/popup/PopupContainer'
 import {
   selectMachineInfo,
-  selectMachinePopupVisible, setMachineInfo,
+  selectMachinePopupVisible,
+  setMachineInfo,
   setMachinePopUpVisible
 } from './slice'
 import './index.scss'
@@ -24,23 +25,23 @@ const MachinePopup = () => {
   const isMachinePopupVisible = useSelector(selectMachinePopupVisible)
 
   const machineInfo = useSelector(selectMachineInfo)
+  const room = useRef(null)
+  const { run: fetchMachineInfo } = useRequest()
 
-  const {
-    run: fetchMachineInfo
-  } = useRequest()
-
-  const handleCloseMachinePopup = () => {
-
-  }
+  const handleCloseMachinePopup = () => {}
 
   useEffect(() => {
     if (isMachinePopupVisible) {
       // 获取机房相关信息
-      fetchMachineInfo(machineInfoConfig()).then(res => {
-        if (Number(res) === 0) {
-          dispatch(setMachineInfo(res.data))
-        }
-      })
+      fetchMachineInfo(machineInfoConfig())
+        .then((res) => {
+          if (Number(res) === 0) {
+            dispatch(setMachineInfo(res.data))
+          }
+          room.current = res.data
+          console.log('1112111', room.current)
+        })
+        .catch((e) => console.error(e))
     }
   }, [isMachinePopupVisible])
 
@@ -54,19 +55,19 @@ const MachinePopup = () => {
       <div className="popup__machine-title">服务器信息名称</div>
       <div className="popup__machine-head">
         <div>
-          <p>3</p>
+          <p>{(room.current && room.current.machinesCount) || ''}</p>
           <p>服务器总数</p>
         </div>
         <div>
-          <p>99</p>
+          <p>{(room.current && room.current.healthScore) || ''}</p>
           <p>服务器健康指数</p>
         </div>
         <div>
-          <p>98%</p>
+          <p>{(room.current && room.current.serverRatio) || ''}%</p>
           <p>服务器在线率</p>
         </div>
         <div>
-          <p>114</p>
+          <p>{(room.current && room.current.compentsCount) || ''}</p>
           <p>组件运行数量</p>
         </div>
       </div>
@@ -80,7 +81,21 @@ const MachinePopup = () => {
       </div>
       <div className="popup__machine-bck2"></div>
       <ul className="popup__machine-info">
-        <li>
+        {(room.current &&
+          room.current.machineInfo &&
+          room.current.machineInfo.map((item, index) => {
+            return (
+              <li key={index}>
+                <p>{item.machineName}</p>
+                <p>{item.memoryTotal}</p>
+                <p>{item.memoryUsed}</p>
+                <p>{item.memoryUseRetio}</p>
+                <p>{item.cpuUsed}</p>
+              </li>
+            )
+          })) ||
+          ''}
+        {/* <li>
           <p>LD00012号服务器</p>
           <p>48TB</p>
           <p>98%</p>
@@ -114,7 +129,7 @@ const MachinePopup = () => {
           <p>98%</p>
           <p>70%</p>
           <p>70%</p>
-        </li>
+        </li> */}
       </ul>
     </PopupContainer>
   )
