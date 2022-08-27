@@ -133,7 +133,10 @@ const useRoomStatus = ({ floor }) => {
               screen: true,
               scale: 0.5,
               iconStyle: 'person-men3.png',
-              location: roomConfig.location
+              location: {
+                ...roomConfig.location,
+                z: roomConfig.location.z + 400
+              }
             })
           )
         }

@@ -127,8 +127,8 @@ function Admin({ mapReady = false }) {
       //   console.log(res)
       // })
       mapViewer.drawer.create.image({
-        // style: 'qiangji_icon',
-        style: 'P_Marker',
+        style: 'qiangji_icon',
+        // style: 'P_Marker',
         location: position
       }, true).then(res => {
         console.log(JSON.stringify(res))
@@ -169,7 +169,7 @@ function Admin({ mapReady = false }) {
       mapViewer.drawer.create.imageLabel({
         screen: true,
         // iconStyle: 'men-10.png',
-        iconStyle: 'P_Marker',
+        iconStyle: 'qiangji.gif',
         location: position
       }, true)
     })
@@ -187,8 +187,17 @@ function Admin({ mapReady = false }) {
     mapViewer.event.setMousePositionCallback(position => {
       // mapViewer.drawer.overLayerCreateObject({
       mapViewer.drawer.create.niagara({
+        attr: {
+          id: 12345,
+          name: '测试',
+          roomIndexCode: +(new Date()),
+          device_code: null,
+          device_name: undefined,
+          floor_id: '',
+          build_id: 0
+        },
         type: 'niagara',
-        scale: 10,
+        scale: 1,
         // filename: 'P_Marker_1',
         filename: niagara,
         location: position
