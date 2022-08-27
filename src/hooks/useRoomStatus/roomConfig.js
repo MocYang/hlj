@@ -13,7 +13,9 @@ export default [
     "roomRemark": "",
     "roomStatus": "0",
     "roomType": "roomType.2001",
-    "roomTypeName": "留置室"
+    "roomTypeName": "留置室",
+    "build_id": "V001_JZ0001",
+    "floor_id": "V001_JZ0001#F001"
   },
   {
     "roomIndexCode": "fcf64eede70a4ab3a35963fdade7bc3e",
@@ -21,7 +23,9 @@ export default [
     "roomRemark": "",
     "roomStatus": "0",
     "roomType": "roomType.2001",
-    "roomTypeName": "留置室"
+    "roomTypeName": "留置室",
+    "build_id": "V001_JZ0001",
+    "floor_id": "V001_JZ0001#F001"
   },
   {
     "roomIndexCode": "bc9ca22bf42c4ccbb784e11a3d09e90a",
@@ -29,7 +33,9 @@ export default [
     "roomRemark": "",
     "roomStatus": "0",
     "roomType": "roomType.2001",
-    "roomTypeName": "留置室"
+    "roomTypeName": "留置室",
+    "build_id": "V001_JZ0001",
+    "floor_id": "V001_JZ0001#F001"
   },
   {
     "roomIndexCode": "063115c3d5bd4639b2e7f9e145d0a794",
@@ -37,7 +43,9 @@ export default [
     "roomRemark": "",
     "roomStatus": "0",
     "roomType": "roomType.2001",
-    "roomTypeName": "留置室"
+    "roomTypeName": "留置室",
+    "build_id": "V001_JZ0001",
+    "floor_id": "V001_JZ0001#F001"
   },
   {
     "roomIndexCode": "9668b98a8de545ad8f02bbcd82bd1553",
@@ -46,6 +54,7 @@ export default [
     "roomStatus": "0",
     "roomType": "roomType.2001",
     "roomTypeName": "留置室"
+
   },
   {
     "roomIndexCode": "535717c1704446aca18ebc6aec087adf",
@@ -292,13 +301,14 @@ export default [
     },
     // location 表示人物图标的位置中心点
     "location": {
-      "x": -44758.32421875,
-      "y": -22094.49609375,
-      "z": 409.2530517578125,
+      "x": -50466.53515625,
+      "y": -18034.984375,
+      "z": 9.253173828125,
       "pitch": 0,
       "yaw": 0,
-      "roll": 0
-      }
+      "roll": 0,
+      "distance": 0
+    }
   },
   {
     "roomIndexCode": "fd8cc1507fe2430b9eef202a631ec568",
@@ -306,7 +316,17 @@ export default [
     "roomRemark": "",
     "roomStatus": "0",
     "roomType": "roomType.2001",
-    "roomTypeName": "留置室"
+    "roomTypeName": "留置室",
+    "build_id": "V001_JZ0001",
+    "floor_id": "V001_JZ0001#F001",
+    "location": {
+      "x": -50465.9765625,
+      "y": -16991.501953125,
+      "z": 9.2529296875,
+      "pitch": 0,
+      "yaw": 0,
+      "roll": 0,
+    }
   },
   {
     "roomIndexCode": "3895a9cd45b54a259b2dfb5b1d11a788",
@@ -314,7 +334,17 @@ export default [
     "roomRemark": "",
     "roomStatus": "0",
     "roomType": "roomType.2001",
-    "roomTypeName": "留置室"
+    "roomTypeName": "留置室",
+    "build_id": "V001_JZ0001",
+    "floor_id": "V001_JZ0001#F001",
+    "location": {
+      "x": -50112.6328125,
+      "y": -16992.830078125,
+      "z": 9.2529296875,
+      "pitch": 0,
+      "yaw": 0,
+      "roll": 0,
+    }
   },
   {
     "roomIndexCode": "c76e9fa09aa34ff1950e76a176b73f4b",
@@ -322,7 +352,17 @@ export default [
     "roomRemark": "",
     "roomStatus": "0",
     "roomType": "roomType.2001",
-    "roomTypeName": "留置室"
+    "roomTypeName": "留置室",
+    "build_id": "V001_JZ0001",
+    "floor_id": "V001_JZ0001#F001",
+    "location": {
+      "x": -49711.50390625,
+      "y": -16991.267578125,
+      "z": 9.253173828125,
+      "pitch": 0,
+      "yaw": 0,
+      "roll": 0
+    }
   },
   {
     "roomIndexCode": "c1e46acf804441e691c1ee1892cb5acc",
