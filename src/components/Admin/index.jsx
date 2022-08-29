@@ -26,16 +26,16 @@ function Admin({ mapReady = false }) {
     setMaterial(m)
   }
 
-  useEffect(() => {
-    const mapViewer = getMapViewer()
-    if (mapViewer) {
-      if (mapViewer.event) {
-        mapViewer.event.onDrag(res => {
-          console.log('onDrag trigger====')
-        })
-      }
-    }
-  }, [])
+  // useEffect(() => {
+  //   const mapViewer = getMapViewer()
+  //   if (mapViewer) {
+  //     if (mapViewer.event) {
+  //       mapViewer.event.onDrag(res => {
+  //         console.log('onDrag trigger====')
+  //       })
+  //     }
+  //   }
+  // }, [])
 
 
   const handleDrawLine = () => {
@@ -106,10 +106,10 @@ function Admin({ mapReady = false }) {
     })
   }
 
-  const handleGetMousePosition = ()=>{
+  const handleGetMousePosition = () => {
     const mapViewer = getMapViewer()
 
-    mapViewer.event.setMousePositionCallback(p =>{
+    mapViewer.event.setMousePositionCallback(p => {
       console.log(JSON.stringify(p))
     })
   }
@@ -127,8 +127,8 @@ function Admin({ mapReady = false }) {
       //   console.log(res)
       // })
       mapViewer.drawer.create.image({
-        // style: 'qiangji_icon',
-        style: 'P_Marker',
+        style: 'qiangji_icon',
+        // style: 'P_Marker',
         location: position
       }, true).then(res => {
         console.log(JSON.stringify(res))
@@ -136,6 +136,7 @@ function Admin({ mapReady = false }) {
     })
   }
 
+  const modelEntityRef = useRef(null)
   const handleAddModel = () => {
     const mapViewer = getMapViewer()
     mapViewer.event.setMousePositionCallback(position => {
@@ -143,7 +144,22 @@ function Admin({ mapReady = false }) {
         filename: 'qiangji',
         scale: 5,
         location: position
-      }, true)
+      }, true).then(res => {
+        modelEntityRef.current = res
+      })
+    })
+  }
+
+  const handleUpdateModelPosition = () => {
+    if (!modelEntityRef.current) {
+      return
+    }
+    const mapViewer = getMapViewer()
+    mapViewer.event.setMousePositionCallback(p => {
+      modelEntityRef.current.location = p
+      setTimeout(() => {
+        mapViewer.drawer.updateObjects([modelEntityRef.current])
+      }, 100)
     })
   }
 
@@ -153,7 +169,7 @@ function Admin({ mapReady = false }) {
       mapViewer.drawer.create.imageLabel({
         screen: true,
         // iconStyle: 'men-10.png',
-        iconStyle: 'P_Marker',
+        iconStyle: 'qiangji.gif',
         location: position
       }, true)
     })
@@ -169,8 +185,19 @@ function Admin({ mapReady = false }) {
       // mapViewer.drawer.remove.one(niagaraEntity)
     }
     mapViewer.event.setMousePositionCallback(position => {
-      mapViewer.drawer.overLayerCreateObject({
+      // mapViewer.drawer.overLayerCreateObject({
+      mapViewer.drawer.create.niagara({
+        attr: {
+          id: 12345,
+          name: '测试',
+          roomIndexCode: +(new Date()),
+          device_code: null,
+          device_name: undefined,
+          floor_id: '',
+          build_id: 0
+        },
         type: 'niagara',
+        scale: 1,
         // filename: 'P_Marker_1',
         filename: niagara,
         location: position
@@ -265,6 +292,18 @@ function Admin({ mapReady = false }) {
     })
   }
 
+  const handleFloorClick = () => {
+    const mapViewer = getMapViewer()
+    mapViewer.event.onClick("floor_click", function (e) {
+      console.log(e, 1111111111)
+    }, {
+      compare: (gid) => {
+        return Build.utils.isBuildingWK(gid)
+      }
+    })
+  }
+
+
   const getFloorRoomVisible = () => {
 
   }
@@ -318,11 +357,14 @@ function Admin({ mapReady = false }) {
       <div className="panel--item" onClick={handleGetMousePosition}>获取鼠标点击的位置</div>
       <div className="panel--item" onClick={handleAddImage}>添加图片</div>
       <div className="panel--item" onClick={handleAddModel}>添加模型</div>
+      <div className="panel--item" onClick={handleUpdateModelPosition}>更新位置</div>
       <div className="panel--item" onClick={handleAddPOI}>添加POI</div>
       <div className="panel--item" onClick={handleAddNiagara}>添加特殊粒子效果</div>
 
       <div className="panel--item">
         <select name="niagara" id="niagara" value={niagara} onChange={e => setNiagara(e.target.value)}>
+          <option value="TB">TB</option>
+          <option value="TB1">TB1</option>
           <option value="P_Marker">P_Maker</option>
           <option value="P_Marker_1">P_Maker_1</option>
           <option value="P_Marker_2">P_Maker_2</option>
@@ -359,6 +401,7 @@ function Admin({ mapReady = false }) {
       <div className="panel--item" onClick={getFloorRoomNames}>获取房间名称</div>
       <div className="panel--item" onClick={getFloorRoomVisible}>获取房间是否显示</div>
       <div className="panel--item" onClick={getFloorRoomNames}>设置房间的可见性</div>
+      <div className="panel--item" onClick={handleFloorClick}>楼层单击</div>
 
 
     </div>

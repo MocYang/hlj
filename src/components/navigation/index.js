@@ -29,7 +29,10 @@ function Navigation({ onChange }) {
         const splitHeight = configJson.splitHeight
         Build.api.splitDynamicBuilding(buildId, splitHeight, 1)
       } else if (openCachedRef.current && !open) {
+
         Build.api.splitBuildingReset(buildId)
+
+        Build.api.setBuildingVisible(buildId, true)
 
         // setActiveFloorId(null)
 

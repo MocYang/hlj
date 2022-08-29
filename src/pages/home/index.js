@@ -14,7 +14,7 @@ import Build from '../../utils/build'
 import VideoPreviewPopup from './popup/VideoPreviewPopup'
 import RoomInfoPopup from './popup/roomInfoPopup'
 import MachineInfoPopup from './popup/machineInfoPopup'
-
+import useMachineInfo from '../../hooks/useMachineInfo'
 import useCamera from '../../hooks/useCamera'
 import useRoomStatus, { useRoomIconClick } from '../../hooks/useRoomStatus'
 import useZoom from '../../hooks/useZoom'
@@ -42,6 +42,10 @@ function Index() {
     floor: activeFloor
   })
 
+  useMachineInfo({
+    floor: activeFloor
+  })
+
   const { addPersonIconClick } = useRoomIconClick()
 
   // 地图初始化成功后的回调
@@ -50,7 +54,7 @@ function Index() {
 
     initUrlConfig(config)
 
-    mapViewer.event.debugger = true
+    mapViewer.event.debug = true
 
     // 默认定位到指定视角
     flyToHomePosition(() => {
@@ -102,16 +106,16 @@ function Index() {
         {/*开发环境下，会显示的测试面板*/}
         <Admin />
 
-        {/*视频预览弹窗*/}
-        <VideoPreviewPopup
-          platformIp={(configFile && configFile.hikVideoPlatformIp) || ''}
-        />
-
         {/*房间内-人员，环境信息弹窗*/}
         <RoomInfoPopup />
 
         {/*机房信息弹窗*/}
         <MachineInfoPopup />
+
+        {/*视频预览弹窗*/}
+        <VideoPreviewPopup
+          platformIp={(configFile && configFile.hikVideoPlatformIp) || ''}
+        />
       </MapContainer>
     </>
   )
