@@ -24,14 +24,14 @@ const commonConfig = () => ({
   strPlatLanguage: 'zh_CN',
   iMultiRouteId: 0,
   strUserName: 'admin',
-  bShowName: false,
-  bShowIP: false,
-  bShowMac: false,
-  bGpuEnable: false,
+  bShowName: true,
+  bShowIP: true,
+  bShowMac: true,
+  bGpuEnable: true,
   iErrConcealEnable: 0,
-  bGetSnap: false,
+  bGetSnap: true,
   bShowCalendar: true,
-  bShowDownload: false
+  bShowDownload: true
 })
 
 const cameraIndexCodePlayConf = () => ({
