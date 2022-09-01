@@ -1,0 +1,24 @@
+/**
+顺时针选择
+ */
+@keyframes rotateL2R {
+  0% {
+    transform: rotateZ(0);
+  }
+
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+/**
+逆时针选择
+ */
+@keyframes rotateR2L {
+  0% {
+    transform: rotateZ(0);
+  }
+
+  100% {
+    transform: rotateZ(-360deg);
+  }
+}

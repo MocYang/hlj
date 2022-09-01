@@ -66,12 +66,12 @@ function Index() {
       makeServer()
     }
 
-    fetchCamera()
+    // fetchCamera()
 
     setConfigFile(config)
 
     // 监听人物图标的点击
-    addPersonIconClick()
+    // addPersonIconClick()
 
     // zoom init
     init()

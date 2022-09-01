@@ -1,0 +1,80 @@
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+@mixin flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flex-start {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+@mixin word-break {
+  word-break:break-all;
+  word-wrap: break-word;
+}
+
+@mixin disabled {
+  cursor: not-allowed;
+}
+
+@mixin pointer {
+  cursor: pointer;
+}
+
+/* 不换号省略号 */
+@mixin ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 背景图 */
+@mixin common-bg ($url,$size:100% 100%) {
+  background: url($url) center no-repeat;
+  background-size: $size;
+}
+
+@mixin clearfix {
+  &:before, &:after {
+    content: " ";
+    display: table;
+    height: 0;
+    clear: both;
+  }
+  &:after {
+    zoom: 1;
+  }
+}
+
+
+@mixin center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin centerY {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin centerX {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
