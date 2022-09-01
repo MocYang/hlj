@@ -6,9 +6,8 @@ import expand from './images/icon-open.png'
 import icon from './images/icon-fold.png'
 import './index.scss'
 import useHomePosition from '../../hooks/useHomePosition'
-import { handleGetSplitEntitiesHeight } from '../../utils'
 
-function Navigation({ onChange }) {
+function Navigation({ onChange,resetHomeFinish }) {
   // 是否点击了分层，
   const [open, setOpen] = useState(false)
   const openCachedRef = useRef(open)
@@ -22,6 +21,10 @@ function Navigation({ onChange }) {
 
   useEffect(() => {
     const mapViewer = getMapViewer()
+
+    if (!resetHomeFinish) {
+      return
+    }
 
     if (mapViewer && Build.api) {
       if (open) {
@@ -50,9 +53,13 @@ function Navigation({ onChange }) {
       }
       openCachedRef.current = open
     }
-  }, [open])
+  }, [open, resetHomeFinish])
 
   const handleToggleOpen = () => {
+    if (!resetHomeFinish) {
+      return
+    }
+
     setOpen(open => !open)
   }
 

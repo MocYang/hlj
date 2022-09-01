@@ -80,20 +80,22 @@ function Admin({ mapReady = false }) {
     }
   }
 
+  const prefix = "V"
+
   const handleAddClickHandler = () => {
     const mapViewer = getMapViewer()
     if (!clickCallbackRef.current) {
       clickCallbackRef.current = (res) => {
         console.log(res)
       }
-      mapViewer.event.onClick("*", clickCallbackRef.current)
+      mapViewer.event.onClick(prefix, clickCallbackRef.current)
     }
   }
 
   const removeMouseClickCallback = () => {
     const mapViewer = getMapViewer()
     if (clickCallbackRef.current) {
-      mapViewer.event.remove('*', clickCallbackRef.current)
+      mapViewer.event.remove(prefix, clickCallbackRef.current)
       clickCallbackRef.current = null
     }
   }

@@ -5,7 +5,7 @@
  * @Email: 958292256@qq.com
  * @Description: 首页定位 hooks
  */
-import { useCallback } from 'react'
+import { useCallback, useRef } from 'react'
 import { getMapViewer } from '../../components/MapContainer'
 
 const homePosition = {
@@ -18,16 +18,25 @@ const homePosition = {
 }
 
 function useHomePosition() {
+  const runCallbackTimerRef = useRef(null)
   const flyToHomePosition = useCallback((callback = () => null) => {
     const mapViewer = getMapViewer()
     if (mapViewer) {
+      const duration = 1
       mapViewer.camera.flyToPositionByOptions({
         position: homePosition,
-        duration: 1,
+        duration,
         onFinish: () => {
+          if (runCallbackTimerRef.current) {
+            clearTimeout(runCallbackTimerRef.current)
+          }
           callback && callback()
         }
       })
+
+      runCallbackTimerRef.current = setTimeout(() => {
+        callback && callback()
+      }, (duration + 0.5) * 1000)
     }
   }, [])
 

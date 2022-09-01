@@ -25,6 +25,9 @@ function Index() {
 
   const [activeFloor, setActiveFloor] = useState(null)
 
+  // 页面打开时，会做初始定位，只有等初始定位就绪，才允许楼层的点击分层操作
+  const [resetHomeFinish, setResetHomeFinish] = useState(false)
+
   const { init } = useZoom()
 
   const {
@@ -59,6 +62,8 @@ function Index() {
     // 默认定位到指定视角
     flyToHomePosition(() => {
       Build.init(mapViewer)
+
+      setResetHomeFinish(true)
     })
 
     // environments = MOCK 才用mock server
@@ -101,7 +106,7 @@ function Index() {
         <Header />
 
         {/*楼层分层按钮*/}
-        <Navigation onChange={handleSetActiveFloor} />
+        <Navigation onChange={handleSetActiveFloor} resetHomeFinish={resetHomeFinish}/>
 
         {/*开发环境下，会显示的测试面板*/}
         <Admin />
