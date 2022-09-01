@@ -80,7 +80,7 @@ function Admin({ mapReady = false }) {
     }
   }
 
-  const prefix = "V"
+  const prefix = "*"
 
   const handleAddClickHandler = () => {
     const mapViewer = getMapViewer()
@@ -174,6 +174,22 @@ function Admin({ mapReady = false }) {
         iconStyle: 'qiangji.gif',
         location: position
       }, true)
+    })
+  }
+
+  const handleAddCylinder = () => {
+
+    const mapViewer = getMapViewer()
+    mapViewer.event.setMousePositionCallback(position => {
+      console.log(position)
+
+      mapViewer.drawer.create.model({
+        filename: 'cylinder_T',
+        scale: 1.5,
+        location: position
+      }, true).then(res => {
+        console.log(res)
+      })
     })
   }
 
@@ -361,6 +377,7 @@ function Admin({ mapReady = false }) {
       <div className="panel--item" onClick={handleAddModel}>添加模型</div>
       <div className="panel--item" onClick={handleUpdateModelPosition}>更新位置</div>
       <div className="panel--item" onClick={handleAddPOI}>添加POI</div>
+      <div className="panel--item" onClick={handleAddCylinder}>添加圆柱体</div>
       <div className="panel--item" onClick={handleAddNiagara}>添加特殊粒子效果</div>
 
       <div className="panel--item">

@@ -18,6 +18,7 @@ import useMachineInfo from '../../hooks/useMachineInfo'
 import useCamera from '../../hooks/useCamera'
 import useRoomStatus, { useRoomIconClick } from '../../hooks/useRoomStatus'
 import useZoom from '../../hooks/useZoom'
+import useWindowVisible from '../../hooks/useWindowVisible'
 
 function Index() {
   // config.json配置文件
@@ -29,6 +30,10 @@ function Index() {
   const [resetHomeFinish, setResetHomeFinish] = useState(false)
 
   const { init } = useZoom()
+
+  const { init: initWindow, setVisible: setWindowVisible } = useWindowVisible({
+    prefix: 'chuang'
+  })
 
   const {
     flyToHomePosition,
@@ -80,6 +85,8 @@ function Index() {
 
     // zoom init
     init()
+
+    initWindow()
   }, [])
 
   const handleSetActiveFloor = (floor) => {
@@ -106,7 +113,11 @@ function Index() {
         <Header />
 
         {/*楼层分层按钮*/}
-        <Navigation onChange={handleSetActiveFloor} resetHomeFinish={resetHomeFinish}/>
+        <Navigation
+          onChange={handleSetActiveFloor}
+          resetHomeFinish={resetHomeFinish}
+          setWindowVisible={setWindowVisible}
+        />
 
         {/*开发环境下，会显示的测试面板*/}
         <Admin />

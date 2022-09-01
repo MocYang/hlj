@@ -7,12 +7,18 @@ import icon from './images/icon-fold.png'
 import './index.scss'
 import useHomePosition from '../../hooks/useHomePosition'
 
-function Navigation({ onChange,resetHomeFinish }) {
+function Navigation({
+  onChange,
+  resetHomeFinish,
+  setWindowVisible
+}) {
+
   // 是否点击了分层，
   const [open, setOpen] = useState(false)
   const openCachedRef = useRef(open)
   // const [activeFloorId, setActiveFloorId] = useState(-1)
   const { flyToHomePosition } = useHomePosition()
+
 
   const [activeFloors, setActiveFloors] = useState(floorConfig.map(floor => ({
     ...floor,
@@ -59,7 +65,7 @@ function Navigation({ onChange,resetHomeFinish }) {
     if (!resetHomeFinish) {
       return
     }
-
+    setWindowVisible(open)
     setOpen(open => !open)
   }
 
