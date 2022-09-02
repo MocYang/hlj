@@ -169,7 +169,7 @@ const SuspectInfoPopup = () => {
               <p></p>
               <p>温度</p>
               <p>
-                <span>{(room.current && evnt.current.temperature) || ''}</span>
+                <span>{(room.current && evnt.current.temperature) || '0'}</span>
                 <span>℃</span>
               </p>
             </div>
