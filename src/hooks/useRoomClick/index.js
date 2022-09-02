@@ -12,7 +12,7 @@ import { getMapViewer } from '../../components/MapContainer'
 const useRoomClick = () => {
   const init = useCallback(() => {
     const mapViewer = getMapViewer()
-    mapViewer.event.onClick('V', res => {
+    const onRoomClick = res => {
       if (res.gid) {
         const roomPosition = res.onMousePoint
         mapViewer.camera.getCurrentPosition().then(current => {
@@ -28,9 +28,13 @@ const useRoomClick = () => {
           })
         })
       }
-    }, {
+    }
+
+    mapViewer.event.onClick('V', onRoomClick, {
       compare: gid => Build.utils.isRoomId(gid)
     })
+
+    mapViewer.event.onClick("area_", onRoomClick)
   }, [])
 
   return {

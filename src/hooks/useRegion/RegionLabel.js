@@ -11,7 +11,11 @@ import regionConfig from './config'
 import './index.scss'
 import { getMapViewer } from '../../components/MapContainer'
 
-const RegionLabel = ({ floor, regionEntity, setActiveFloors }) => {
+const RegionLabel = ({
+  floor,
+  regionEntity,
+  setActiveFloors
+}) => {
   const [labelVisible, setLabelVisible] = useState(false)
 
   const [labelList, setLabelList] = useState(() => {
@@ -36,7 +40,7 @@ const RegionLabel = ({ floor, regionEntity, setActiveFloors }) => {
 
   // 点击色块 - 做面的显示和隐藏
   const onLabelColorClick = useCallback(
-    (label) => {
+    (label, visible) => {
       const mapViewer = getMapViewer()
 
       const entities = regionEntity[label.key]
@@ -48,8 +52,7 @@ const RegionLabel = ({ floor, regionEntity, setActiveFloors }) => {
       setLabelList((labelList) =>
         labelList.map((curLabel) => ({
           ...curLabel,
-          visible:
-            label.key === curLabel.key ? !curLabel.visible : curLabel.visible
+          visible: label.key === curLabel.key ? (visible !== undefined ? visible : !curLabel.visible) : curLabel.visible
         }))
       )
     },
@@ -64,7 +67,7 @@ const RegionLabel = ({ floor, regionEntity, setActiveFloors }) => {
           duration: 1,
           position: label.center,
           onFinish: () => {
-            onLabelColorClick(label)
+            onLabelColorClick(label, false)
           }
         })
       }
@@ -90,11 +93,11 @@ const RegionLabel = ({ floor, regionEntity, setActiveFloors }) => {
   return (
     <div className="label-group">
       {(labelVisible &&
-        labelList.map((label, i) => (
-          <div
-            key={i}
-            className={`label-item ${label.visible ? 'active' : ''}`}
-          >
+          labelList.map((label, i) => (
+            <div
+              key={i}
+              className={`label-item ${label.visible ? 'active' : ''}`}
+            >
             <span
               className={`label-color`}
               style={{
@@ -102,17 +105,17 @@ const RegionLabel = ({ floor, regionEntity, setActiveFloors }) => {
               }}
               onClick={() => onLabelColorClick(label)}
             />
-            <span
-              className={'label-name'}
-              style={{
-                color: label.color
-              }}
-              onClick={() => onLabelNameClick(label)}
-            >
+              <span
+                className={'label-name'}
+                style={{
+                  color: label.color
+                }}
+                onClick={() => onLabelNameClick(label)}
+              >
               {label.label}
             </span>
-          </div>
-        ))) ||
+            </div>
+          ))) ||
         null}
     </div>
   )
