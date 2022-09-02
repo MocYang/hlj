@@ -21,6 +21,10 @@ function Admin({ mapReady = false }) {
 
   const materialEntityRef = useRef(null)
 
+  const materialList = [
+    { name:'opacity', value: 'opacity' },
+  ]
+
   const handleMaterialChange = (e) => {
     let m = e.target.value
     setMaterial(m)

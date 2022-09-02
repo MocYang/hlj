@@ -7,6 +7,7 @@ import makeServer from '../../api/mock/server'
 import Header from '../../components/Header'
 import Background from '../../components/Background'
 import Admin from '../../components/Admin'
+import RegionLabel from '../../hooks/useRegion/RegionLabel'
 
 import Navigation from '../../components/navigation'
 import useHomePosition from '../../hooks/useHomePosition'
@@ -145,6 +146,8 @@ function Index() {
 
         {/*机房信息弹窗*/}
         <MachineInfoPopup />
+
+        <RegionLabel />
 
         {/*视频预览弹窗*/}
         <VideoPreviewPopup
