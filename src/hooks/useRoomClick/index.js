@@ -14,13 +14,13 @@ const useRoomClick = () => {
     const mapViewer = getMapViewer()
     mapViewer.event.onClick('V', res => {
       if (res.gid) {
-        const roomPosition = res.position
+        const roomPosition = res.onMousePoint
         mapViewer.camera.getCurrentPosition().then(current => {
           mapViewer.camera.flyToPositionByOptions({
             position: {
               x: roomPosition.x,
               y: roomPosition.y,
-              z: roomPosition.z + 1500,
+              z: roomPosition.z + 2000,
               pitch: 90,
               roll: current.roll,
               yaw: current.yaw

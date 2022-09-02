@@ -60,7 +60,6 @@ const RegionLabel = ({
           duration: 1,
           position: label.center,
           onFinish: () => {
-            debugger
             onLabelColorClick(label)
           }
         })

@@ -22,6 +22,7 @@ import useZoom from '../../hooks/useZoom'
 import useWindowVisible from '../../hooks/useWindowVisible'
 import useRegion from '../../hooks/useRegion'
 import floorConfig from '../../components/navigation/floorConfig'
+import useRoomClick from '../../hooks/useRoomClick'
 
 function Index() {
   // config.json配置文件
@@ -41,7 +42,7 @@ function Index() {
   const { init } = useZoom()
 
   // 房间点击 - 先不开放,有些房间的坐标有问题.
-  // const {init: initRoomClick } = useRoomClick()
+  const {init: initRoomClick } = useRoomClick()
 
   const {
     init: initWindow,
@@ -109,7 +110,7 @@ function Index() {
 
     initWindow()
 
-    // initRoomClick()
+    initRoomClick()
   }, [])
 
   const handleSetActiveFloor = (floor) => {
