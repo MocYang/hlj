@@ -60,7 +60,7 @@ function Navigation({
     if (!resetHomeFinish) {
       return
     }
-
+    setWindowVisible(open)
     setOpen(open => !open)
   }
 
