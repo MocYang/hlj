@@ -28,10 +28,12 @@ function Index() {
   // config.json配置文件
   const [configFile, setConfigFile] = useState({})
 
-  const [activeFloors, setActiveFloors] = useState(floorConfig.map(floor => ({
-    ...floor,
-    active: false
-  })))
+  const [activeFloors, setActiveFloors] = useState(
+    floorConfig.map((floor) => ({
+      ...floor,
+      active: false
+    }))
+  )
 
   // 页面打开时，会做初始定位，只有等初始定位就绪，才允许楼层的点击分层操作
   const [resetHomeFinish, setResetHomeFinish] = useState(false)
@@ -42,12 +44,9 @@ function Index() {
   const { init } = useZoom()
 
   // 房间点击 - 先不开放,有些房间的坐标有问题.
-  const {init: initRoomClick } = useRoomClick()
+  const { init: initRoomClick } = useRoomClick()
 
-  const {
-    init: initWindow,
-    setVisible: setWindowVisible
-  } = useWindowVisible({
+  const { init: initWindow, setVisible: setWindowVisible } = useWindowVisible({
     prefix: 'chuang'
   })
 

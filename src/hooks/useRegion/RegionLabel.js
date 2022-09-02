@@ -11,18 +11,16 @@ import regionConfig from './config'
 import './index.scss'
 import { getMapViewer } from '../../components/MapContainer'
 
-const RegionLabel = ({
-  floor,
-  regionEntity,
-  setActiveFloors
-}) => {
+const RegionLabel = ({ floor, regionEntity, setActiveFloors }) => {
   const [labelVisible, setLabelVisible] = useState(false)
 
   const [labelList, setLabelList] = useState(() => {
-    return Object.values(regionConfig).filter(region => region.label).map(region => ({
-      ...region,
-      visible: true
-    }))
+    return Object.values(regionConfig)
+      .filter((region) => region.label)
+      .map((region) => ({
+        ...region,
+        visible: true
+      }))
   })
 
   useEffect(() => {
@@ -37,20 +35,26 @@ const RegionLabel = ({
   }, [floor])
 
   // 点击色块 - 做面的显示和隐藏
-  const onLabelColorClick = useCallback((label) => {
-    const mapViewer = getMapViewer()
+  const onLabelColorClick = useCallback(
+    (label) => {
+      const mapViewer = getMapViewer()
 
-    const entities = regionEntity[label.key]
+      const entities = regionEntity[label.key]
 
-    for (let entity of entities) {
-      mapViewer.drawer.updateObjectVisible(entity.gid, !label.visible)
-    }
+      for (let entity of entities) {
+        mapViewer.drawer.updateObjectVisible(entity.gid, !label.visible)
+      }
 
-    setLabelList(labelList => labelList.map(curLabel => ({
-      ...curLabel,
-      visible: label.key === curLabel.key ? !curLabel.visible : curLabel.visible
-    })))
-  }, [regionEntity, labelList])
+      setLabelList((labelList) =>
+        labelList.map((curLabel) => ({
+          ...curLabel,
+          visible:
+            label.key === curLabel.key ? !curLabel.visible : curLabel.visible
+        }))
+      )
+    },
+    [regionEntity, labelList]
+  )
 
   const onLabelNameClick = (label) => {
     const mapViewer = getMapViewer()
@@ -65,12 +69,14 @@ const RegionLabel = ({
         })
       }
       // 有多个楼层显示时,把其他层隐藏掉
-      const activeFloors = floor.filter(floor => floor.active)
+      const activeFloors = floor.filter((floor) => floor.active)
       if (activeFloors.length > 1) {
-        setActiveFloors(floor => floor.map(f => ({
-          ...f,
-          active: f.floorId === 'F001'
-        })))
+        setActiveFloors((floor) =>
+          floor.map((f) => ({
+            ...f,
+            active: f.floorId === 'F001'
+          }))
+        )
 
         setTimeout(() => {
           flyToArea()
@@ -83,8 +89,8 @@ const RegionLabel = ({
 
   return (
     <div className="label-group">
-      {
-        labelVisible && labelList.map((label, i) => (
+      {(labelVisible &&
+        labelList.map((label, i) => (
           <div
             key={i}
             className={`label-item ${label.visible ? 'active' : ''}`}
@@ -97,15 +103,17 @@ const RegionLabel = ({
               onClick={() => onLabelColorClick(label)}
             />
             <span
-              className={"label-name"}
+              className={'label-name'}
               style={{
                 color: label.color
               }}
               onClick={() => onLabelNameClick(label)}
-            >{label.label}</span>
+            >
+              {label.label}
+            </span>
           </div>
-        )) || null
-      }
+        ))) ||
+        null}
     </div>
   )
 }
