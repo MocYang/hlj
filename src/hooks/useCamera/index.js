@@ -116,7 +116,8 @@ const useCamera = ({ floor }) => {
             scale: 1.5,
             gid: `CAMERA_${camera.model_url}`,
             location: handleGetSplitEntitiesHeight(camera.list_style, currentFloorNumber),
-            fileName: 'banqiu'
+            // fileName: 'banqiu_cheng',
+            fileName: 'banqiu',
           })
         })
 

@@ -20,6 +20,11 @@ import {
 } from '../../pages/home/popup/roomInfoPopup/slice'
 import useZoom from '../useZoom'
 
+// 按区域做显示的人物粒子POI
+const niagaraConfig = {
+
+}
+
 export const useRoomIconClick = () => {
   const dispatch = useDispatch()
 
@@ -125,20 +130,38 @@ const useRoomStatus = ({ floor }) => {
       for (let roomConfig of roomUsedInfo) {
         if (roomConfig.location !== undefined) {
           roomPersonIconConfig.push(
-            mapViewer.drawer.config.imageLabel({
+            mapViewer.drawer.config.niagara({
+              type: 'niagara',
+              scale: 1,
+            // mapViewer.drawer.config.imageLabel({
+              filename: "TB2",
+              // gid: 'PERSON_' + roomConfig.roomIndexCode,
+              attr: {
+                roomIndexCode: roomConfig.roomIndexCode
+              },
+              // scale: 0.5,
+              location: {
+                ...roomConfig.location,
+                z: roomConfig.location.z + 480
+              }
+            })
+          )
+          roomPersonIconConfig.push(
+            mapViewer.drawer.config.model({
+              scale: 1.2,
+              filename: "cylinder_T",
               gid: 'PERSON_' + roomConfig.roomIndexCode,
               attr: {
                 roomIndexCode: roomConfig.roomIndexCode
               },
-              screen: true,
-              scale: 0.5,
-              iconStyle: 'person-men3.png',
+              // scale: 0.5,
               location: {
                 ...roomConfig.location,
-                z: roomConfig.location.z + 400
+                z: roomConfig.location.z + 480
               }
             })
           )
+
         }
       }
 

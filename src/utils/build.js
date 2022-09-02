@@ -138,6 +138,24 @@ class MapBuildingUtils {
     return floorId.split('#')[1]
   }
 
+  /**
+   * 从房间id,提取出楼层号:V001_JZ0001_WK_F001_U0001_H0095 => 1
+   */
+  getFloorNumberFromRoomId(roomId) {
+    if (!this.isRoomId(roomId)) {
+      return 0
+    }
+
+    const floorNameReg = /_F\d+_/
+    const matched = roomId.match(floorNameReg)
+    if (matched) {
+      const floorName = matched[0]
+      return this.getFloorNumberFromFloorName(floorName)
+    }
+
+    return 0
+  }
+
   isValidBuildingId(id) {
     if (!this.isBuildingId(id)) {
       console.error(`建筑 id: ${id}, 不符合格式：V001_JZ0001`)

@@ -19,6 +19,8 @@ import useCamera from '../../hooks/useCamera'
 import useRoomStatus, { useRoomIconClick } from '../../hooks/useRoomStatus'
 import useZoom from '../../hooks/useZoom'
 import useWindowVisible from '../../hooks/useWindowVisible'
+// import useRoomClick from '../../hooks/useRoomClick'
+import useRegion from '../../hooks/useRegion'
 
 function Index() {
   // config.json配置文件
@@ -31,10 +33,17 @@ function Index() {
 
   const { init } = useZoom()
 
-  const { init: initWindow, setVisible: setWindowVisible } = useWindowVisible({
+  // 房间点击 - 先不开放,有些房间的坐标有问题.
+  // const {init: initRoomClick } = useRoomClick()
+
+  const {
+    init: initWindow,
+    setVisible: setWindowVisible
+  } = useWindowVisible({
     prefix: 'chuang'
   })
 
+  // 初始视角定位
   const {
     flyToHomePosition,
     setHome
@@ -50,11 +59,18 @@ function Index() {
     floor: activeFloor
   })
 
+  // 机房信息
   useMachineInfo({
     floor: activeFloor
   })
 
+  // 房间内人物图标
   const { addPersonIconClick } = useRoomIconClick()
+
+  // 区域划分
+  useRegion({
+    floor: activeFloor
+  })
 
   // 地图初始化成功后的回调
   const handleSuccess = useCallback((mapViewer) => {
@@ -87,6 +103,8 @@ function Index() {
     init()
 
     initWindow()
+
+    // initRoomClick()
   }, [])
 
   const handleSetActiveFloor = (floor) => {

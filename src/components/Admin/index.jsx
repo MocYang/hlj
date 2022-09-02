@@ -138,15 +138,33 @@ function Admin({ mapReady = false }) {
     })
   }
 
+  const modelFileNameList = [
+    "banqiu",
+    "banqiu_cheng",
+    "banqiu_hong",
+    "banqiu_huang",
+    "banqiu_lan",
+    "banqiu_lv",
+    "qiangji",
+  ]
+
+  const [modelFileName, setModelFileName] = useState(modelFileNameList[0])
+  const handleModelFileNameChange = (e) => {
+    setModelFileName(e.target.value)
+  }
+
   const modelEntityRef = useRef(null)
   const handleAddModel = () => {
     const mapViewer = getMapViewer()
     mapViewer.event.setMousePositionCallback(position => {
       mapViewer.drawer.create.model({
-        filename: 'qiangji',
+        type: 'model',
+        // filename: 'qiangji',
+        filename: modelFileName,
         scale: 5,
         location: position
       }, true).then(res => {
+        console.log(res)
         modelEntityRef.current = res
       })
     })
@@ -374,6 +392,15 @@ function Admin({ mapReady = false }) {
       <div className="panel--item" onClick={handleGetCurrentPosition}>获取当前位置</div>
       <div className="panel--item" onClick={handleGetMousePosition}>获取鼠标点击的位置</div>
       <div className="panel--item" onClick={handleAddImage}>添加图片</div>
+      <div className="panel--item">
+        <select value={modelFileName} onChange={handleModelFileNameChange}>
+          {
+            modelFileNameList.map(model => (
+              <option key={model} value={model}>{model}</option>
+            ))
+          }
+        </select>
+      </div>
       <div className="panel--item" onClick={handleAddModel}>添加模型</div>
       <div className="panel--item" onClick={handleUpdateModelPosition}>更新位置</div>
       <div className="panel--item" onClick={handleAddPOI}>添加POI</div>
