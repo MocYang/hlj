@@ -17,3 +17,7 @@ export const handleGetSplitEntitiesHeight = (position, floorNumber) => {
     z: Number(position.z) + (floorNumber - 1) * configFile.splitHeight * 100 * 2
   }
 }
+
+export function createUUID () {
+  return (Math.random() * 0xffffff).toString(16).split('.')[1]
+}

@@ -1,5 +1,5 @@
-import { useCallback, useState, useEffect } from 'react'
-import MapContainer, { getConfigJson, getMapViewer } from '../../components/MapContainer'
+import { useCallback, useState } from 'react'
+import MapContainer, { getConfigJson } from '../../components/MapContainer'
 
 import { initUrlConfig } from '../../api'
 
@@ -20,17 +20,23 @@ import useCamera from '../../hooks/useCamera'
 import useRoomStatus, { useRoomIconClick } from '../../hooks/useRoomStatus'
 import useZoom from '../../hooks/useZoom'
 import useWindowVisible from '../../hooks/useWindowVisible'
-// import useRoomClick from '../../hooks/useRoomClick'
 import useRegion from '../../hooks/useRegion'
+import floorConfig from '../../components/navigation/floorConfig'
 
 function Index() {
   // config.json配置文件
   const [configFile, setConfigFile] = useState({})
 
-  const [activeFloor, setActiveFloor] = useState(null)
+  const [activeFloors, setActiveFloors] = useState(floorConfig.map(floor => ({
+    ...floor,
+    active: false
+  })))
 
   // 页面打开时，会做初始定位，只有等初始定位就绪，才允许楼层的点击分层操作
   const [resetHomeFinish, setResetHomeFinish] = useState(false)
+
+  // 保存绘制的区域面
+  const [regionEntities, setRegionEntities] = useState([])
 
   const { init } = useZoom()
 
@@ -45,24 +51,21 @@ function Index() {
   })
 
   // 初始视角定位
-  const {
-    flyToHomePosition,
-    setHome
-  } = useHomePosition()
+  const { flyToHomePosition } = useHomePosition()
 
   // 监控信息
   const { fetchCamera } = useCamera({
-    floor: activeFloor
+    floor: activeFloors
   })
 
   // 房间使用信息
   useRoomStatus({
-    floor: activeFloor
+    floor: activeFloors
   })
 
   // 机房信息
   useMachineInfo({
-    floor: activeFloor
+    floor: activeFloors
   })
 
   // 房间内人物图标
@@ -70,7 +73,8 @@ function Index() {
 
   // 区域划分
   useRegion({
-    floor: activeFloor
+    floor: activeFloors,
+    setRegion: setRegionEntities
   })
 
   // 地图初始化成功后的回调
@@ -109,18 +113,8 @@ function Index() {
   }, [])
 
   const handleSetActiveFloor = (floor) => {
-    setActiveFloor(floor)
+    setActiveFloors(floor)
   }
-
-  useEffect(() => {
-    return () => {
-      const mapViewer = getMapViewer()
-      if (mapViewer) {
-        // 页面卸载前，先视角设置为初始视角，下次页面再打开就直接能显示初始视角。
-        setHome()
-      }
-    }
-  }, [])
 
   return (
     <>
@@ -133,6 +127,8 @@ function Index() {
 
         {/*楼层分层按钮*/}
         <Navigation
+          activeFloors={activeFloors}
+          setActiveFloors={setActiveFloors}
           onChange={handleSetActiveFloor}
           resetHomeFinish={resetHomeFinish}
           setWindowVisible={setWindowVisible}
@@ -147,7 +143,11 @@ function Index() {
         {/*机房信息弹窗*/}
         <MachineInfoPopup />
 
-        <RegionLabel />
+        <RegionLabel
+          floor={activeFloors}
+          regionEntity={regionEntities}
+          setActiveFloors={setActiveFloors}
+        />
 
         {/*视频预览弹窗*/}
         <VideoPreviewPopup

@@ -5,15 +5,15 @@
  * @File: index.js
  * @Description 区域划分
  */
-import { useCallback, useEffect } from 'react'
+import { useEffect } from 'react'
 import { getMapViewer } from '../../components/MapContainer'
 import regionConfig from './config'
+import { createUUID } from '../../utils'
 
-const useRegion = ({ floor }) => {
-  const init = useCallback(() => {
-
-  }, [])
-
+const useRegion = ({
+  floor,
+  setRegion
+}) => {
   useEffect(() => {
     // 只在1楼显示的情况下,显示区域面
     if (floor && floor.length > 0) {
@@ -25,13 +25,15 @@ const useRegion = ({ floor }) => {
           isFirstFloorVisible = f.active
         }
       }
+      let regionEntities = {}
+      let allRegions = []
 
       // 一楼可见是,显示楼层
       if (isFirstFloorVisible) {
-        let allRegions = []
-        for (let [, region] of Object.entries(regionConfig)) {
-          allRegions = allRegions.concat(region.areas.map(polygon => ({
+        for (let [key, region] of Object.entries(regionConfig)) {
+          let currentRegions = region.areas.map(polygon => ({
             ...polygon,
+            gid: 'area_' + createUUID(),
             linewidth: 0,
             linevisible: false,
             // 同一个区域，赋予统一的面材质
@@ -40,22 +42,26 @@ const useRegion = ({ floor }) => {
               ...p,
               z: p.z - 10
             }))
-          })))
+          }))
+
+          regionEntities[key] = currentRegions
+
+          allRegions.push(...currentRegions)
         }
 
         mapViewer.model.getController().addMany(allRegions, {
-          success: res => {
-            console.log('所有区域绘制完成')
+          onSuccess: res => {
+            // 缓存添加的面
             mapViewer.event.reBind()
+
+            setTimeout(() => {
+              setRegion(regionEntities)
+            }, 50)
           }
         })
       }
     }
   }, [floor])
-
-  return {
-    init
-  }
 }
 
 export default useRegion

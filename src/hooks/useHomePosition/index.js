@@ -5,7 +5,7 @@
  * @Email: 958292256@qq.com
  * @Description: 首页定位 hooks
  */
-import { useCallback, useRef } from 'react'
+import { useCallback, useRef, useEffect } from 'react'
 import { getMapViewer } from '../../components/MapContainer'
 
 const homePosition = {
@@ -45,9 +45,14 @@ function useHomePosition() {
     mapViewer.camera.setPosition(homePosition)
   }, [])
 
+  useEffect(() => {
+    window.addEventListener('beforeunload', () =>{
+      setHome()
+    })
+  }, [])
+
   return {
     flyToHomePosition,
-    setHome
   }
 
 }

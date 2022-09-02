@@ -57,8 +57,7 @@ const useMachineInfo = ({ floor }) => {
   }
 
   useEffect(() => {
-    if (floor) {
-      if (Array.isArray(floor) && floor.length > 0) {
+    if (floor && floor.filter(f => f.active).length > 0) {
         const currentMachineInActiveFloor = []
         for (let currentFloor of floor) {
           if (!currentFloor.active) {
@@ -73,7 +72,6 @@ const useMachineInfo = ({ floor }) => {
               currentMachineInActiveFloor.push(machineConfig)
             }
           })
-        }
 
         addMachineIconHandler()
 

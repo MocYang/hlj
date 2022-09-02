@@ -794,7 +794,7 @@ class MapBuild extends MapBuildingBase {
       visible = false,
       multiple = false // 是否同时显示多个楼层
     } = options
-
+    console.log('active floorNames: ', floorName)
     if (!this.utils.isValidBuildingId(buildId)) {
       return
     }

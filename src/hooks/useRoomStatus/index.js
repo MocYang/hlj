@@ -85,7 +85,7 @@ const useRoomStatus = ({ floor }) => {
   }
 
   useEffect(() => {
-    if (floor) {
+    if (floor && floor.filter(f => f.active).length > 0) {
       fetchRoomUseStatus()
       subscribe()
     } else {
