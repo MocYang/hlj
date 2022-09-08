@@ -237,7 +237,7 @@ function Admin({ mapReady = false }) {
           build_id: 0
         },
         type: 'niagara',
-        scale: 1,
+        scale: 10,
         // filename: 'P_Marker_1',
         filename: niagara,
         location: position
