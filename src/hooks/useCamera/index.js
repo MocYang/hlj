@@ -95,7 +95,7 @@ const useCamera = ({ floor }) => {
             const activeBuildId = activeFloor.buildId
 
             if (currentCameraBuildId === activeBuildId && activeFloorName === currentCameraFloorName) {
-             isCameraShow = true
+              isCameraShow = true
             }
           }
 
@@ -117,9 +117,10 @@ const useCamera = ({ floor }) => {
             gid: `CAMERA_${camera.model_url}`,
             location: handleGetSplitEntitiesHeight({
               ...camera.list_style,
-              z: camera.list_style.z + 10
+              z: camera.list_style.z
             }, currentFloorNumber),
-            // fileName: 'banqiu_cheng',
+
+            // fileName: 'banqiu  _cheng',
             fileName: 'banqiu',
           })
         })

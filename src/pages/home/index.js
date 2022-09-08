@@ -85,6 +85,8 @@ function Index() {
 
     mapViewer.event.debug = true
 
+    mapViewer.event.setDragTicker(180)
+
     // 默认定位到指定视角
     flyToHomePosition(() => {
       Build.init(mapViewer)

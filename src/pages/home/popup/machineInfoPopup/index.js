@@ -86,7 +86,10 @@ const MachinePopup = () => {
           room.current.machineInfo.map((item, index) => {
             return (
               <li key={index}>
-                <p>{item.machineName}</p>
+                 <p>
+                  <span>{item.machineName}</span>
+                  <span>{item.machineName}</span>
+                </p>
                 <p>{item.memoryTotal}</p>
                 <p>{item.memoryUsed}</p>
                 <p>{item.memoryUseRetio}</p>

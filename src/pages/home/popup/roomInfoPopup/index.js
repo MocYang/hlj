@@ -101,7 +101,7 @@ const SuspectInfoPopup = () => {
               <p>{(room.current && room.current.gender) || ''}</p>
             </li>
             <li>
-              <span>审讯调查组名称</span>
+              <span>审查调查组名称</span>
               <p>{(room.current && room.current.groupName) || ''}</p>
               <span>留置开始时间</span>
               <p>{(room.current && room.current.beginTime) || ''}</p>

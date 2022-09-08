@@ -17,7 +17,6 @@ const RegionLabel = ({
   setActiveFloors
 }) => {
   const [labelVisible, setLabelVisible] = useState(false)
-
   const [labelList, setLabelList] = useState(() => {
     return Object.values(regionConfig)
       .filter((region) => region.label)
@@ -91,7 +90,7 @@ const RegionLabel = ({
   }
 
   return (
-    <div className="label-group">
+    <div className="label-group ">
       {(labelVisible &&
           labelList.map((label, i) => (
             <div
