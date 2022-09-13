@@ -416,6 +416,7 @@ function Admin({ mapReady = false }) {
           <option value="TB">TB</option>
           <option value="TB1">TB1</option>
           <option value="TB2">TB2</option>
+          <option value="FX_IPO">FX_IPO</option>
           <option value="P_Marker">P_Maker</option>
           <option value="P_Marker_1">P_Maker_1</option>
           <option value="P_Marker_2">P_Maker_2</option>

@@ -143,7 +143,7 @@ function Navigation({
   return (
     <div className="navigation">
       <div className="fenceng" onClick={handleToggleOpen}>
-        <p className="text">分层</p>
+        <p className = "text" > {!open ? "分层" : "还原"} </p>
         {open ? (
           <img className="icon shouqi" src={icon} alt="" />
         ) : (

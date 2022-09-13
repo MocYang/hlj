@@ -45,7 +45,9 @@ const RegionLabel = ({
       const entities = regionEntity[label.key]
 
       for (let entity of entities) {
-        mapViewer.drawer.updateObjectVisible(entity.gid, !label.visible)
+        setTimeout(() => {
+          mapViewer.drawer.updateObjectVisible(entity.gid, visible !== undefined ? visible : !label.visible)
+        }, 30)
       }
 
       setLabelList((labelList) =>
@@ -66,7 +68,9 @@ const RegionLabel = ({
           duration: 1,
           position: label.center,
           onFinish: () => {
-            onLabelColorClick(label, false)
+            setTimeout(() => {
+              onLabelColorClick(label, false)
+            }, 50)
           }
         })
       }

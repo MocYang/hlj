@@ -10,7 +10,7 @@
   background: url(./images/icon_close.png) !important;
   background-size: 100% 100% !important;
   top: 2.9vw !important;
-    right: 3.5vw !important;
+  right: 3.5vw !important;
 }
 
 .popup__suspect-info {
@@ -28,6 +28,10 @@
     overflow: hidden;
     position: relative;
     margin-top: px2vh(75);
+
+    p {
+      margin-bottom: 0;
+    }
   }
 
   .popup__dragable-header {
@@ -137,7 +141,7 @@
         }
       }
 
-      li:nth-child(1)~li {
+      li:nth-child(1) ~ li {
         margin-top: px2vh(23);
 
         span {
@@ -195,14 +199,15 @@
           width: px2vw(285);
           margin-left: px2vw(15);
         }
-span:nth-child(3) {
-  margin-left: px2vw(25);
-}
 
-p:nth-child(4) {
-  width: px2vw(290);
-  margin-left: px2vw(30);
-}
+        span:nth-child(3) {
+          margin-left: px2vw(25);
+        }
+
+        p:nth-child(4) {
+          width: px2vw(290);
+          margin-left: px2vw(30);
+        }
       }
 
       li:nth-child(4) {
@@ -394,7 +399,8 @@ p:nth-child(4) {
       top: px2vh(114);
       display: flex;
       flex-wrap: wrap;
-div {
+
+      div {
         width: px2vw(415);
         height: px2vh(203);
         border-radius: 3px 3px 3px 3px;
@@ -402,52 +408,59 @@ div {
         background: url(./images/img_icon_bg.png);
         background-size: 100% 100%;
         margin-left: px2vw(23);
-          p:nth-child(1) {
-              width: px2vw(110);
-              height: px2vw(110);
-              margin-top: px2vh(44);
-              margin-left: px2vw(72);
-            }
-p:nth-child(2) {
-  width: px2vw(100);
-  height: px2vh(36);
-  font-size: 1.2vw;
+
+        p:nth-child(1) {
+          width: px2vw(110);
+          height: px2vw(110);
+          margin-top: px2vh(44);
+          margin-left: px2vw(72);
+        }
+
+        p:nth-child(2) {
+          width: px2vw(100);
+          height: px2vh(36);
+          font-size: 1.2vw;
           margin-left: px2vw(220);
-            margin-top: px2vh(-90);
-          }
-p:nth-child(3) {
-  width: px2vw(180);
-  height: px2vh(60);
-  font-size: 1.2vw;
+          margin-top: px2vh(-90);
+        }
+
+        p:nth-child(3) {
+          width: px2vw(180);
+          height: px2vh(60);
+          font-size: 1.2vw;
           margin-left: px2vw(220);
-            margin-top: px2vh(15);
-          
-            span:nth-child(1) {
-              font-size: 1.6vw;
-              color: #4EF9FF;
-            }
+          margin-top: px2vh(15);
+
+          span:nth-child(1) {
+            font-size: 1.6vw;
+            color: #4EF9FF;
           }
+        }
       }
-div:nth-child(1) {
-  p:nth-child(1) {
+
+      div:nth-child(1) {
+        p:nth-child(1) {
           background: url(./images/icon_temperature.png);
           background-size: 100% 100%;
         }
       }
-div:nth-child(2) {
-  p:nth-child(1) {
+
+      div:nth-child(2) {
+        p:nth-child(1) {
           background: url(./images/icon_humidity.png);
           background-size: 100% 100%;
         }
       }
-div:nth-child(3) {
-  p:nth-child(1) {
+
+      div:nth-child(3) {
+        p:nth-child(1) {
           background: url(./images/icon_air.png);
           background-size: 100% 100%;
         }
       }
-div:nth-child(4) {
-  p:nth-child(1) {
+
+      div:nth-child(4) {
+        p:nth-child(1) {
           background: url(./images/icon_light.png);
           background-size: 100% 100%;
         }

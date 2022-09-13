@@ -7,6 +7,7 @@
  */
 import { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
+import { message } from 'antd'
 import PopupContainer from '../../../../components/popup/PopupContainer'
 import {
   selectEnvironmentInfo,
@@ -27,10 +28,10 @@ const SuspectInfoPopup = () => {
 
   // 留置人员详情
   const suspectInfo = useSelector(selectSuspectInfo)
-  const room = useRef(null)
+  const room = useRef({})
   // 房间环境信息
   const environmentInfo = useSelector(selectEnvironmentInfo)
-  const evnt = useRef(null)
+  const evnt = useRef({})
   const { run: fetchSuspectInfo } = useRequest()
 
   const { run: fetchEnvironmentInfo } = useRequest()
@@ -49,6 +50,8 @@ const SuspectInfoPopup = () => {
             setSuspectInfo(res.data)
             // console.log('11111', res.data)
             room.current = res.data
+          } else {
+            message.warning(res.msg)
           }
         })
         .catch((e) => console.error(e))
@@ -59,9 +62,10 @@ const SuspectInfoPopup = () => {
       )
         .then((res) => {
           if (Number(res.code) === 0) {
-            console.log('2222', res.data)
             evnt.current = res.data
             setSuspectInfo(res.data)
+          } else {
+            message.warning(res.msg)
           }
         })
         .catch((e) => console.error(e))
@@ -115,12 +119,12 @@ const SuspectInfoPopup = () => {
             <li>
               <span>既往病史</span>
               <p>
-                {(room.current && room.current.healthInfo.medicineHistory) ||
+                {(room.current && room.current?.healthInfo?.medicineHistory) ||
                   ''}
               </p>
               <span>饮食禁忌</span>
               <p>
-                {(room.current && room.current.healthInfo.foodTaboos) || ''}
+                {(room.current && room.current?.healthInfo?.foodTaboos) || ''}
               </p>
             </li>
           </ul>

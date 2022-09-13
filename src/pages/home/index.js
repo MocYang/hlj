@@ -21,6 +21,7 @@ import useRoomStatus, { useRoomIconClick } from '../../hooks/useRoomStatus'
 import useZoom from '../../hooks/useZoom'
 import useWindowVisible from '../../hooks/useWindowVisible'
 import useRegion from '../../hooks/useRegion'
+import useAnimateSequence from '../../hooks/useAnimateSequence'
 import floorConfig from '../../components/navigation/floorConfig'
 import useRoomClick from '../../hooks/useRoomClick'
 
@@ -77,6 +78,8 @@ function Index() {
     setRegion: setRegionEntities
   })
 
+  const { play } = useAnimateSequence("NewLevelSequence")
+
   // 地图初始化成功后的回调
   const handleSuccess = useCallback((mapViewer) => {
     const config = getConfigJson()
@@ -87,31 +90,34 @@ function Index() {
 
     mapViewer.event.setDragTicker(180)
 
-    // 默认定位到指定视角
-    flyToHomePosition(() => {
-      Build.init(mapViewer)
-
-      setResetHomeFinish(true)
-    })
-
     // environments = MOCK 才用mock server
     if (config && config.environments === 'MOCK') {
       makeServer()
     }
 
-    fetchCamera()
-
-    setConfigFile(config)
-
-    // 监听人物图标的点击
-    addPersonIconClick()
-
-    // zoom init
-    init()
-
     initWindow()
 
-    initRoomClick()
+    play(mapViewer, () => {
+      // 默认定位到指定视角
+      flyToHomePosition(() => {
+        Build.init(mapViewer)
+
+        setResetHomeFinish(true)
+      })
+
+      fetchCamera()
+
+      setConfigFile(config)
+
+      // 监听人物图标的点击
+      addPersonIconClick()
+
+      // zoom init
+      init()
+
+      initRoomClick()
+    })
+
   }, [])
 
   const handleSetActiveFloor = (floor) => {
