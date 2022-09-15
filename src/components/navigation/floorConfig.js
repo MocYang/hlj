@@ -7,12 +7,23 @@
  */
 export const buildId = 'V001_JZ0001'
 
+// 显示地下上，在地上的额外需要去隐藏的对象
+export const undergroundObjects = [
+  'Plane_2',
+]
+
 export default [
+  {
+    id: -1,
+    buildId: buildId,
+    floorId: 'B001',
+    displayName: '地下',
+  },
   {
     id: 1,
     buildId: buildId,
     floorId: 'F001',
-    displayName: 'F1',
+    displayName: '一楼',
     position: {
       pitch: 43.65330123901367,
       roll: 0.0001095290353987366,
@@ -26,7 +37,7 @@ export default [
     id: 2,
     buildId: buildId,
     floorId: 'F002',
-    displayName: 'F2',
+    displayName: '二楼',
     position: {
       pitch: 43.65330123901367,
       roll: 0.0001095290353987366,
@@ -40,7 +51,7 @@ export default [
     id: 3,
     buildId: buildId,
     floorId: 'F003',
-    displayName: 'F3',
+    displayName: '三楼',
     position: {
       pitch: 43.65330123901367,
       roll: 0.0001095290353987366,
@@ -54,7 +65,7 @@ export default [
     id: 4,
     buildId: buildId,
     floorId: 'F004',
-    displayName: 'F4',
+    displayName: '四楼',
     position: {
       pitch: 43.65330123901367,
       roll: 0.0001095290353987366,

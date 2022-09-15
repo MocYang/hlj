@@ -35,17 +35,34 @@ const useMachineInfo = ({ floor }) => {
   const addMachineInfoIcon = (roomConfig) => {
     const mapViewer = getMapViewer()
 
-    const machineIconConfig = roomConfig.map(config => {
-      return mapViewer.drawer.config.image({
+    const machineIconConfig = roomConfig.reduce((acc, config) => {
+      acc.push(mapViewer.drawer.config.niagara({
+        type: 'niagara',
+        scale: 2,
         attr: {
           roomIndexCode: config.roomIndexCode
         },
+        location: {
+          ...config.location,
+          z: config.location.z + 200
+        },
+        filename: 'FX_IPO'
+      }))
+
+      acc.push(mapViewer.drawer.config.model({
+        scale: 2,
+        filename: "cylinder_T",
         gid: 'MACHINE_' + config.roomIndexCode,
-        scale: 1,
-        style: 'dainziweilan_icon',
-        location: config.location
-      })
-    })
+        attr: {
+          roomIndexCode: config.roomIndexCode
+        },
+        location: {
+          ...config.location,
+          z: config.location.z + 200
+        }
+      }))
+      return acc
+    }, [])
 
     mapViewer.model.getController().addMany(machineIconConfig, {
       onSuccess: () => {
@@ -58,20 +75,20 @@ const useMachineInfo = ({ floor }) => {
 
   useEffect(() => {
     if (floor && floor.filter(f => f.active).length > 0) {
-        const currentMachineInActiveFloor = []
-        for (let currentFloor of floor) {
-          if (!currentFloor.active) {
-            continue
+      const currentMachineInActiveFloor = []
+      for (let currentFloor of floor) {
+        if (!currentFloor.active) {
+          continue
+        }
+
+        const currentFloorName = currentFloor.floorId
+
+        machineRoomConfig.forEach(machineConfig => {
+          const machineFloorName = Build.utils.getFloorNameFromFloorId(machineConfig.floor_id)
+          if (currentFloorName === machineFloorName) {
+            currentMachineInActiveFloor.push(machineConfig)
           }
-
-          const currentFloorName = currentFloor.floorId
-
-          machineRoomConfig.forEach(machineConfig => {
-            const machineFloorName = Build.utils.getFloorNameFromFloorId(machineConfig.floor_id)
-            if (currentFloorName === machineFloorName) {
-              currentMachineInActiveFloor.push(machineConfig)
-            }
-          })
+        })
 
         addMachineIconHandler()
 

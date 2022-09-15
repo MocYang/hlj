@@ -43,6 +43,8 @@ function Navigation({
         //如果分层过,这里如果再点分层,
         mapViewer.drawer.remove.all()
 
+        // TODO：显示影像，显示地上其他模型
+
         flyToHomePosition()
 
         setActiveFloors((floors) =>
@@ -70,6 +72,8 @@ function Navigation({
 
       mapViewer.drawer.remove.all()
 
+      console.log(activeFloors)
+
       setTimeout(() => {
         // 设置楼层分层显示
         Build.setFloorVisible({
@@ -79,27 +83,6 @@ function Navigation({
             .map((floor) => floor.floorId),
           multiple: true
         })
-
-        // if (currentFloorActive) {
-        // 只在显示时，做楼层定位
-        // setTimeout(() => {
-        //   const floorNumber = Build.utils.getFloorNumberFromFloorName(currentFloor.floorId)
-        //   mapViewer.camera.flyToPositionByOptions({
-        //     // position: currentFloor.position,
-        //     position: handleGetSplitEntitiesHeight({
-        //       ...currentFloor.position,
-        //       x: currentFloor.position.x + 1000
-        //     }, floorNumber),
-        //     duration: 1,
-        //     onFinish: () => {
-        //       if (onChange) {
-        //         // onChange(currentFloor)
-        //         onChange(currentActiveFloors)
-        //       }
-        //     }
-        //   })
-        // }, 10)
-        // }
       }, 10)
     }
   }, [activeFloors])
@@ -112,7 +95,8 @@ function Navigation({
 
     let currentFloorActive = currentFloor.active
 
-    const currentActiveFloors = activeFloors.map((floor) => {
+    // TODO: 如果前一次选择了地下，本次选择了地上楼层，要允许选择且
+    let currentActiveFloors = activeFloors.map((floor) => {
       let active = floor.active
 
       // 如果之前只有一个楼层，本次不让这个楼层隐藏
@@ -134,6 +118,14 @@ function Navigation({
       }
     })
 
+    //
+    if (currentActiveFloors.some(floor => floor.floorId.indexOf('B') !== -1 && floor.active)) {
+      currentActiveFloors = currentActiveFloors.map(floor => ({
+        ...floor,
+        active: floor.floorId.indexOf('B') !== -1
+      }))
+    }
+
     setActiveFloors(currentActiveFloors)
 
     // 统一在这里删除所有的模型，后续监控，和房间内图标就只负责上图
@@ -143,7 +135,7 @@ function Navigation({
   return (
     <div className="navigation">
       <div className="fenceng" onClick={handleToggleOpen}>
-        <p className = "text" > {!open ? "分层" : "还原"} </p>
+        <p className="text"> {!open ? "分层" : "还原"} </p>
         {open ? (
           <img className="icon shouqi" src={icon} alt="" />
         ) : (

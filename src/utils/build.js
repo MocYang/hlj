@@ -623,6 +623,8 @@ class MapBuild extends MapBuildingBase {
 
     this.api.init(mapViewer)
 
+    this.api.setGroundVisible(true)
+
     // 初始楼栋楼层信息
     this.initBuildingInfo()
   }
@@ -784,7 +786,7 @@ class MapBuild extends MapBuildingBase {
    * 楼层显示和隐藏 - 无动态效果
    *
    * @param options.buildId {String}
-   * @param options.floorName {String}
+   * @param options.floorName {Array<String>}
    * @param options.visible {Boolean}
    */
   setFloorVisible(options) {
@@ -803,7 +805,7 @@ class MapBuild extends MapBuildingBase {
       return
     }
 
-    const floorSign = floorName[0]
+    const floorSign = Array.isArray(floorName) ? floorName[0][0] : floorName[0]
 
     if (floorSign === 'B') {
       // 隐藏地面
@@ -846,6 +848,7 @@ class MapBuild extends MapBuildingBase {
         for (let floor of buildInfo.floor) {
           const currentFloorName = floor.floorname
           let floorVisible = floorName.indexOf(currentFloorName) !== -1
+          console.log(floor, visible)
           this.api.setFloorVisible(buildId, currentFloorName, floorVisible)
         }
       }

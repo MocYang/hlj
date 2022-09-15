@@ -78,7 +78,7 @@ function Index() {
     setRegion: setRegionEntities
   })
 
-  const { play } = useAnimateSequence("NewLevelSequence")
+  const { play } = useAnimateSequence("NewLevelSequence", false)
 
   // 地图初始化成功后的回调
   const handleSuccess = useCallback((mapViewer) => {

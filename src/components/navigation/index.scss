@@ -45,7 +45,7 @@
     left: 0;
     top: 100%;
     width: 92px;
-    height: 128px;
+    height: 166px;
     background: transparent;
     overflow: hidden;
   }
@@ -76,11 +76,13 @@
     color: #4EF9FF;
 
     .text-f1 {
-      width: 21px;
+      width: 43px;
       height: 27px;
       font-size: 18px;
       font-family: Source Han Sans CN-Medium, Source Han Sans CN;
       margin: 0 auto;
+      padding-left: .2em;
+      line-height: 1.4;
     }
 
     &.active {
